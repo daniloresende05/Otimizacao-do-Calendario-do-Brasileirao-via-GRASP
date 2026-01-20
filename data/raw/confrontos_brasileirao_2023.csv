@@ -1,0 +1,381 @@
+﻿Mandante,Visitante
+Fluminense,Athletico-PR
+Botafogo,América-MG
+Internacional,Palmeiras
+Athletico-PR,EC Bahia
+Goiás,São Paulo
+Palmeiras,Fluminense
+EC Bahia,Palmeiras
+EC Bahia,Corinthians
+EC Bahia,RB Bragantino
+EC Bahia,Internacional
+EC Bahia,Fortaleza
+EC Bahia,Fluminense
+Vasco da Gama,Grêmio
+Vasco da Gama,São Paulo
+Vasco da Gama,Fortaleza
+Vasco da Gama,Botafogo
+Coritiba FC,Cruzeiro
+Corinthians,Fluminense
+Corinthians,Palmeiras
+Corinthians,Botafogo
+Corinthians,Athletico-PR
+Coritiba FC,Santos
+Coritiba FC,Fluminense
+Coritiba FC,Athletico-PR
+Fluminense,Cuiabá-MT
+Fluminense,Internacional
+Fluminense,Flamengo
+Fluminense,Santos
+Fluminense,Cruzeiro
+Fluminense,São Paulo
+Fluminense,Fortaleza
+São Paulo,RB Bragantino
+Botafogo,Atlético-MG
+Botafogo,Corinthians
+Botafogo,Fluminense
+Botafogo,Fortaleza
+Botafogo,Vasco da Gama
+Botafogo,RB Bragantino
+Botafogo,EC Bahia
+Botafogo,Cruzeiro
+Cruzeiro,Grêmio
+São Paulo,América-MG
+São Paulo,Internacional
+São Paulo,Fluminense
+São Paulo,EC Bahia
+São Paulo,Botafogo
+São Paulo,Grêmio
+São Paulo,Cruzeiro
+São Paulo,Cuiabá-MT
+São Paulo,Flamengo
+Grêmio,Fortaleza
+Grêmio,Atlético-MG
+Grêmio,Cruzeiro
+Grêmio,Cuiabá-MT
+Grêmio,Palmeiras
+Grêmio,EC Bahia
+Grêmio,Vasco da Gama
+Athletico-PR,Goiás
+Athletico-PR,Botafogo
+Athletico-PR,Corinthians
+Athletico-PR,Cuiabá-MT
+Athletico-PR,Vasco da Gama
+Athletico-PR,Santos
+Vasco da Gama,Cuiabá-MT
+Atlético-MG,Internacional
+Atlético-MG,EC Bahia
+Santos,Atlético-MG
+Santos,EC Bahia
+Santos,Palmeiras
+Santos,Cuiabá-MT
+Santos,São Paulo
+RB Bragantino,Athletico-PR
+RB Bragantino,Santos
+RB Bragantino,Flamengo
+RB Bragantino,Goiás
+RB Bragantino,São Paulo
+RB Bragantino,Internacional
+RB Bragantino,Cuiabá-MT
+RB Bragantino,Grêmio
+Internacional,Fluminense
+Internacional,RB Bragantino
+RB Bragantino,Fluminense
+RB Bragantino,Corinthians
+RB Bragantino,Coritiba FC
+Fortaleza,São Paulo
+Fortaleza,Vasco da Gama
+Fortaleza,EC Bahia
+Fortaleza,Athletico-PR
+Fortaleza,Santos
+Fortaleza,Goiás
+América-MG,Corinthians
+América-MG,Santos
+Atlético-MG,Santos
+Atlético-MG,Botafogo
+Atlético-MG,Cuiabá-MT
+Atlético-MG,Fluminense
+Atlético-MG,Grêmio
+Goiás,Atlético-MG
+Goiás,Fortaleza
+Goiás,Internacional
+Goiás,Flamengo
+Goiás,América-MG
+Internacional,Goiás
+Internacional,EC Bahia
+Internacional,Cruzeiro
+Palmeiras,Cruzeiro
+Palmeiras,Vasco da Gama
+Palmeiras,Goiás
+Palmeiras,São Paulo
+Palmeiras,EC Bahia
+Palmeiras,América-MG
+Palmeiras,Athletico-PR
+Cuiabá-MT,Santos
+Cuiabá-MT,Flamengo
+Cuiabá-MT,Fluminense
+Cuiabá-MT,Cruzeiro
+Cuiabá-MT,Athletico-PR
+Cruzeiro,São Paulo
+Cruzeiro,Coritiba FC
+Cruzeiro,Botafogo
+Cruzeiro,RB Bragantino
+Cruzeiro,EC Bahia
+Grêmio,Santos
+Palmeiras,Internacional
+Flamengo,Coritiba FC
+Flamengo,Goiás
+Flamengo,Corinthians
+Flamengo,Grêmio
+Flamengo,Fortaleza
+Flamengo,Internacional
+Flamengo,EC Bahia
+Flamengo,Vasco da Gama
+Flamengo,RB Bragantino
+Flamengo,Palmeiras
+Vasco da Gama,Atlético-MG
+Palmeiras,Cuiabá-MT
+Cuiabá-MT,São Paulo
+EC Bahia,América-MG
+Fortaleza,Coritiba FC
+Fortaleza,Corinthians
+EC Bahia,Coritiba FC
+EC Bahia,Goiás
+EC Bahia,Vasco da Gama
+EC Bahia,Athletico-PR
+EC Bahia,São Paulo
+EC Bahia,Atlético-MG
+Vasco da Gama,EC Bahia
+Vasco da Gama,Santos
+Vasco da Gama,Goiás
+Vasco da Gama,Cruzeiro
+Vasco da Gama,Coritiba FC
+Vasco da Gama,América-MG
+Vasco da Gama,RB Bragantino
+América-MG,Atlético-MG
+Corinthians,Cruzeiro
+Corinthians,Fortaleza
+Corinthians,São Paulo
+Corinthians,Cuiabá-MT
+Corinthians,RB Bragantino
+Corinthians,Vasco da Gama
+Corinthians,Coritiba FC
+Corinthians,Goiás
+Corinthians,Flamengo
+Corinthians,América-MG
+Corinthians,Santos
+Corinthians,Atlético-MG
+Coritiba FC,São Paulo
+Coritiba FC,Vasco da Gama
+Coritiba FC,Internacional
+Coritiba FC,América-MG
+Coritiba FC,RB Bragantino
+Coritiba FC,Goiás
+Coritiba FC,Botafogo
+Fluminense,Vasco da Gama
+Fluminense,RB Bragantino
+Fluminense,EC Bahia
+Fluminense,Palmeiras
+Fluminense,América-MG
+Fluminense,Coritiba FC
+Fluminense,Atlético-MG
+Atlético-MG,São Paulo
+Botafogo,São Paulo
+Botafogo,Coritiba FC
+Botafogo,Internacional
+Botafogo,Goiás
+Botafogo,Athletico-PR
+Botafogo,Cuiabá-MT
+Botafogo,Santos
+São Paulo,Goiás
+São Paulo,Athletico-PR
+São Paulo,Santos
+São Paulo,Coritiba FC
+São Paulo,Corinthians
+Grêmio,Internacional
+Grêmio,São Paulo
+Grêmio,América-MG
+Grêmio,Coritiba FC
+Grêmio,Fluminense
+Grêmio,Corinthians
+Grêmio,Goiás
+Athletico-PR,Flamengo
+Athletico-PR,Atlético-MG
+Athletico-PR,Internacional
+Athletico-PR,RB Bragantino
+Athletico-PR,São Paulo
+Athletico-PR,Fortaleza
+Atlético-MG,Palmeiras
+Atlético-MG,RB Bragantino
+Atlético-MG,Corinthians
+Cruzeiro,Atlético-MG
+Santos,Internacional
+Santos,Athletico-PR
+Santos,Grêmio
+Santos,Vasco da Gama
+Santos,Coritiba FC
+RB Bragantino,EC Bahia
+RB Bragantino,Vasco da Gama
+RB Bragantino,Palmeiras
+Internacional,Fortaleza
+Internacional,São Paulo
+Internacional,Santos
+Internacional,América-MG
+Internacional,Botafogo
+Atlético-MG,Athletico-PR
+Fortaleza,Internacional
+Fortaleza,Atlético-MG
+Fortaleza,Cuiabá-MT
+Fortaleza,Grêmio
+Fortaleza,Cruzeiro
+Cruzeiro,Santos
+América-MG,Fortaleza
+América-MG,Vasco da Gama
+Cruzeiro,Goiás
+América-MG,Goiás
+América-MG,São Paulo
+Atlético-MG,Cruzeiro
+Atlético-MG,Fortaleza
+Atlético-MG,Goiás
+Goiás,Corinthians
+Goiás,Botafogo
+Goiás,Cuiabá-MT
+Goiás,Grêmio
+Goiás,Athletico-PR
+Goiás,Vasco da Gama
+Goiás,Santos
+Goiás,Cruzeiro
+Internacional,Flamengo
+Internacional,Vasco da Gama
+Palmeiras,Corinthians
+Palmeiras,Grêmio
+Palmeiras,RB Bragantino
+Palmeiras,Coritiba FC
+Palmeiras,Botafogo
+Palmeiras,Flamengo
+Palmeiras,Fortaleza
+Cuiabá-MT,RB Bragantino
+Cuiabá-MT,Coritiba FC
+Cuiabá-MT,Botafogo
+Cuiabá-MT,EC Bahia
+Cuiabá-MT,Goiás
+Cuiabá-MT,Corinthians
+Cuiabá-MT,Fortaleza
+Cruzeiro,Cuiabá-MT
+Cruzeiro,Fortaleza
+Cruzeiro,Corinthians
+Cruzeiro,América-MG
+Cruzeiro,Athletico-PR
+Cruzeiro,Palmeiras
+Flamengo,Cruzeiro
+Flamengo,América-MG
+Flamengo,São Paulo
+Flamengo,Fluminense
+Flamengo,Cuiabá-MT
+Athletico-PR,Fluminense
+Cruzeiro,Flamengo
+Vasco da Gama,Fluminense
+EC Bahia,Botafogo
+EC Bahia,Cruzeiro
+EC Bahia,Grêmio
+EC Bahia,Santos
+Vasco da Gama,Athletico-PR
+Vasco da Gama,Internacional
+Corinthians,Internacional
+Coritiba FC,Atlético-MG
+Coritiba FC,Palmeiras
+Coritiba FC,Grêmio
+Coritiba FC,Corinthians
+Fluminense,Botafogo
+Botafogo,Flamengo
+São Paulo,Vasco da Gama
+São Paulo,Palmeiras
+São Paulo,Atlético-MG
+São Paulo,Fortaleza
+Grêmio,Botafogo
+Grêmio,Athletico-PR
+Grêmio,Flamengo
+Athletico-PR,Coritiba FC
+Athletico-PR,Grêmio
+Athletico-PR,Palmeiras
+Athletico-PR,América-MG
+Flamengo,Santos
+Atlético-MG,Vasco da Gama
+Atlético-MG,América-MG
+Santos,América-MG
+Santos,Corinthians
+Santos,Botafogo
+Santos,Fortaleza
+RB Bragantino,América-MG
+Internacional,Cuiabá-MT
+Internacional,Corinthians
+Internacional,Atlético-MG
+Internacional,Grêmio
+RB Bragantino,Atlético-MG
+RB Bragantino,Botafogo
+RB Bragantino,Fortaleza
+Atlético-MG,Flamengo
+Fortaleza,Fluminense
+Fortaleza,América-MG
+Fortaleza,Botafogo
+Fortaleza,Flamengo
+Fortaleza,Palmeiras
+América-MG,Cuiabá-MT
+América-MG,Internacional
+América-MG,RB Bragantino
+América-MG,Botafogo
+América-MG,EC Bahia
+Atlético-MG,Coritiba FC
+Goiás,Fluminense
+Goiás,Coritiba FC
+Goiás,RB Bragantino
+Internacional,Athletico-PR
+Palmeiras,Atlético-MG
+Cuiabá-MT,Grêmio
+Cuiabá-MT,Palmeiras
+Cuiabá-MT,América-MG
+Cuiabá-MT,Vasco da Gama
+Cuiabá-MT,Internacional
+América-MG,Athletico-PR
+Cruzeiro,Fluminense
+Cruzeiro,Internacional
+Cruzeiro,Vasco da Gama
+Palmeiras,Santos
+Vasco da Gama,Palmeiras
+Flamengo,Botafogo
+EC Bahia,Flamengo
+EC Bahia,Cuiabá-MT
+América-MG,Flamengo
+Coritiba FC,Fortaleza
+Coritiba FC,Flamengo
+Coritiba FC,Cuiabá-MT
+Fluminense,Corinthians
+Fluminense,Grêmio
+Fluminense,Goiás
+Flamengo,Athletico-PR
+Grêmio,RB Bragantino
+Athletico-PR,Cruzeiro
+Santos,Flamengo
+Santos,Goiás
+Santos,Cruzeiro
+Santos,RB Bragantino
+Santos,Fluminense
+RB Bragantino,Cruzeiro
+Fortaleza,RB Bragantino
+América-MG,Fluminense
+América-MG,Coritiba FC
+Flamengo,Atlético-MG
+Vasco da Gama,Corinthians
+Corinthians,Grêmio
+Coritiba FC,EC Bahia
+Botafogo,Palmeiras
+Botafogo,Grêmio
+Vasco da Gama,Flamengo
+Internacional,Coritiba FC
+América-MG,Cruzeiro
+América-MG,Palmeiras
+América-MG,Grêmio
+Cuiabá-MT,Atlético-MG
+Corinthians,EC Bahia
+Goiás,Palmeiras
+Goiás,EC Bahia
