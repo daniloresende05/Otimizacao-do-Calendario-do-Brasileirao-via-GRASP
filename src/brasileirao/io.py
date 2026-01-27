@@ -27,3 +27,24 @@ def load_matches(path: str, home_col: str = "Mandante", away_col: str = "Visitan
             f"Colunas: {list(df.columns)}"
         )
     return df[[home_col, away_col]].astype(str)
+
+def select_round_dates(dates_str: list[str], n_rounds: int = 38, gap_days: int = 7) -> list[str]:
+    """
+    Seleciona n_rounds datas a partir de dates_str (dd/mm/yyyy), espaçando por gap_days.
+    Como o seu CSV tem todos os dias do intervalo, sempre vai existir data >= alvo.
+    """
+    dates_dt = pd.to_datetime(pd.Series(dates_str), dayfirst=True, errors="coerce")
+    if dates_dt.isna().any():
+        bad = pd.Series(dates_str)[dates_dt.isna()].head(5).tolist()
+        raise ValueError(f"Datas inválidas no CSV. Exemplos: {bad}")
+
+    dates_dt = dates_dt.sort_values().reset_index(drop=True)
+    start = dates_dt.iloc[0]
+
+    selected = [start]
+    for i in range(1, n_rounds):
+        target = start + pd.Timedelta(days=i * gap_days)
+        nxt = dates_dt[dates_dt >= target].iloc[0]
+        selected.append(nxt)
+
+    return [d.strftime("%d/%m/%Y") for d in selected]

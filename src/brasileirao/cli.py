@@ -1,86 +1,62 @@
+# src/brasileirao/cli.py
 import argparse
+import os
 import pandas as pd
 
 from .io import load_dates, load_teams
-from .round_robin import circle_method
-from .domain import ScheduledMatch
-from .constraints import check_all
-
-def build_baseline_schedule(dates, teams_map):
-    team_names = list(teams_map.keys())
-    rounds_pairs = circle_method(team_names)  # 19 rodadas com 10 jogos (para 20 times)
-
-    if len(rounds_pairs) != 19:
-        raise ValueError(f"Esperava 19 rodadas no turno, veio {len(rounds_pairs)}. Times={len(team_names)}")
-
-    # Seleciona 38 datas (turno + returno)
-    if len(dates) < 38:
-        raise ValueError(f"CSV de datas tem apenas {len(dates)} datas, mas precisam de 38.")
-
-    selected_dates = dates[:38]
-
-    schedule = []
-
-    # Turno: rodadas 1..19
-    for r_idx, pairs in enumerate(rounds_pairs, start=1):
-        day = selected_dates[r_idx - 1]
-        for a, b in pairs:
-            home, away = a, b  # baseline (sem regras c..g ainda)
-            th = teams_map[home]
-            ta = teams_map[away]
-            schedule.append(ScheduledMatch(
-                round=r_idx,
-                day=day,
-                home=home,
-                away=away,
-                stadium=th.stadium,
-                home_state=th.state,
-                away_state=ta.state,
-            ))
-
-    # Returno: rodadas 20..38, mesmos pares, mando invertido
-    for r_idx, pairs in enumerate(rounds_pairs, start=20):
-        day = selected_dates[r_idx - 1]
-        for a, b in pairs:
-            home, away = b, a
-            th = teams_map[home]
-            ta = teams_map[away]
-            schedule.append(ScheduledMatch(
-                round=r_idx,
-                day=day,
-                home=home,
-                away=away,
-                stadium=th.stadium,
-                home_state=th.state,
-                away_state=ta.state,
-            ))
-
-    return schedule
+from .initial_solution import build_initial_schedule_with_constraints
+from .objective import add_prv_column
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--date-col", default="Data", help="Nome da coluna de data no CSV de datas")
-    parser.add_argument("--teams", required=True, help="Caminho do teams.csv (name,stadium,state)")
-    parser.add_argument("--out", default="results/schedule.csv", help="Saída do calendário")
-    parser.add_argument("--date-col", default="data", help="Nome da coluna de data no CSV de datas")
+    parser.add_argument("--dates", required=True, help="CSV de datas (coluna Data em dd/mm/aaaa)")
+    parser.add_argument("--date-col", default="Data", help="Nome da coluna de data no CSV")
+    parser.add_argument("--teams", required=True, help="teams.csv (name,stadium,state)")
+    parser.add_argument("--out", default="results/schedule.csv", help="CSV final (Rodada,Data,Mandante,Visitante,Estádio,PRV)")
+    parser.add_argument("--prv-days", type=int, default=5, help="Intervalo PRV (dias) para cálculo")
+    parser.add_argument("--round-gap", type=int, default=7, help="Dias entre o início de rodadas")
+    parser.add_argument("--round-span", type=int, default=3, help="Quantos dias diferentes uma rodada pode usar")
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--max-attempts", type=int, default=200000)
     args = parser.parse_args()
 
-    dates = load_dates(args.dates, col=args.date_col)
+    os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
+
+    dates_raw = load_dates(args.dates, col=args.date_col)   # lista de strings dd/mm/aaaa
     teams_map = load_teams(args.teams)
 
-    schedule = build_baseline_schedule(dates, teams_map)
-    violations = check_all(schedule)
+    schedule = build_initial_schedule_with_constraints(
+        dates_raw,
+        teams_map,
+        round_gap=args.round_gap,
+        round_span=args.round_span,
+        seed=args.seed,
+        max_attempts=args.max_attempts,
+    )
 
     df = pd.DataFrame([m.__dict__ for m in schedule])
-    df.to_csv(args.out, index=False)
 
-    if violations:
-        print("Calendário gerado, mas com violações:")
-        for v in violations:
-            print("-", v)
-        raise SystemExit(1)
+    # calcula PRV (soft) e monta saída no formato que você quer
+    df_prv = add_prv_column(df, prv_days=args.prv_days)
+    df_out = df_prv.rename(columns={
+        "round": "Rodada",
+        "day": "Data",
+        "home": "Mandante",
+        "away": "Visitante",
+        "stadium": "Estádio",
+    })[["Rodada", "Data", "Mandante", "Visitante", "Estádio", "PRV"]].sort_values(["Rodada", "Data"])
 
-    print(f"OK! Calendário baseline salvo em {args.out} (sem PRV, só estrutura).")
+    df_out.to_csv(args.out, index=False)
+
+    # terminal: Estádio / PRV
+    df_stadium = (
+        df_out.groupby("Estádio", as_index=False)["PRV"]
+        .sum()
+        .sort_values("PRV", ascending=False)
+    )
+
+    print(f"\nOK! CSV gerado: {args.out}\n")
+    print(df_stadium.to_string(index=False))
 
 if __name__ == "__main__":
     main()

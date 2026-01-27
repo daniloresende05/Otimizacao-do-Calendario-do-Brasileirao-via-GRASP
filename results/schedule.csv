@@ -1,0 +1,381 @@
+Rodada,Data,Mandante,Visitante,Estádio,PRV
+1,20/08/2023,Internacional,Coritiba,Beira-Rio,0
+1,20/08/2023,Ceará,São Paulo,Castelão,0
+1,20/08/2023,Sport,Palmeiras,Ilha do Retiro,0
+1,20/08/2023,Fluminense,Botafogo,Maracanã,0
+1,21/08/2023,Atlético-MG,Athletico-PR,Arena MRV,0
+1,21/08/2023,Vitória,Flamengo,Barradão,0
+1,21/08/2023,Fortaleza,Santos,Castelão,1
+1,22/08/2023,Grêmio,Cuiabá,Arena do Grêmio,0
+1,22/08/2023,Corinthians,Bahia,Neo Química Arena,0
+1,22/08/2023,Vasco,Cruzeiro,São Januário,0
+2,27/08/2023,Palmeiras,Vitória,Allianz Parque,0
+2,27/08/2023,Fortaleza,Corinthians,Castelão,0
+2,27/08/2023,Athletico-PR,Grêmio,Ligga Arena,0
+2,27/08/2023,Botafogo,Cruzeiro,Nilton Santos (Engenhão),0
+2,28/08/2023,Sport,Bahia,Ilha do Retiro,0
+2,28/08/2023,São Paulo,Cuiabá,Morumbi,0
+2,28/08/2023,Vasco,Internacional,São Januário,0
+2,29/08/2023,Ceará,Flamengo,Castelão,1
+2,29/08/2023,Fluminense,Atlético-MG,Maracanã,0
+2,29/08/2023,Santos,Coritiba,Vila Belmiro,0
+3,03/09/2023,Palmeiras,Bahia,Allianz Parque,0
+3,03/09/2023,Atlético-MG,Cruzeiro,Arena MRV,0
+3,03/09/2023,Cuiabá,Flamengo,Arena Pantanal,0
+3,03/09/2023,Vasco,Santos,São Januário,0
+3,04/09/2023,Vitória,Ceará,Barradão,0
+3,04/09/2023,Fluminense,Grêmio,Maracanã,0
+3,04/09/2023,Corinthians,Coritiba,Neo Química Arena,0
+3,05/09/2023,Fortaleza,Sport,Castelão,0
+3,05/09/2023,São Paulo,Athletico-PR,Morumbi,0
+3,05/09/2023,Botafogo,Internacional,Nilton Santos (Engenhão),0
+4,10/09/2023,Palmeiras,Ceará,Allianz Parque,0
+4,10/09/2023,Atlético-MG,Internacional,Arena MRV,0
+4,10/09/2023,Coritiba,Sport,Couto Pereira,0
+4,10/09/2023,São Paulo,Fluminense,Morumbi,0
+4,11/09/2023,Fortaleza,Bahia,Castelão,0
+4,11/09/2023,Flamengo,Athletico-PR,Maracanã,0
+4,11/09/2023,Santos,Botafogo,Vila Belmiro,0
+4,12/09/2023,Grêmio,Cruzeiro,Arena do Grêmio,0
+4,12/09/2023,Vitória,Cuiabá,Barradão,0
+4,12/09/2023,Corinthians,Vasco,Neo Química Arena,0
+5,17/09/2023,Palmeiras,Fortaleza,Allianz Parque,0
+5,17/09/2023,Vitória,Athletico-PR,Barradão,0
+5,17/09/2023,Internacional,Grêmio,Beira-Rio,0
+5,17/09/2023,Corinthians,Botafogo,Neo Química Arena,0
+5,18/09/2023,Cuiabá,Ceará,Arena Pantanal,0
+5,18/09/2023,São Paulo,Cruzeiro,Morumbi,0
+5,18/09/2023,Vasco,Sport,São Januário,0
+5,19/09/2023,Coritiba,Bahia,Couto Pereira,0
+5,19/09/2023,Fluminense,Flamengo,Maracanã,0
+5,19/09/2023,Santos,Atlético-MG,Vila Belmiro,0
+6,24/09/2023,Palmeiras,Cuiabá,Allianz Parque,0
+6,24/09/2023,Bahia,Vasco,Arena Fonte Nova,0
+6,24/09/2023,Grêmio,Santos,Arena do Grêmio,0
+6,24/09/2023,Cruzeiro,Flamengo,Mineirão,0
+6,25/09/2023,Atlético-MG,Corinthians,Arena MRV,0
+6,25/09/2023,Vitória,Fluminense,Barradão,0
+6,25/09/2023,Coritiba,Fortaleza,Couto Pereira,0
+6,26/09/2023,Ceará,Athletico-PR,Castelão,0
+6,26/09/2023,São Paulo,Internacional,Morumbi,0
+6,26/09/2023,Botafogo,Sport,Nilton Santos (Engenhão),0
+7,01/10/2023,Palmeiras,Coritiba,Allianz Parque,0
+7,01/10/2023,Sport,Atlético-MG,Ilha do Retiro,0
+7,01/10/2023,Fluminense,Ceará,Maracanã,0
+7,01/10/2023,Santos,São Paulo,Vila Belmiro,0
+7,02/10/2023,Bahia,Botafogo,Arena Fonte Nova,0
+7,02/10/2023,Athletico-PR,Cuiabá,Ligga Arena,0
+7,02/10/2023,Flamengo,Internacional,Maracanã,1
+7,03/10/2023,Grêmio,Corinthians,Arena do Grêmio,0
+7,03/10/2023,Cruzeiro,Vitória,Mineirão,0
+7,03/10/2023,Vasco,Fortaleza,São Januário,0
+8,08/10/2023,Internacional,Vitória,Beira-Rio,0
+8,08/10/2023,Athletico-PR,Palmeiras,Ligga Arena,0
+8,08/10/2023,São Paulo,Corinthians,Morumbi,0
+8,08/10/2023,Botafogo,Fortaleza,Nilton Santos (Engenhão),0
+8,09/10/2023,Ceará,Cruzeiro,Castelão,0
+8,09/10/2023,Coritiba,Vasco,Couto Pereira,0
+8,09/10/2023,Sport,Grêmio,Ilha do Retiro,0
+8,10/10/2023,Bahia,Atlético-MG,Arena Fonte Nova,0
+8,10/10/2023,Fluminense,Cuiabá,Maracanã,0
+8,10/10/2023,Santos,Flamengo,Vila Belmiro,0
+9,15/10/2023,Bahia,Grêmio,Arena Fonte Nova,0
+9,15/10/2023,Flamengo,Corinthians,Maracanã,0
+9,15/10/2023,Cruzeiro,Cuiabá,Mineirão,0
+9,15/10/2023,Vasco,Palmeiras,São Januário,0
+9,16/10/2023,Atlético-MG,Fortaleza,Arena MRV,0
+9,16/10/2023,Fluminense,Athletico-PR,Maracanã,1
+9,16/10/2023,Santos,Vitória,Vila Belmiro,0
+9,17/10/2023,Ceará,Internacional,Castelão,0
+9,17/10/2023,Sport,São Paulo,Ilha do Retiro,0
+9,17/10/2023,Botafogo,Coritiba,Nilton Santos (Engenhão),0
+10,22/10/2023,Palmeiras,Fluminense,Allianz Parque,0
+10,22/10/2023,Atlético-MG,Coritiba,Arena MRV,0
+10,22/10/2023,Ceará,Santos,Castelão,0
+10,22/10/2023,Flamengo,Sport,Maracanã,0
+10,23/10/2023,Internacional,Cuiabá,Beira-Rio,0
+10,23/10/2023,São Paulo,Bahia,Morumbi,0
+10,23/10/2023,Botafogo,Vasco,Nilton Santos (Engenhão),0
+10,24/10/2023,Grêmio,Fortaleza,Arena do Grêmio,0
+10,24/10/2023,Cruzeiro,Athletico-PR,Mineirão,0
+10,24/10/2023,Corinthians,Vitória,Neo Química Arena,0
+11,29/10/2023,Palmeiras,Botafogo,Allianz Parque,0
+11,29/10/2023,Sport,Vitória,Ilha do Retiro,0
+11,29/10/2023,Athletico-PR,Internacional,Ligga Arena,0
+11,29/10/2023,São Paulo,Fortaleza,Morumbi,0
+11,30/10/2023,Coritiba,Grêmio,Couto Pereira,0
+11,30/10/2023,Cruzeiro,Fluminense,Mineirão,0
+11,30/10/2023,Corinthians,Ceará,Neo Química Arena,0
+11,31/10/2023,Cuiabá,Santos,Arena Pantanal,0
+11,31/10/2023,Flamengo,Bahia,Maracanã,0
+11,31/10/2023,Vasco,Atlético-MG,São Januário,0
+12,05/11/2023,Palmeiras,Cruzeiro,Allianz Parque,0
+12,05/11/2023,Vitória,Bahia,Barradão,0
+12,05/11/2023,Corinthians,Cuiabá,Neo Química Arena,0
+12,05/11/2023,Vasco,Grêmio,São Januário,0
+12,06/11/2023,Fortaleza,Flamengo,Castelão,0
+12,06/11/2023,Athletico-PR,Santos,Ligga Arena,0
+12,06/11/2023,Botafogo,Atlético-MG,Nilton Santos (Engenhão),0
+12,07/11/2023,Coritiba,São Paulo,Couto Pereira,0
+12,07/11/2023,Sport,Ceará,Ilha do Retiro,0
+12,07/11/2023,Fluminense,Internacional,Maracanã,0
+13,12/11/2023,Palmeiras,Atlético-MG,Allianz Parque,0
+13,12/11/2023,Bahia,Ceará,Arena Fonte Nova,0
+13,12/11/2023,Fluminense,Santos,Maracanã,0
+13,12/11/2023,Flamengo,Coritiba,Maracanã,1
+13,13/11/2023,Cuiabá,Sport,Arena Pantanal,0
+13,13/11/2023,Cruzeiro,Internacional,Mineirão,0
+13,13/11/2023,Vasco,São Paulo,São Januário,0
+13,14/11/2023,Fortaleza,Vitória,Castelão,0
+13,14/11/2023,Athletico-PR,Corinthians,Ligga Arena,0
+13,14/11/2023,Botafogo,Grêmio,Nilton Santos (Engenhão),0
+14,19/11/2023,Internacional,Palmeiras,Beira-Rio,0
+14,19/11/2023,Ceará,Fortaleza,Castelão,0
+14,19/11/2023,Athletico-PR,Sport,Ligga Arena,0
+14,19/11/2023,Botafogo,São Paulo,Nilton Santos (Engenhão),0
+14,20/11/2023,Grêmio,Atlético-MG,Arena do Grêmio,0
+14,20/11/2023,Coritiba,Vitória,Couto Pereira,0
+14,20/11/2023,Fluminense,Corinthians,Maracanã,0
+14,21/11/2023,Cuiabá,Bahia,Arena Pantanal,0
+14,21/11/2023,Flamengo,Vasco,Maracanã,1
+14,21/11/2023,Cruzeiro,Santos,Mineirão,0
+15,26/11/2023,Grêmio,Palmeiras,Arena do Grêmio,0
+15,26/11/2023,Vitória,Vasco,Barradão,0
+15,26/11/2023,Fortaleza,Cuiabá,Castelão,0
+15,26/11/2023,Corinthians,Cruzeiro,Neo Química Arena,0
+15,27/11/2023,Bahia,Athletico-PR,Arena Fonte Nova,0
+15,27/11/2023,Internacional,Santos,Beira-Rio,0
+15,27/11/2023,Botafogo,Flamengo,Nilton Santos (Engenhão),0
+15,28/11/2023,Atlético-MG,São Paulo,Arena MRV,0
+15,28/11/2023,Ceará,Coritiba,Castelão,1
+15,28/11/2023,Fluminense,Sport,Maracanã,0
+16,03/12/2023,Palmeiras,Santos,Allianz Parque,0
+16,03/12/2023,Bahia,Fluminense,Arena Fonte Nova,0
+16,03/12/2023,Cuiabá,Coritiba,Arena Pantanal,0
+16,03/12/2023,Flamengo,Atlético-MG,Maracanã,0
+16,04/12/2023,Grêmio,São Paulo,Arena do Grêmio,0
+16,04/12/2023,Cruzeiro,Sport,Mineirão,0
+16,04/12/2023,Vasco,Ceará,São Januário,0
+16,05/12/2023,Vitória,Botafogo,Barradão,0
+16,05/12/2023,Internacional,Corinthians,Beira-Rio,0
+16,05/12/2023,Athletico-PR,Fortaleza,Ligga Arena,0
+17,10/12/2023,Palmeiras,São Paulo,Allianz Parque,0
+17,10/12/2023,Internacional,Sport,Beira-Rio,0
+17,10/12/2023,Athletico-PR,Coritiba,Ligga Arena,0
+17,10/12/2023,Botafogo,Ceará,Nilton Santos (Engenhão),0
+17,11/12/2023,Atlético-MG,Vitória,Arena MRV,0
+17,11/12/2023,Fortaleza,Fluminense,Castelão,0
+17,11/12/2023,Santos,Corinthians,Vila Belmiro,0
+17,12/12/2023,Bahia,Cruzeiro,Arena Fonte Nova,0
+17,12/12/2023,Flamengo,Grêmio,Maracanã,0
+17,12/12/2023,Vasco,Cuiabá,São Januário,0
+18,17/12/2023,Palmeiras,Corinthians,Allianz Parque,0
+18,17/12/2023,Vitória,Grêmio,Barradão,0
+18,17/12/2023,Athletico-PR,Vasco,Ligga Arena,0
+18,17/12/2023,Cruzeiro,Fortaleza,Mineirão,0
+18,18/12/2023,Bahia,Internacional,Arena Fonte Nova,0
+18,18/12/2023,São Paulo,Flamengo,Morumbi,0
+18,18/12/2023,Botafogo,Cuiabá,Nilton Santos (Engenhão),0
+18,19/12/2023,Ceará,Atlético-MG,Castelão,0
+18,19/12/2023,Sport,Santos,Ilha do Retiro,0
+18,19/12/2023,Fluminense,Coritiba,Maracanã,0
+19,24/12/2023,Palmeiras,Flamengo,Allianz Parque,0
+19,24/12/2023,Bahia,Santos,Arena Fonte Nova,0
+19,24/12/2023,Cuiabá,Atlético-MG,Arena Pantanal,0
+19,24/12/2023,Fluminense,Vasco,Maracanã,0
+19,25/12/2023,Grêmio,Ceará,Arena do Grêmio,0
+19,25/12/2023,Cruzeiro,Coritiba,Mineirão,0
+19,25/12/2023,Corinthians,Sport,Neo Química Arena,0
+19,26/12/2023,Fortaleza,Internacional,Castelão,0
+19,26/12/2023,São Paulo,Vitória,Morumbi,0
+19,26/12/2023,Botafogo,Athletico-PR,Nilton Santos (Engenhão),0
+20,01/01/2024,Athletico-PR,Atlético-MG,Ligga Arena,0
+20,01/01/2024,Flamengo,Vitória,Maracanã,0
+20,01/01/2024,Santos,Fortaleza,Vila Belmiro,0
+20,02/01/2024,Bahia,Corinthians,Arena Fonte Nova,0
+20,02/01/2024,Cuiabá,Grêmio,Arena Pantanal,0
+20,02/01/2024,Cruzeiro,Vasco,Mineirão,0
+20,31/12/2023,Palmeiras,Sport,Allianz Parque,0
+20,31/12/2023,Coritiba,Internacional,Couto Pereira,0
+20,31/12/2023,São Paulo,Ceará,Morumbi,0
+20,31/12/2023,Botafogo,Fluminense,Nilton Santos (Engenhão),0
+21,07/01/2024,Grêmio,Athletico-PR,Arena do Grêmio,0
+21,07/01/2024,Vitória,Palmeiras,Barradão,0
+21,07/01/2024,Cruzeiro,Botafogo,Mineirão,0
+21,07/01/2024,Corinthians,Fortaleza,Neo Química Arena,0
+21,08/01/2024,Bahia,Sport,Arena Fonte Nova,0
+21,08/01/2024,Cuiabá,São Paulo,Arena Pantanal,0
+21,08/01/2024,Internacional,Vasco,Beira-Rio,0
+21,09/01/2024,Atlético-MG,Fluminense,Arena MRV,0
+21,09/01/2024,Coritiba,Santos,Couto Pereira,0
+21,09/01/2024,Flamengo,Ceará,Maracanã,0
+22,14/01/2024,Bahia,Palmeiras,Arena Fonte Nova,0
+22,14/01/2024,Flamengo,Cuiabá,Maracanã,0
+22,14/01/2024,Cruzeiro,Atlético-MG,Mineirão,0
+22,14/01/2024,Santos,Vasco,Vila Belmiro,0
+22,15/01/2024,Grêmio,Fluminense,Arena do Grêmio,0
+22,15/01/2024,Ceará,Vitória,Castelão,0
+22,15/01/2024,Coritiba,Corinthians,Couto Pereira,0
+22,16/01/2024,Internacional,Botafogo,Beira-Rio,0
+22,16/01/2024,Sport,Fortaleza,Ilha do Retiro,0
+22,16/01/2024,Athletico-PR,São Paulo,Ligga Arena,0
+23,21/01/2024,Internacional,Atlético-MG,Beira-Rio,0
+23,21/01/2024,Ceará,Palmeiras,Castelão,0
+23,21/01/2024,Sport,Coritiba,Ilha do Retiro,0
+23,21/01/2024,Fluminense,São Paulo,Maracanã,0
+23,22/01/2024,Bahia,Fortaleza,Arena Fonte Nova,0
+23,22/01/2024,Athletico-PR,Flamengo,Ligga Arena,0
+23,22/01/2024,Botafogo,Santos,Nilton Santos (Engenhão),0
+23,23/01/2024,Cuiabá,Vitória,Arena Pantanal,0
+23,23/01/2024,Cruzeiro,Grêmio,Mineirão,0
+23,23/01/2024,Vasco,Corinthians,São Januário,0
+24,28/01/2024,Grêmio,Internacional,Arena do Grêmio,0
+24,28/01/2024,Fortaleza,Palmeiras,Castelão,0
+24,28/01/2024,Athletico-PR,Vitória,Ligga Arena,0
+24,28/01/2024,Botafogo,Corinthians,Nilton Santos (Engenhão),0
+24,29/01/2024,Ceará,Cuiabá,Castelão,1
+24,29/01/2024,Sport,Vasco,Ilha do Retiro,0
+24,29/01/2024,Cruzeiro,São Paulo,Mineirão,0
+24,30/01/2024,Bahia,Coritiba,Arena Fonte Nova,0
+24,30/01/2024,Atlético-MG,Santos,Arena MRV,0
+24,30/01/2024,Flamengo,Fluminense,Maracanã,0
+25,04/02/2024,Cuiabá,Palmeiras,Arena Pantanal,0
+25,04/02/2024,Flamengo,Cruzeiro,Maracanã,0
+25,04/02/2024,Vasco,Bahia,São Januário,0
+25,04/02/2024,Santos,Grêmio,Vila Belmiro,0
+25,05/02/2024,Fortaleza,Coritiba,Castelão,0
+25,05/02/2024,Fluminense,Vitória,Maracanã,1
+25,05/02/2024,Corinthians,Atlético-MG,Neo Química Arena,0
+25,06/02/2024,Internacional,São Paulo,Beira-Rio,0
+25,06/02/2024,Sport,Botafogo,Ilha do Retiro,0
+25,06/02/2024,Athletico-PR,Ceará,Ligga Arena,0
+26,11/02/2024,Atlético-MG,Sport,Arena MRV,0
+26,11/02/2024,Ceará,Fluminense,Castelão,0
+26,11/02/2024,Coritiba,Palmeiras,Couto Pereira,0
+26,11/02/2024,São Paulo,Santos,Morumbi,0
+26,12/02/2024,Cuiabá,Athletico-PR,Arena Pantanal,0
+26,12/02/2024,Internacional,Flamengo,Beira-Rio,0
+26,12/02/2024,Botafogo,Bahia,Nilton Santos (Engenhão),0
+26,13/02/2024,Vitória,Cruzeiro,Barradão,0
+26,13/02/2024,Fortaleza,Vasco,Castelão,1
+26,13/02/2024,Corinthians,Grêmio,Neo Química Arena,0
+27,18/02/2024,Palmeiras,Athletico-PR,Allianz Parque,0
+27,18/02/2024,Vitória,Internacional,Barradão,0
+27,18/02/2024,Fortaleza,Botafogo,Castelão,0
+27,18/02/2024,Corinthians,São Paulo,Neo Química Arena,0
+27,19/02/2024,Grêmio,Sport,Arena do Grêmio,0
+27,19/02/2024,Cruzeiro,Ceará,Mineirão,0
+27,19/02/2024,Vasco,Coritiba,São Januário,0
+27,20/02/2024,Atlético-MG,Bahia,Arena MRV,0
+27,20/02/2024,Cuiabá,Fluminense,Arena Pantanal,0
+27,20/02/2024,Flamengo,Santos,Maracanã,0
+28,25/02/2024,Palmeiras,Vasco,Allianz Parque,0
+28,25/02/2024,Cuiabá,Cruzeiro,Arena Pantanal,0
+28,25/02/2024,Grêmio,Bahia,Arena do Grêmio,0
+28,25/02/2024,Corinthians,Flamengo,Neo Química Arena,0
+28,26/02/2024,Vitória,Santos,Barradão,0
+28,26/02/2024,Fortaleza,Atlético-MG,Castelão,0
+28,26/02/2024,Athletico-PR,Fluminense,Ligga Arena,0
+28,27/02/2024,Internacional,Ceará,Beira-Rio,0
+28,27/02/2024,Coritiba,Botafogo,Couto Pereira,0
+28,27/02/2024,São Paulo,Sport,Morumbi,0
+29,03/03/2024,Coritiba,Atlético-MG,Couto Pereira,0
+29,03/03/2024,Sport,Flamengo,Ilha do Retiro,0
+29,03/03/2024,Fluminense,Palmeiras,Maracanã,0
+29,03/03/2024,Santos,Ceará,Vila Belmiro,0
+29,04/03/2024,Bahia,São Paulo,Arena Fonte Nova,0
+29,04/03/2024,Cuiabá,Internacional,Arena Pantanal,0
+29,04/03/2024,Vasco,Botafogo,São Januário,0
+29,05/03/2024,Vitória,Corinthians,Barradão,0
+29,05/03/2024,Fortaleza,Grêmio,Castelão,0
+29,05/03/2024,Athletico-PR,Cruzeiro,Ligga Arena,0
+30,10/03/2024,Vitória,Sport,Barradão,0
+30,10/03/2024,Internacional,Athletico-PR,Beira-Rio,0
+30,10/03/2024,Fortaleza,São Paulo,Castelão,0
+30,10/03/2024,Botafogo,Palmeiras,Nilton Santos (Engenhão),0
+30,11/03/2024,Grêmio,Coritiba,Arena do Grêmio,0
+30,11/03/2024,Ceará,Corinthians,Castelão,1
+30,11/03/2024,Fluminense,Cruzeiro,Maracanã,0
+30,12/03/2024,Bahia,Flamengo,Arena Fonte Nova,0
+30,12/03/2024,Atlético-MG,Vasco,Arena MRV,0
+30,12/03/2024,Santos,Cuiabá,Vila Belmiro,0
+31,17/03/2024,Bahia,Vitória,Arena Fonte Nova,0
+31,17/03/2024,Cuiabá,Corinthians,Arena Pantanal,0
+31,17/03/2024,Grêmio,Vasco,Arena do Grêmio,0
+31,17/03/2024,Cruzeiro,Palmeiras,Mineirão,0
+31,18/03/2024,Atlético-MG,Botafogo,Arena MRV,0
+31,18/03/2024,Flamengo,Fortaleza,Maracanã,0
+31,18/03/2024,Santos,Athletico-PR,Vila Belmiro,0
+31,19/03/2024,Internacional,Fluminense,Beira-Rio,0
+31,19/03/2024,Ceará,Sport,Castelão,0
+31,19/03/2024,São Paulo,Coritiba,Morumbi,0
+32,24/03/2024,Atlético-MG,Palmeiras,Arena MRV,0
+32,24/03/2024,Ceará,Bahia,Castelão,0
+32,24/03/2024,Coritiba,Flamengo,Couto Pereira,0
+32,24/03/2024,Santos,Fluminense,Vila Belmiro,0
+32,25/03/2024,Internacional,Cruzeiro,Beira-Rio,0
+32,25/03/2024,Sport,Cuiabá,Ilha do Retiro,0
+32,25/03/2024,São Paulo,Vasco,Morumbi,0
+32,26/03/2024,Grêmio,Botafogo,Arena do Grêmio,0
+32,26/03/2024,Vitória,Fortaleza,Barradão,0
+32,26/03/2024,Corinthians,Athletico-PR,Neo Química Arena,0
+33,01/04/2024,Atlético-MG,Grêmio,Arena MRV,0
+33,01/04/2024,Vitória,Coritiba,Barradão,0
+33,01/04/2024,Corinthians,Fluminense,Neo Química Arena,0
+33,02/04/2024,Bahia,Cuiabá,Arena Fonte Nova,0
+33,02/04/2024,Vasco,Flamengo,São Januário,0
+33,02/04/2024,Santos,Cruzeiro,Vila Belmiro,0
+33,31/03/2024,Palmeiras,Internacional,Allianz Parque,0
+33,31/03/2024,Fortaleza,Ceará,Castelão,0
+33,31/03/2024,Sport,Athletico-PR,Ilha do Retiro,0
+33,31/03/2024,São Paulo,Botafogo,Morumbi,0
+34,07/04/2024,Palmeiras,Grêmio,Allianz Parque,0
+34,07/04/2024,Cuiabá,Fortaleza,Arena Pantanal,0
+34,07/04/2024,Cruzeiro,Corinthians,Mineirão,0
+34,07/04/2024,Vasco,Vitória,São Januário,0
+34,08/04/2024,Athletico-PR,Bahia,Ligga Arena,0
+34,08/04/2024,Flamengo,Botafogo,Maracanã,0
+34,08/04/2024,Santos,Internacional,Vila Belmiro,0
+34,09/04/2024,Coritiba,Ceará,Couto Pereira,0
+34,09/04/2024,Sport,Fluminense,Ilha do Retiro,0
+34,09/04/2024,São Paulo,Atlético-MG,Morumbi,0
+35,14/04/2024,Atlético-MG,Flamengo,Arena MRV,0
+35,14/04/2024,Coritiba,Cuiabá,Couto Pereira,0
+35,14/04/2024,Fluminense,Bahia,Maracanã,0
+35,14/04/2024,Santos,Palmeiras,Vila Belmiro,0
+35,15/04/2024,Ceará,Vasco,Castelão,0
+35,15/04/2024,Sport,Cruzeiro,Ilha do Retiro,0
+35,15/04/2024,São Paulo,Grêmio,Morumbi,0
+35,16/04/2024,Fortaleza,Athletico-PR,Castelão,1
+35,16/04/2024,Corinthians,Internacional,Neo Química Arena,0
+35,16/04/2024,Botafogo,Vitória,Nilton Santos (Engenhão),0
+36,21/04/2024,Ceará,Botafogo,Castelão,0
+36,21/04/2024,Coritiba,Athletico-PR,Couto Pereira,0
+36,21/04/2024,Sport,Internacional,Ilha do Retiro,0
+36,21/04/2024,São Paulo,Palmeiras,Morumbi,0
+36,22/04/2024,Vitória,Atlético-MG,Barradão,0
+36,22/04/2024,Fluminense,Fortaleza,Maracanã,0
+36,22/04/2024,Corinthians,Santos,Neo Química Arena,0
+36,23/04/2024,Cuiabá,Vasco,Arena Pantanal,0
+36,23/04/2024,Grêmio,Flamengo,Arena do Grêmio,0
+36,23/04/2024,Cruzeiro,Bahia,Mineirão,0
+37,28/04/2024,Grêmio,Vitória,Arena do Grêmio,0
+37,28/04/2024,Fortaleza,Cruzeiro,Castelão,0
+37,28/04/2024,Corinthians,Palmeiras,Neo Química Arena,0
+37,28/04/2024,Vasco,Athletico-PR,São Januário,0
+37,29/04/2024,Cuiabá,Botafogo,Arena Pantanal,0
+37,29/04/2024,Internacional,Bahia,Beira-Rio,0
+37,29/04/2024,Flamengo,São Paulo,Maracanã,0
+37,30/04/2024,Atlético-MG,Ceará,Arena MRV,0
+37,30/04/2024,Coritiba,Fluminense,Couto Pereira,0
+37,30/04/2024,Santos,Sport,Vila Belmiro,0
+38,05/05/2024,Atlético-MG,Cuiabá,Arena MRV,0
+38,05/05/2024,Flamengo,Palmeiras,Maracanã,0
+38,05/05/2024,Vasco,Fluminense,São Januário,0
+38,05/05/2024,Santos,Bahia,Vila Belmiro,0
+38,06/05/2024,Ceará,Grêmio,Castelão,0
+38,06/05/2024,Coritiba,Cruzeiro,Couto Pereira,0
+38,06/05/2024,Sport,Corinthians,Ilha do Retiro,0
+38,07/05/2024,Vitória,São Paulo,Barradão,0
+38,07/05/2024,Internacional,Fortaleza,Beira-Rio,0
+38,07/05/2024,Athletico-PR,Botafogo,Ligga Arena,0
