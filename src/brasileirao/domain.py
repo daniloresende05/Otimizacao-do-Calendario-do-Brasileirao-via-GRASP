@@ -1,6 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Optional
 
 @dataclass(frozen=True)
 class Team:
@@ -25,3 +25,55 @@ class ScheduledMatch:
 
 Schedule = List[ScheduledMatch]
 TeamMap = Dict[str, Team]
+
+
+@dataclass(frozen=True)
+class PRVOccurrence:
+    stadium: str
+    match_a: ScheduledMatch
+    match_b: ScheduledMatch
+    days_between: int
+
+
+@dataclass(frozen=True)
+class PRVResult:
+    total_prv: int
+    occurrences: List[PRVOccurrence]
+    prv_by_stadium: Dict[str, int]
+
+
+@dataclass(frozen=True)
+class ConstraintViolation:
+    constraint_id: str
+    description: str
+    round: Optional[int] = None
+    team: Optional[str] = None
+    stadium: Optional[str] = None
+
+
+@dataclass(frozen=True)
+class EvaluationResult:
+    total_cost: float
+    total_prv: int
+    prv_result: PRVResult
+    hard_constraint_violations: List[ConstraintViolation]
+    soft_constraint_violations: List[ConstraintViolation]
+    violations_by_type: Dict[str, int]
+
+    @property
+    def is_feasible(self) -> bool:
+        return not self.hard_constraint_violations
+
+    def summary(self) -> str:
+        lines = [
+            "Schedule evaluation",
+            f"  is_feasible: {self.is_feasible}",
+            f"  total_cost:  {self.total_cost:.2f}",
+            f"  total_prv:   {self.total_prv}",
+            f"  hard:        {len(self.hard_constraint_violations)}",
+            f"  soft:        {len(self.soft_constraint_violations)}",
+            "  violations_by_type:",
+        ]
+        for cid, count in self.violations_by_type.items():
+            lines.append(f"    {cid}: {count}")
+        return "\n".join(lines)

@@ -5,7 +5,7 @@ import pandas as pd
 
 from .io import load_dates, load_teams
 from .initial_solution import build_initial_schedule_with_constraints
-from .objective import add_prv_column
+from .objective import add_prv_column, evaluate
 
 def main():
     parser = argparse.ArgumentParser()
@@ -57,6 +57,9 @@ def main():
 
     print(f"\nOK! CSV gerado: {args.out}\n")
     print(df_stadium.to_string(index=False))
+
+    result = evaluate(schedule, prv_days=args.prv_days)
+    print("\n" + result.summary())
 
 if __name__ == "__main__":
     main()
