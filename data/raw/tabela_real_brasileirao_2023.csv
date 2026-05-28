@@ -1,0 +1,381 @@
+round,day,home,away,stadium,home_state,away_state
+1,2023-04-15,Athletico-PR,Goiás,Ligga Arena,PR,GO
+1,2023-04-16,Flamengo,Coritiba FC,Estádio Jornalista Mário Filho,RJ,
+1,2023-04-15,Palmeiras,Cuiabá-MT,Allianz Parque,SP,
+1,2023-04-16,Atlético-MG,Vasco da Gama,Estádio Governador Magalhães Pinto,MG,RJ
+1,2023-04-16,Grêmio,Santos,Estádio Alfredo Jaconi ,RS,SP
+1,2023-04-15,Fortaleza,Internacional,Estádio Governador Plácido Castelo,CE,RS
+1,2023-04-15,Botafogo,São Paulo,Estádio Olímpico Nilton Santos,RJ,SP
+1,2023-04-16,Corinthians,Cruzeiro,Neo Química Arena ,SP,MG
+1,2023-04-15,RB Bragantino,EC Bahia,Estádio Nabi Abi Chedid,,BA
+1,2023-04-15,América-MG,Fluminense,Estádio Raimundo Sampaio,MG,RJ
+2,2023-04-23,Coritiba FC,Fortaleza,Estádio Major Antônio Couto Pereira,,CE
+2,2023-04-23,Santos,Atlético-MG,Estádio Urbano Caldeira,SP,MG
+2,2023-04-23,Vasco da Gama,Palmeiras,Estádio Jornalista Mário Filho,RJ,SP
+2,2023-04-22,Fluminense,Athletico-PR,Estádio Jornalista Mário Filho,RJ,PR
+2,2023-04-22,São Paulo,América-MG,Estádio Cícero Pompeu de Toledo,SP,MG
+2,2023-04-23,Cruzeiro,Grêmio,Estádio Raimundo Sampaio,MG,RS
+2,2023-04-25,EC Bahia,Botafogo,Arena Fonte Nova,BA,RJ
+2,2023-04-22,Cuiabá-MT,RB Bragantino,Arena Pantanal,,
+2,2023-04-23,Internacional,Flamengo,Estádio Beira-Rio,RS,RJ
+2,2023-04-24,Goiás,Corinthians,Estádio Serra Dourada,GO,SP
+3,2023-04-29,RB Bragantino,Cruzeiro,Estádio Nabi Abi Chedid,,MG
+3,2023-04-30,Atlético-MG,Athletico-PR,Estádio Raimundo Sampaio,MG,PR
+3,2023-05-02,Vasco da Gama,EC Bahia,Estádio São Januário,RJ,BA
+3,2023-04-29,Coritiba FC,São Paulo,Estádio Major Antônio Couto Pereira,,SP
+3,2023-04-30,Flamengo,Botafogo,Estádio Jornalista Mário Filho,RJ,RJ
+3,2023-04-29,Santos,América-MG,Estádio Urbano Caldeira,SP,MG
+3,2023-04-29,Palmeiras,Corinthians,Allianz Parque,SP,SP
+3,2023-04-30,Internacional,Goiás,Estádio Beira-Rio,RS,GO
+3,2023-04-29,Fortaleza,Fluminense,Estádio Governador Plácido Castelo,CE,RJ
+3,2023-04-30,Cuiabá-MT,Grêmio,Arena Pantanal,,RS
+4,2023-05-07,América-MG,Cuiabá-MT,Estádio Raimundo Sampaio,MG,
+4,2023-05-07,Grêmio,RB Bragantino,Arena do Grêmio,RS,
+4,2023-05-07,Fluminense,Vasco da Gama,Estádio Jornalista Mário Filho,RJ,RJ
+4,2023-05-07,Athletico-PR,Flamengo,Ligga Arena,PR,RJ
+4,2023-05-07,Botafogo,Atlético-MG,Estádio Olímpico Nilton Santos,RJ,MG
+4,2023-05-07,Goiás,Palmeiras,Estádio Serra Dourada,GO,SP
+4,2023-05-07,São Paulo,Internacional,Estádio Cícero Pompeu de Toledo,SP,RS
+4,2023-05-07,EC Bahia,Coritiba FC,Arena Fonte Nova,BA,
+4,2023-05-09,Corinthians,Fortaleza,Neo Química Arena ,SP,CE
+4,2023-05-06,Cruzeiro,Santos,Estádio Raimundo Sampaio,MG,SP
+5,2023-05-11,Internacional,Athletico-PR,Estádio Beira-Rio,RS,PR
+5,2023-05-11,Cruzeiro,Fluminense,Estádio Governador Magalhães Pinto,MG,RJ
+5,2023-05-11,Santos,EC Bahia,Estádio Urbano Caldeira,SP,BA
+5,2023-05-11,Cuiabá-MT,Atlético-MG,Arena Pantanal,,MG
+5,2023-05-11,Palmeiras,Grêmio,Allianz Parque,SP,RS
+5,2023-05-12,Coritiba FC,Vasco da Gama,Estádio Major Antônio Couto Pereira,,RJ
+5,2023-05-11,RB Bragantino,América-MG,Estádio Nabi Abi Chedid,,MG
+5,2023-05-12,Fortaleza,São Paulo,Estádio Governador Plácido Castelo,CE,SP
+5,2023-05-11,Flamengo,Goiás,Estádio Jornalista Mário Filho,RJ,GO
+5,2023-05-12,Botafogo,Corinthians,Estádio Olímpico Nilton Santos,RJ,SP
+6,2023-05-14,Athletico-PR,Coritiba FC,Ligga Arena,PR,
+6,2023-05-14,Corinthians,São Paulo,Neo Química Arena ,SP,SP
+6,2023-05-14,Grêmio,Fortaleza,Arena do Grêmio,RS,CE
+6,2023-05-14,Atlético-MG,Internacional,Estádio Governador Magalhães Pinto,MG,RS
+6,2023-05-13,EC Bahia,Flamengo,Arena Fonte Nova,BA,RJ
+6,2023-05-13,Palmeiras,RB Bragantino,Allianz Parque,SP,
+6,2023-05-14,América-MG,Cruzeiro,Estádio Raimundo Sampaio,MG,MG
+6,2023-05-14,Goiás,Botafogo,Estádio Serra Dourada,GO,RJ
+6,2023-05-14,Vasco da Gama,Santos,Estádio São Januário,RJ,SP
+6,2023-05-13,Fluminense,Cuiabá-MT,Estádio Jornalista Mário Filho,RJ,
+7,2023-05-20,Coritiba FC,Atlético-MG,Estádio Major Antônio Couto Pereira,,MG
+7,2023-05-20,São Paulo,Vasco da Gama,Estádio Cícero Pompeu de Toledo,SP,RJ
+7,2023-05-21,Santos,Palmeiras,Estádio Urbano Caldeira,SP,SP
+7,2023-05-21,Flamengo,Corinthians,Estádio Jornalista Mário Filho,RJ,SP
+7,2023-05-20,Botafogo,Fluminense,Estádio Olímpico Nilton Santos,RJ,RJ
+7,2023-05-20,EC Bahia,Goiás,Arena Fonte Nova,BA,GO
+7,2023-05-20,América-MG,Fortaleza,Estádio Raimundo Sampaio,MG,CE
+7,2023-05-20,RB Bragantino,Athletico-PR,Estádio Nabi Abi Chedid,,PR
+7,2023-05-21,Grêmio,Internacional,Arena do Grêmio,RS,RS
+7,2023-05-23,Cruzeiro,Cuiabá-MT,Estádio Joaquim Henrique Nogueira,MG,
+8,2023-05-27,Flamengo,Cruzeiro,Estádio Jornalista Mário Filho,RJ,MG
+8,2023-05-27,Cuiabá-MT,Coritiba FC,Arena Pantanal,,
+8,2023-05-28,São Paulo,Goiás,Estádio Cícero Pompeu de Toledo,SP,GO
+8,2023-05-28,Atlético-MG,Palmeiras,Estádio Governador Magalhães Pinto,MG,SP
+8,2023-05-29,RB Bragantino,Santos,Estádio Nabi Abi Chedid,,SP
+8,2023-05-29,Botafogo,América-MG,Estádio Olímpico Nilton Santos,RJ,MG
+8,2023-05-27,Athletico-PR,Grêmio,Ligga Arena,PR,RS
+8,2023-05-27,Fortaleza,Vasco da Gama,Estádio Governador Plácido Castelo,CE,RJ
+8,2023-05-28,Internacional,EC Bahia,Estádio Beira-Rio,RS,BA
+8,2023-05-28,Corinthians,Fluminense,Neo Química Arena ,SP,RJ
+9,2023-06-03,América-MG,Corinthians,Estádio Raimundo Sampaio,MG,SP
+9,2023-06-03,Athletico-PR,Botafogo,Ligga Arena,PR,RJ
+9,2023-06-04,Grêmio,São Paulo,Arena do Grêmio,RS,SP
+9,2023-06-04,Fluminense,RB Bragantino,Estádio Jornalista Mário Filho,RJ,
+9,2023-06-04,Santos,Internacional,Estádio Urbano Caldeira,SP,RS
+9,2023-06-06,Vasco da Gama,Flamengo,Estádio Jornalista Mário Filho,RJ,RJ
+9,2023-06-04,Goiás,Cuiabá-MT,Estádio Serra Dourada,GO,
+9,2023-06-03,Fortaleza,EC Bahia,Estádio Governador Plácido Castelo,CE,BA
+9,2023-06-03,Cruzeiro,Atlético-MG,Estádio Municipal Parque do Sabiá,MG,MG
+9,2023-06-04,Palmeiras,Coritiba FC,Allianz Parque,SP,
+10,2023-06-11,São Paulo,Palmeiras,Estádio Cícero Pompeu de Toledo,SP,SP
+10,2023-06-10,Coritiba FC,Santos,Estádio Major Antônio Couto Pereira,,SP
+10,2023-06-10,Corinthians,Cuiabá-MT,Neo Química Arena ,SP,
+10,2023-06-10,EC Bahia,Cruzeiro,Arena Fonte Nova,BA,MG
+10,2023-06-10,Atlético-MG,RB Bragantino,Estádio Governador Magalhães Pinto,MG,
+10,2023-06-11,Internacional,Vasco da Gama,Estádio Beira-Rio,RS,RJ
+10,2023-06-11,Botafogo,Fortaleza,Estádio Olímpico Nilton Santos,RJ,CE
+10,2023-06-11,América-MG,Athletico-PR,Estádio Governador Magalhães Pinto,MG,PR
+10,2023-06-11,Goiás,Fluminense,Estádio Serra Dourada,GO,RJ
+10,2023-06-11,Flamengo,Grêmio,Estádio Jornalista Mário Filho,RJ,RS
+11,2023-06-23,Coritiba FC,Internacional,Estádio Major Antônio Couto Pereira,,RS
+11,2023-06-23,Vasco da Gama,Goiás,Estádio São Januário,RJ,GO
+11,2023-06-22,Fluminense,Atlético-MG,Estádio General Sylvio Raulino de Oliveira,RJ,MG
+11,2023-06-22,Santos,Corinthians,Estádio Urbano Caldeira,SP,SP
+11,2023-06-23,RB Bragantino,Flamengo,Estádio Nabi Abi Chedid,,RJ
+11,2023-06-22,EC Bahia,Palmeiras,Arena Fonte Nova,BA,SP
+11,2023-06-23,Grêmio,América-MG,Arena do Grêmio,RS,MG
+11,2023-06-23,Cuiabá-MT,Botafogo,Arena Pantanal,,RJ
+11,2023-06-22,São Paulo,Athletico-PR,Estádio Cícero Pompeu de Toledo,SP,PR
+11,2023-06-22,Cruzeiro,Fortaleza,Estádio Governador Magalhães Pinto,MG,CE
+12,2023-06-25,Palmeiras,Botafogo,Allianz Parque,SP,RJ
+12,2023-06-25,Grêmio,Coritiba FC,Arena do Grêmio,RS,
+12,2023-06-24,Fluminense,EC Bahia,Estádio Jornalista Mário Filho,RJ,BA
+12,2023-06-24,Fortaleza,Atlético-MG,Estádio Governador Plácido Castelo,CE,MG
+12,2023-06-24,Athletico-PR,Corinthians,Ligga Arena,PR,SP
+12,2023-06-25,RB Bragantino,Goiás,Estádio Nabi Abi Chedid,,GO
+12,2023-06-25,América-MG,Internacional,Estádio Raimundo Sampaio,MG,RS
+12,2023-06-25,Cruzeiro,São Paulo,Estádio Governador Magalhães Pinto,MG,SP
+12,2023-06-27,Vasco da Gama,Cuiabá-MT,Estádio Luso Brasileiro,RJ,
+12,2023-06-25,Santos,Flamengo,Estádio Urbano Caldeira,SP,RJ
+13,2023-07-02,Cuiabá-MT,Santos,Arena Pantanal,,SP
+13,2023-07-02,Botafogo,Vasco da Gama,Estádio Olímpico Nilton Santos,RJ,RJ
+13,2023-07-01,São Paulo,Fluminense,Estádio Cícero Pompeu de Toledo,SP,RJ
+13,2023-07-04,Goiás,Coritiba FC,Estádio Serra Dourada,GO,
+13,2023-07-02,Atlético-MG,América-MG,Estádio Governador Magalhães Pinto,MG,MG
+13,2023-07-02,Athletico-PR,Palmeiras,Ligga Arena,PR,SP
+13,2023-07-02,Internacional,Cruzeiro,Estádio Beira-Rio,RS,MG
+13,2023-07-01,Flamengo,Fortaleza,Estádio Jornalista Mário Filho,RJ,CE
+13,2023-07-01,EC Bahia,Grêmio,Arena Fonte Nova,BA,RS
+13,2023-07-02,Corinthians,RB Bragantino,Neo Química Arena ,SP,
+14,2023-07-08,Atlético-MG,Corinthians,Estádio Governador Magalhães Pinto,MG,SP
+14,2023-07-09,Fluminense,Internacional,Estádio Jornalista Mário Filho,RJ,RS
+14,2023-07-09,Santos,Goiás,Estádio Urbano Caldeira,SP,GO
+14,2023-07-09,Grêmio,Botafogo,Arena do Grêmio,RS,RJ
+14,2023-07-09,Fortaleza,Athletico-PR,Estádio Governador Plácido Castelo,CE,PR
+14,2023-07-09,RB Bragantino,São Paulo,Estádio Nabi Abi Chedid,,SP
+14,2023-07-08,Coritiba FC,América-MG,Estádio Major Antônio Couto Pereira,,MG
+14,2023-07-08,Cuiabá-MT,EC Bahia,Arena Pantanal,,BA
+14,2023-07-09,Palmeiras,Flamengo,Allianz Parque,SP,RJ
+14,2023-07-08,Vasco da Gama,Cruzeiro,Estádio São Januário,RJ,MG
+15,2023-09-19,Corinthians,Grêmio,Neo Química Arena ,SP,RS
+15,2023-07-16,Fortaleza,Cuiabá-MT,Estádio Governador Plácido Castelo,CE,
+15,2023-09-26,América-MG,Vasco da Gama,Estádio Raimundo Sampaio,MG,RJ
+15,2023-07-16,Athletico-PR,EC Bahia,Ligga Arena,PR,BA
+15,2023-07-16,Cruzeiro,Coritiba FC,Estádio Governador Magalhães Pinto,MG,
+15,2023-07-18,Goiás,Atlético-MG,Estádio Serra Dourada,GO,MG
+15,2023-07-16,Internacional,Palmeiras,Estádio Beira-Rio,RS,SP
+15,2023-07-16,São Paulo,Santos,Estádio Cícero Pompeu de Toledo,SP,SP
+15,2023-07-16,Fluminense,Flamengo,Estádio Jornalista Mário Filho,RJ,RJ
+15,2023-07-16,Botafogo,RB Bragantino,Estádio Olímpico Nilton Santos,RJ,
+16,2023-07-22,Flamengo,América-MG,Estádio Jornalista Mário Filho,RJ,MG
+16,2023-07-22,Palmeiras,Fortaleza,Allianz Parque,SP,CE
+16,2023-07-23,Santos,Botafogo,Estádio Urbano Caldeira,SP,RJ
+16,2023-07-22,Cuiabá-MT,São Paulo,Arena Pantanal,,SP
+16,2023-07-23,Vasco da Gama,Athletico-PR,Estádio São Januário,RJ,PR
+16,2023-07-22,EC Bahia,Corinthians,Arena Fonte Nova,BA,SP
+16,2023-07-23,Grêmio,Atlético-MG,Arena do Grêmio,RS,MG
+16,2023-07-23,Cruzeiro,Goiás,Estádio Raimundo Sampaio,MG,GO
+16,2023-07-25,Coritiba FC,Fluminense,Estádio Major Antônio Couto Pereira,,RJ
+16,2023-07-23,RB Bragantino,Internacional,Estádio Nabi Abi Chedid,,RS
+17,2023-07-30,Goiás,Grêmio,Estádio Serra Dourada,GO,RS
+17,2023-07-30,América-MG,Palmeiras,Estádio Raimundo Sampaio,MG,SP
+17,2023-07-29,Fluminense,Santos,Estádio Jornalista Mário Filho,RJ,SP
+17,2023-07-29,Athletico-PR,Cruzeiro,Ligga Arena,PR,MG
+17,2023-07-30,Atlético-MG,Flamengo,Estádio Raimundo Sampaio,MG,RJ
+17,2023-07-30,São Paulo,EC Bahia,Estádio Cícero Pompeu de Toledo,SP,BA
+17,2023-07-29,Internacional,Cuiabá-MT,Estádio Beira-Rio,RS,
+17,2023-07-29,Fortaleza,RB Bragantino,Estádio Governador Plácido Castelo,CE,
+17,2023-07-30,Botafogo,Coritiba FC,Estádio Olímpico Nilton Santos,RJ,
+17,2023-07-29,Corinthians,Vasco da Gama,Neo Química Arena ,SP,RJ
+18,2023-08-06,EC Bahia,América-MG,Arena Fonte Nova,BA,MG
+18,2023-08-05,Goiás,Fortaleza,Estádio Serra Dourada,GO,CE
+18,2023-08-06,Fluminense,Palmeiras,Estádio Jornalista Mário Filho,RJ,SP
+18,2023-08-06,Coritiba FC,RB Bragantino,Estádio Major Antônio Couto Pereira,,
+18,2023-08-05,Santos,Athletico-PR,Estádio Urbano Caldeira,SP,PR
+18,2023-08-06,Vasco da Gama,Grêmio,Estádio São Januário,RJ,RS
+18,2023-08-05,Internacional,Corinthians,Estádio Beira-Rio,RS,SP
+18,2023-08-06,São Paulo,Atlético-MG,Estádio Cícero Pompeu de Toledo,SP,MG
+18,2023-08-06,Cruzeiro,Botafogo,Estádio Governador Magalhães Pinto,MG,RJ
+18,2023-08-07,Cuiabá-MT,Flamengo,Arena Pantanal,,RJ
+19,2023-08-13,Flamengo,São Paulo,Estádio Jornalista Mário Filho,RJ,SP
+19,2023-08-13,Corinthians,Coritiba FC,Neo Química Arena ,SP,
+19,2023-08-13,Grêmio,Fluminense,Arena do Grêmio,RS,RJ
+19,2023-08-13,Botafogo,Internacional,Estádio Olímpico Nilton Santos,RJ,RS
+19,2023-08-16,Athletico-PR,Cuiabá-MT,Ligga Arena,PR,
+19,2023-08-13,Atlético-MG,EC Bahia,Estádio Governador Magalhães Pinto,MG,BA
+19,2023-08-15,Palmeiras,Cruzeiro,Allianz Parque,SP,MG
+19,2023-08-13,Fortaleza,Santos,Estádio Governador Plácido Castelo,CE,SP
+19,2023-08-15,RB Bragantino,Vasco da Gama,Estádio Nabi Abi Chedid,,RJ
+19,2023-08-13,América-MG,Goiás,Estádio Raimundo Sampaio,MG,GO
+20,2023-08-20,Coritiba FC,Flamengo,Estádio Major Antônio Couto Pereira,,RJ
+20,2023-08-19,São Paulo,Botafogo,Estádio Cícero Pompeu de Toledo,SP,RJ
+20,2023-08-22,Goiás,Athletico-PR,Estádio Serra Dourada,GO,PR
+20,2023-08-20,EC Bahia,RB Bragantino,Arena Fonte Nova,BA,
+20,2023-08-20,Santos,Grêmio,Estádio Urbano Caldeira,SP,RS
+20,2023-08-19,Internacional,Fortaleza,Estádio Beira-Rio,RS,CE
+20,2023-08-19,Cuiabá-MT,Palmeiras,Arena Pantanal,,SP
+20,2023-08-20,Vasco da Gama,Atlético-MG,Estádio Jornalista Mário Filho,RJ,MG
+20,2023-08-19,Fluminense,América-MG,Estádio Jornalista Mário Filho,RJ,MG
+20,2023-08-20,Cruzeiro,Corinthians,Estádio Governador Magalhães Pinto,MG,SP
+21,2023-08-27,Fortaleza,Coritiba FC,Estádio Governador Plácido Castelo,CE,
+21,2023-08-28,Grêmio,Cruzeiro,Arena do Grêmio,RS,MG
+21,2023-08-27,Botafogo,EC Bahia,Estádio Olímpico Nilton Santos,RJ,BA
+21,2023-08-27,Atlético-MG,Santos,Arena MRV,MG,SP
+21,2023-08-27,Athletico-PR,Fluminense,Ligga Arena,PR,RJ
+21,2023-08-26,Flamengo,Internacional,Estádio Jornalista Mário Filho,RJ,RS
+21,2023-08-27,RB Bragantino,Cuiabá-MT,Estádio Nabi Abi Chedid,,
+21,2023-08-27,Palmeiras,Vasco da Gama,Allianz Parque,SP,RJ
+21,2023-08-27,América-MG,São Paulo,Estádio Raimundo Sampaio,MG,SP
+21,2023-08-27,Corinthians,Goiás,Neo Química Arena ,SP,GO
+22,2023-09-03,EC Bahia,Vasco da Gama,Arena Fonte Nova,BA,RJ
+22,2023-09-03,Fluminense,Fortaleza,Estádio General Sylvio Raulino de Oliveira,RJ,CE
+22,2023-09-03,Botafogo,Flamengo,Estádio Olímpico Nilton Santos,RJ,RJ
+22,2023-09-02,Athletico-PR,Atlético-MG,Ligga Arena,PR,MG
+22,2023-09-03,Corinthians,Palmeiras,Neo Química Arena ,SP,SP
+22,2023-09-03,América-MG,Santos,Estádio Raimundo Sampaio,MG,SP
+22,2023-09-03,Grêmio,Cuiabá-MT,Arena do Grêmio,RS,
+22,2023-09-02,Goiás,Internacional,Estádio Serra Dourada,GO,RS
+22,2023-09-03,Cruzeiro,RB Bragantino,Estádio Governador Magalhães Pinto,MG,
+22,2023-09-28,São Paulo,Coritiba FC,Estádio Cícero Pompeu de Toledo,SP,
+23,2023-09-15,Santos,Cruzeiro,Estádio Urbano Caldeira,SP,MG
+23,2023-09-14,Flamengo,Athletico-PR,Estádio Estadual Kléber José de Andrade,RJ,PR
+23,2023-09-16,Cuiabá-MT,América-MG,Arena Pantanal,,MG
+23,2023-09-15,RB Bragantino,Grêmio,Estádio Nabi Abi Chedid,,RS
+23,2023-09-15,Fortaleza,Corinthians,Estádio Governador Plácido Castelo,CE,SP
+23,2023-09-16,Palmeiras,Goiás,Allianz Parque,SP,GO
+23,2023-09-17,Atlético-MG,Botafogo,Arena MRV,MG,RJ
+23,2023-09-16,Vasco da Gama,Fluminense,Estádio Olímpico Nilton Santos,RJ,RJ
+23,2023-09-14,Internacional,São Paulo,Estádio Beira-Rio,RS,SP
+23,2023-09-15,Coritiba FC,EC Bahia,Estádio Major Antônio Couto Pereira,,BA
+24,2023-09-23,Corinthians,Botafogo,Neo Química Arena ,SP,RJ
+24,2023-09-22,Athletico-PR,Internacional,Ligga Arena,PR,RS
+24,2023-09-19,EC Bahia,Santos,Arena Fonte Nova,BA,SP
+24,2023-09-20,América-MG,RB Bragantino,Estádio Raimundo Sampaio,MG,
+24,2023-09-21,Goiás,Flamengo,Estádio Serra Dourada,GO,RJ
+24,2023-09-24,Atlético-MG,Cuiabá-MT,Arena MRV,MG,
+24,2023-09-21,São Paulo,Fortaleza,Estádio Cícero Pompeu de Toledo,SP,CE
+24,2023-09-22,Vasco da Gama,Coritiba FC,Estádio São Januário,RJ,
+24,2023-09-21,Fluminense,Cruzeiro,Estádio Jornalista Mário Filho,RJ,MG
+24,2023-09-22,Grêmio,Palmeiras,Arena do Grêmio,RS,SP
+25,2023-09-30,São Paulo,Corinthians,Estádio Cícero Pompeu de Toledo,SP,SP
+25,2023-10-01,Cruzeiro,América-MG,Estádio Governador Magalhães Pinto,MG,MG
+25,2023-10-01,Santos,Vasco da Gama,Estádio Urbano Caldeira,SP,RJ
+25,2023-10-03,Botafogo,Goiás,Estádio Olímpico Nilton Santos,RJ,GO
+25,2023-10-01,Internacional,Atlético-MG,Estádio Beira-Rio,RS,MG
+25,2023-10-01,Coritiba FC,Athletico-PR,Estádio Major Antônio Couto Pereira,,PR
+25,2023-09-30,Flamengo,EC Bahia,Estádio Jornalista Mário Filho,RJ,BA
+25,2023-09-30,Cuiabá-MT,Fluminense,Arena Pantanal,,RJ
+25,2023-10-01,RB Bragantino,Palmeiras,Estádio Nabi Abi Chedid,,SP
+25,2023-09-30,Fortaleza,Grêmio,Estádio Governador Plácido Castelo,CE,RS
+26,2023-10-08,Fortaleza,América-MG,Estádio Governador Plácido Castelo,CE,MG
+26,2023-10-08,Palmeiras,Santos,Arena Barueri,SP,SP
+26,2023-10-08,Internacional,Grêmio,Estádio Beira-Rio,RS,RS
+26,2023-10-08,Fluminense,Botafogo,Estádio Jornalista Mário Filho,RJ,RJ
+26,2023-10-07,Vasco da Gama,São Paulo,Estádio São Januário,RJ,SP
+26,2023-10-08,Athletico-PR,RB Bragantino,Ligga Arena,PR,
+26,2023-10-08,Corinthians,Flamengo,Neo Química Arena ,SP,RJ
+26,2023-10-08,Atlético-MG,Coritiba FC,Arena MRV,MG,
+26,2023-10-15,Cuiabá-MT,Cruzeiro,Arena Pantanal,,MG
+26,2023-10-07,Goiás,EC Bahia,Estádio Serra Dourada,GO,BA
+27,2023-10-20,Palmeiras,Atlético-MG,Allianz Parque,SP,MG
+27,2023-10-19,Grêmio,Athletico-PR,Arena do Grêmio,RS,PR
+27,2023-10-19,América-MG,Botafogo,Estádio Raimundo Sampaio,MG,RJ
+27,2023-10-19,Coritiba FC,Cuiabá-MT,Estádio Major Antônio Couto Pereira,,
+27,2023-10-19,Goiás,São Paulo,Estádio de Hailé Pinheiro,GO,SP
+27,2023-10-20,Fluminense,Corinthians,Estádio Jornalista Mário Filho,RJ,SP
+27,2023-10-20,Santos,RB Bragantino,Estádio Urbano Caldeira,SP,
+27,2023-10-20,Cruzeiro,Flamengo,Estádio Governador Magalhães Pinto,MG,RJ
+27,2023-10-19,EC Bahia,Internacional,Arena Fonte Nova,BA,RS
+27,2023-10-19,Vasco da Gama,Fortaleza,Estádio São Januário,RJ,CE
+28,2023-10-22,RB Bragantino,Fluminense,Estádio Nabi Abi Chedid,,RJ
+28,2023-10-21,EC Bahia,Fortaleza,Arena Fonte Nova,BA,CE
+28,2023-10-22,Internacional,Santos,Estádio Beira-Rio,RS,SP
+28,2023-10-22,Atlético-MG,Cruzeiro,Arena MRV,MG,MG
+28,2023-10-21,Cuiabá-MT,Goiás,Arena Pantanal,,GO
+28,2023-10-22,Corinthians,América-MG,Neo Química Arena ,SP,MG
+28,2023-10-22,Flamengo,Vasco da Gama,Estádio Jornalista Mário Filho,RJ,RJ
+28,2023-10-22,Botafogo,Athletico-PR,Estádio Olímpico Nilton Santos,RJ,PR
+28,2023-10-21,São Paulo,Grêmio,Estádio Cícero Pompeu de Toledo,SP,RS
+28,2023-10-22,Coritiba FC,Palmeiras,Estádio Major Antônio Couto Pereira,,SP
+29,2023-10-27,Santos,Coritiba FC,Estádio Urbano Caldeira,SP,
+29,2023-10-26,Cruzeiro,EC Bahia,Estádio Governador Magalhães Pinto,MG,BA
+29,2023-10-26,Palmeiras,São Paulo,Allianz Parque,SP,SP
+29,2023-11-23,Fortaleza,Botafogo,Estádio Governador Plácido Castelo,CE,RJ
+29,2023-10-26,Athletico-PR,América-MG,Ligga Arena,PR,MG
+29,2023-10-26,Fluminense,Goiás,Estádio General Sylvio Raulino de Oliveira,RJ,GO
+29,2023-10-26,Cuiabá-MT,Corinthians,Arena Pantanal,,SP
+29,2023-10-27,Vasco da Gama,Internacional,Estádio São Januário,RJ,RS
+29,2023-10-26,RB Bragantino,Atlético-MG,Estádio Nabi Abi Chedid,,MG
+29,2023-10-26,Grêmio,Flamengo,Arena do Grêmio,RS,RJ
+30,2023-10-29,Palmeiras,EC Bahia,Allianz Parque,SP,BA
+30,2023-10-29,Corinthians,Santos,Neo Química Arena ,SP,SP
+30,2023-11-24,Flamengo,RB Bragantino,Estádio Jornalista Mário Filho,RJ,
+30,2023-10-29,América-MG,Grêmio,Estádio Raimundo Sampaio,MG,RS
+30,2023-10-29,Goiás,Vasco da Gama,Estádio Serra Dourada,GO,RJ
+30,2023-10-29,Internacional,Coritiba FC,Estádio Beira-Rio,RS,
+30,2023-10-29,Athletico-PR,São Paulo,Ligga Arena,PR,SP
+30,2023-10-30,Botafogo,Cuiabá-MT,Estádio Olímpico Nilton Santos,RJ,
+30,2023-11-18,Fortaleza,Cruzeiro,Estádio Governador Plácido Castelo,CE,MG
+30,2023-10-29,Atlético-MG,Fluminense,Arena MRV,MG,RJ
+31,2023-11-03,São Paulo,Cruzeiro,Estádio Cícero Pompeu de Toledo,SP,MG
+31,2023-11-02,Goiás,RB Bragantino,Estádio Serra Dourada,GO,
+31,2023-11-02,Cuiabá-MT,Vasco da Gama,Arena Pantanal,,RJ
+31,2023-11-02,Botafogo,Palmeiras,Estádio Olímpico Nilton Santos,RJ,SP
+31,2023-11-02,Coritiba FC,Grêmio,Estádio Major Antônio Couto Pereira,,RS
+31,2023-11-02,Flamengo,Santos,Estádio Nacional de Brasília Mané Garrincha,RJ,SP
+31,2023-11-01,Corinthians,Athletico-PR,Neo Química Arena ,SP,PR
+31,2023-11-02,Atlético-MG,Fortaleza,Arena MRV,MG,CE
+31,2023-11-01,Internacional,América-MG,Estádio Beira-Rio,RS,MG
+31,2023-10-31,EC Bahia,Fluminense,Arena Fonte Nova,BA,RJ
+32,2023-11-07,Santos,Cuiabá-MT,Estádio Urbano Caldeira,SP,
+32,2023-11-06,Vasco da Gama,Botafogo,Estádio São Januário,RJ,RJ
+32,2023-11-04,América-MG,Atlético-MG,Estádio Municipal Parque do Sabiá,MG,MG
+32,2023-11-23,Fluminense,São Paulo,Estádio Jornalista Mário Filho,RJ,SP
+32,2023-11-04,Grêmio,EC Bahia,Arena do Grêmio,RS,BA
+32,2023-11-05,Fortaleza,Flamengo,Estádio Governador Plácido Castelo,CE,RJ
+32,2023-11-05,RB Bragantino,Corinthians,Estádio Nabi Abi Chedid,,SP
+32,2023-11-05,Palmeiras,Athletico-PR,Arena Barueri,SP,PR
+32,2023-11-05,Cruzeiro,Internacional,Estádio Governador Magalhães Pinto,MG,RS
+32,2023-11-05,Coritiba FC,Goiás,Estádio Major Antônio Couto Pereira,,GO
+33,2023-11-08,América-MG,Coritiba FC,Estádio Raimundo Sampaio,MG,
+33,2023-11-09,Athletico-PR,Fortaleza,Ligga Arena,PR,CE
+33,2023-11-09,Corinthians,Atlético-MG,Neo Química Arena ,SP,MG
+33,2023-11-09,Flamengo,Palmeiras,Estádio Jornalista Mário Filho,RJ,SP
+33,2023-11-22,Cruzeiro,Vasco da Gama,Estádio Governador Magalhães Pinto,MG,RJ
+33,2023-11-08,Internacional,Fluminense,Estádio Beira-Rio,RS,RJ
+33,2023-11-09,Goiás,Santos,Estádio Serra Dourada,GO,SP
+33,2023-11-09,São Paulo,RB Bragantino,Estádio Urbano Caldeira,SP,
+33,2023-11-10,EC Bahia,Cuiabá-MT,Arena Fonte Nova,BA,
+33,2023-11-10,Botafogo,Grêmio,Estádio São Januário,RJ,RS
+34,2023-11-11,Flamengo,Fluminense,Estádio Jornalista Mário Filho,RJ,RJ
+34,2023-11-12,Atlético-MG,Goiás,Arena MRV,MG,GO
+34,2023-11-11,Coritiba FC,Cruzeiro,Estádio Durival Britto e Silva,,MG
+34,2023-11-12,Cuiabá-MT,Fortaleza,Arena Pantanal,,CE
+34,2023-11-12,RB Bragantino,Botafogo,Estádio Nabi Abi Chedid,,RJ
+34,2023-11-12,EC Bahia,Athletico-PR,Arena Fonte Nova,BA,PR
+34,2023-11-12,Palmeiras,Internacional,Arena Barueri,SP,RS
+34,2023-11-12,Santos,São Paulo,Estádio Urbano Caldeira,SP,SP
+34,2023-11-12,Grêmio,Corinthians,Arena do Grêmio,RS,SP
+34,2023-11-12,Vasco da Gama,América-MG,Estádio São Januário,RJ,MG
+35,2023-11-25,Athletico-PR,Vasco da Gama,Ligga Arena,PR,RJ
+35,2023-11-25,Corinthians,EC Bahia,Neo Química Arena ,SP,BA
+35,2023-11-26,São Paulo,Cuiabá-MT,Estádio Cícero Pompeu de Toledo,SP,
+35,2023-11-26,Atlético-MG,Grêmio,Arena MRV,MG,RS
+35,2023-11-26,Internacional,RB Bragantino,Estádio Beira-Rio,RS,
+35,2023-11-28,Goiás,Cruzeiro,Estádio Serra Dourada,GO,MG
+35,2023-11-26,Fluminense,Coritiba FC,Estádio Jornalista Mário Filho,RJ,
+35,2023-11-26,Fortaleza,Palmeiras,Estádio Governador Plácido Castelo,CE,SP
+35,2023-11-26,América-MG,Flamengo,Estádio Municipal Parque do Sabiá,MG,RJ
+35,2023-11-26,Botafogo,Santos,Estádio Olímpico Nilton Santos,RJ,SP
+36,2023-11-29,Flamengo,Atlético-MG,Estádio Jornalista Mário Filho,RJ,MG
+36,2023-11-29,Vasco da Gama,Corinthians,Estádio São Januário,RJ,SP
+36,2023-11-29,Santos,Fluminense,Estádio Urbano Caldeira,SP,RJ
+36,2023-11-30,Palmeiras,América-MG,Allianz Parque,SP,MG
+36,2023-11-30,EC Bahia,São Paulo,Arena Fonte Nova,BA,SP
+36,2023-11-30,Coritiba FC,Botafogo,Estádio Major Antônio Couto Pereira,,RJ
+36,2023-12-01,RB Bragantino,Fortaleza,Estádio Nabi Abi Chedid,,CE
+36,2023-11-30,Cuiabá-MT,Internacional,Arena Pantanal,,RS
+36,2023-12-01,Cruzeiro,Athletico-PR,Estádio Governador Magalhães Pinto,MG,PR
+36,2023-11-30,Grêmio,Goiás,Arena do Grêmio,RS,GO
+37,2023-12-03,Botafogo,Cruzeiro,Estádio Olímpico Nilton Santos,RJ,MG
+37,2023-12-03,Palmeiras,Fluminense,Allianz Parque,SP,RJ
+37,2023-12-03,Flamengo,Cuiabá-MT,Estádio Jornalista Mário Filho,RJ,
+37,2023-12-03,Grêmio,Vasco da Gama,Arena do Grêmio,RS,RJ
+37,2023-12-03,RB Bragantino,Coritiba FC,Estádio Nabi Abi Chedid,,
+37,2023-12-03,Athletico-PR,Santos,Ligga Arena,PR,SP
+37,2023-12-03,América-MG,EC Bahia,Estádio Raimundo Sampaio,MG,BA
+37,2023-12-03,Fortaleza,Goiás,Estádio Governador Plácido Castelo,CE,GO
+37,2023-12-02,Corinthians,Internacional,Neo Química Arena ,SP,RS
+37,2023-12-03,Atlético-MG,São Paulo,Estádio Governador Magalhães Pinto,MG,SP
+38,2023-12-06,Goiás,América-MG,Estádio Serra Dourada,GO,MG
+38,2023-12-07,Internacional,Botafogo,Estádio Beira-Rio,RS,RJ
+38,2023-12-07,Vasco da Gama,RB Bragantino,Estádio São Januário,RJ,
+38,2023-12-07,Cruzeiro,Palmeiras,Estádio Governador Magalhães Pinto,MG,SP
+38,2023-12-07,Coritiba FC,Corinthians,Estádio Major Antônio Couto Pereira,,SP
+38,2023-12-07,Cuiabá-MT,Athletico-PR,Arena Pantanal,,PR
+38,2023-12-07,Santos,Fortaleza,Estádio Urbano Caldeira,SP,CE
+38,2023-12-07,EC Bahia,Atlético-MG,Arena Fonte Nova,BA,MG
+38,2023-12-07,Fluminense,Grêmio,Estádio Jornalista Mário Filho,RJ,RS
+38,2023-12-07,São Paulo,Flamengo,Estádio Cícero Pompeu de Toledo,SP,RJ

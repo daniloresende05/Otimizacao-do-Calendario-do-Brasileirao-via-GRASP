@@ -3,7 +3,12 @@ from __future__ import annotations
 import pandas as pd
 import pytest
 
-from brasileirao.domain import ScheduledMatch
+from brasileirao.domain import (
+    ConstraintViolation,
+    EvaluationResult,
+    PRVResult,
+    ScheduledMatch,
+)
 from brasileirao.objective import (
     DEFAULT_WEIGHTS,
     HARD_CONSTRAINTS,
@@ -275,3 +280,52 @@ def test_deprecated_add_prv_column_still_works():
         out = add_prv_column(df, prv_days=5)
     assert "PRV" in out.columns
     assert int(out["PRV"].sum()) == 1
+
+
+# ----------------------------------------------------------------------
+# lexicographic_key / is_better_than
+# ----------------------------------------------------------------------
+
+def _make_eval(
+    n_hard: int,
+    n_soft: int,
+    total_prv: int,
+) -> EvaluationResult:
+    hard = [ConstraintViolation(constraint_id="a", description="t") for _ in range(n_hard)]
+    soft = [ConstraintViolation(constraint_id="d", description="t") for _ in range(n_soft)]
+    return EvaluationResult(
+        total_cost=0.0,
+        total_prv=total_prv,
+        prv_result=PRVResult(total_prv=total_prv, occurrences=[], prv_by_stadium={}),
+        hard_constraint_violations=hard,
+        soft_constraint_violations=soft,
+        violations_by_type={},
+    )
+
+
+def test_lex_hard_wins():
+    a = _make_eval(n_hard=1, n_soft=0, total_prv=0)
+    b = _make_eval(n_hard=0, n_soft=0, total_prv=100)
+    assert b.is_better_than(a)
+    assert not a.is_better_than(b)
+
+
+def test_lex_soft_wins():
+    a = _make_eval(n_hard=0, n_soft=5, total_prv=0)
+    b = _make_eval(n_hard=0, n_soft=4, total_prv=100)
+    assert b.is_better_than(a)
+    assert not a.is_better_than(b)
+
+
+def test_lex_prv_wins_when_tied():
+    a = _make_eval(n_hard=0, n_soft=3, total_prv=20)
+    b = _make_eval(n_hard=0, n_soft=3, total_prv=10)
+    assert b.is_better_than(a)
+    assert not a.is_better_than(b)
+
+
+def test_lex_exact_tie():
+    a = _make_eval(n_hard=0, n_soft=3, total_prv=10)
+    b = _make_eval(n_hard=0, n_soft=3, total_prv=10)
+    assert not a.is_better_than(b)
+    assert not b.is_better_than(a)

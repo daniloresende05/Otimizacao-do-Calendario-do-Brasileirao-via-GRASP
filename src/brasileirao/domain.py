@@ -1,6 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Optional, Tuple
 
 @dataclass(frozen=True)
 class Team:
@@ -64,10 +64,26 @@ class EvaluationResult:
     def is_feasible(self) -> bool:
         return not self.hard_constraint_violations
 
+    def lexicographic_key(self) -> Tuple[int, int, int]:
+        """Chave de comparacao lexicografica: (hard, soft_estruturais, prv).
+
+        Quanto MENOR a tupla, melhor a solucao."""
+        hard_count = len(self.hard_constraint_violations)
+        soft_estruturais = sum(
+            1 for v in self.soft_constraint_violations
+            if v.constraint_id != "h"
+        )
+        return (hard_count, soft_estruturais, self.total_prv)
+
+    def is_better_than(self, other: "EvaluationResult") -> bool:
+        """True sse self eh estritamente melhor que other lexicograficamente."""
+        return self.lexicographic_key() < other.lexicographic_key()
+
     def summary(self) -> str:
         lines = [
             "Schedule evaluation",
             f"  is_feasible: {self.is_feasible}",
+            f"  lex_key:     {self.lexicographic_key()}",
             f"  total_cost:  {self.total_cost:.2f}",
             f"  total_prv:   {self.total_prv}",
             f"  hard:        {len(self.hard_constraint_violations)}",

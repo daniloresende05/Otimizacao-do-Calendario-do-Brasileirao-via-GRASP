@@ -4,6 +4,7 @@ pyproject.toml
 src/brasileirao/__init__.py
 src/brasileirao/cli.py
 src/brasileirao/constraints.py
+src/brasileirao/construction.py
 src/brasileirao/domain.py
 src/brasileirao/grasp.py
 src/brasileirao/initial_solution.py
@@ -14,6 +15,10 @@ src/brasileirao/round_robin.py
 src/brasileirao.egg-info/PKG-INFO
 src/brasileirao.egg-info/SOURCES.txt
 src/brasileirao.egg-info/dependency_links.txt
+src/brasileirao.egg-info/requires.txt
 src/brasileirao.egg-info/top_level.txt
 tests/test_constraints.py
+tests/test_construction_dates.py
+tests/test_construction_matches.py
+tests/test_objective.py
 tests/test_round_robin.py

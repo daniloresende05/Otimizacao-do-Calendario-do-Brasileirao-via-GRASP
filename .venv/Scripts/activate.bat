@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\gabri\OneDrive\Desktop\GABRIELLE DE SOUZA ANDRADE E SILVA\Otimizacao-do-Calendario-do-Brasileirao-via-GRASP\.venv
+set VIRTUAL_ENV=c:\Users\Danilo\Desktop\Otimizacao-do-Calendario-do-Brasileirao-via-GRASP\.venv
 
 if not defined PROMPT set PROMPT=$P$G
 

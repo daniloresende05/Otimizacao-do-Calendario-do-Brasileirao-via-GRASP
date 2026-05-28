@@ -1,0 +1,381 @@
+round,day,home,away,stadium,home_state,away_state
+1,20/08/2023,Bahia,Palmeiras,Arena Fonte Nova,BA,SP
+1,21/08/2023,América-MG,Fortaleza,Independência,MG,CE
+1,22/08/2023,Goiás,Cuiabá,Hailé Pinheiro,GO,MT
+1,20/08/2023,RB Bragantino,Coritiba,Nabi Abi Chedid,SP,PR
+1,21/08/2023,Athletico-PR,Flamengo,Ligga Arena,PR,RJ
+1,22/08/2023,Vasco,Corinthians,São Januário,RJ,SP
+1,20/08/2023,Fluminense,São Paulo,Maracanã,RJ,SP
+1,21/08/2023,Santos,Botafogo,Vila Belmiro,SP,RJ
+1,22/08/2023,Grêmio,Cruzeiro,Arena do Grêmio,RS,MG
+1,20/08/2023,Internacional,Atlético-MG,Beira-Rio,RS,MG
+2,27/08/2023,Palmeiras,RB Bragantino,Allianz Parque,SP,SP
+2,28/08/2023,Flamengo,Goiás,Maracanã,RJ,GO
+2,29/08/2023,Corinthians,América-MG,Neo Química Arena,SP,MG
+2,27/08/2023,São Paulo,Bahia,Morumbi,SP,BA
+2,28/08/2023,Fortaleza,Santos,Castelão,CE,SP
+2,29/08/2023,Cuiabá,Grêmio,Arena Pantanal,MT,RS
+2,27/08/2023,Coritiba,Internacional,Couto Pereira,PR,RS
+2,28/08/2023,Atlético-MG,Athletico-PR,Arena MRV,MG,PR
+2,29/08/2023,Cruzeiro,Vasco,Mineirão,MG,RJ
+2,27/08/2023,Botafogo,Fluminense,Nilton Santos (Engenhão),RJ,RJ
+3,03/09/2023,Fluminense,Palmeiras,Maracanã,RJ,SP
+3,04/09/2023,Vasco,Botafogo,São Januário,RJ,RJ
+3,05/09/2023,Cruzeiro,Athletico-PR,Mineirão,MG,PR
+3,03/09/2023,Atlético-MG,Coritiba,Arena MRV,MG,PR
+3,04/09/2023,Cuiabá,Internacional,Arena Pantanal,MT,RS
+3,05/09/2023,Grêmio,Fortaleza,Arena do Grêmio,RS,CE
+3,03/09/2023,Santos,Bahia,Vila Belmiro,SP,BA
+3,04/09/2023,América-MG,São Paulo,Independência,MG,SP
+3,05/09/2023,Corinthians,Goiás,Neo Química Arena,SP,GO
+3,03/09/2023,Flamengo,RB Bragantino,Maracanã,RJ,SP
+4,10/09/2023,Coritiba,Palmeiras,Couto Pereira,PR,SP
+4,11/09/2023,Athletico-PR,Cuiabá,Ligga Arena,PR,MT
+4,12/09/2023,Fortaleza,Vasco,Castelão,CE,RJ
+4,10/09/2023,Bahia,Fluminense,Arena Fonte Nova,BA,RJ
+4,11/09/2023,Botafogo,América-MG,Nilton Santos (Engenhão),RJ,MG
+4,12/09/2023,Goiás,Cruzeiro,Hailé Pinheiro,GO,MG
+4,10/09/2023,RB Bragantino,Atlético-MG,Nabi Abi Chedid,SP,MG
+4,11/09/2023,Internacional,Flamengo,Beira-Rio,RS,RJ
+4,12/09/2023,Grêmio,Corinthians,Arena do Grêmio,RS,SP
+4,10/09/2023,Santos,São Paulo,Vila Belmiro,SP,SP
+5,17/09/2023,Palmeiras,Athletico-PR,Allianz Parque,SP,PR
+5,18/09/2023,Coritiba,Vasco,Couto Pereira,PR,RJ
+5,19/09/2023,Fluminense,Cuiabá,Maracanã,RJ,MT
+5,17/09/2023,Botafogo,Fortaleza,Nilton Santos (Engenhão),RJ,CE
+5,18/09/2023,Cruzeiro,Bahia,Mineirão,MG,BA
+5,19/09/2023,América-MG,Atlético-MG,Independência,MG,MG
+5,17/09/2023,Internacional,Goiás,Beira-Rio,RS,GO
+5,18/09/2023,RB Bragantino,Grêmio,Nabi Abi Chedid,SP,RS
+5,19/09/2023,Flamengo,Santos,Maracanã,RJ,SP
+5,17/09/2023,São Paulo,Corinthians,Morumbi,SP,SP
+6,24/09/2023,Palmeiras,Fortaleza,Allianz Parque,SP,CE
+6,25/09/2023,Cuiabá,Bahia,Arena Pantanal,MT,BA
+6,26/09/2023,América-MG,Coritiba,Independência,MG,PR
+6,24/09/2023,Goiás,Athletico-PR,Hailé Pinheiro,GO,PR
+6,25/09/2023,Vasco,RB Bragantino,São Januário,RJ,SP
+6,26/09/2023,Fluminense,Flamengo,Maracanã,RJ,RJ
+6,24/09/2023,Corinthians,Botafogo,Neo Química Arena,SP,RJ
+6,25/09/2023,Cruzeiro,São Paulo,Mineirão,MG,SP
+6,26/09/2023,Atlético-MG,Santos,Arena MRV,MG,SP
+6,24/09/2023,Grêmio,Internacional,Arena do Grêmio,RS,RS
+7,01/10/2023,Corinthians,Palmeiras,Neo Química Arena,SP,SP
+7,02/10/2023,São Paulo,Flamengo,Morumbi,SP,RJ
+7,03/10/2023,Santos,RB Bragantino,Vila Belmiro,SP,SP
+7,01/10/2023,Goiás,Grêmio,Hailé Pinheiro,GO,RS
+7,02/10/2023,Internacional,América-MG,Beira-Rio,RS,MG
+7,03/10/2023,Bahia,Atlético-MG,Arena Fonte Nova,BA,MG
+7,01/10/2023,Fortaleza,Cruzeiro,Castelão,CE,MG
+7,02/10/2023,Cuiabá,Botafogo,Arena Pantanal,MT,RJ
+7,03/10/2023,Coritiba,Fluminense,Couto Pereira,PR,RJ
+7,01/10/2023,Athletico-PR,Vasco,Ligga Arena,PR,RJ
+8,08/10/2023,Atlético-MG,Palmeiras,Arena MRV,MG,SP
+8,09/10/2023,Internacional,Cruzeiro,Beira-Rio,RS,MG
+8,10/10/2023,Botafogo,Grêmio,Nilton Santos (Engenhão),RJ,RS
+8,08/10/2023,Fluminense,Santos,Maracanã,RJ,SP
+8,09/10/2023,Vasco,São Paulo,São Januário,RJ,SP
+8,10/10/2023,Athletico-PR,Corinthians,Ligga Arena,PR,SP
+8,08/10/2023,Flamengo,Coritiba,Maracanã,RJ,PR
+8,09/10/2023,RB Bragantino,Cuiabá,Nabi Abi Chedid,SP,MT
+8,10/10/2023,Fortaleza,Goiás,Castelão,CE,GO
+8,08/10/2023,Bahia,América-MG,Arena Fonte Nova,BA,MG
+9,15/10/2023,Palmeiras,Goiás,Allianz Parque,SP,GO
+9,16/10/2023,América-MG,RB Bragantino,Independência,MG,SP
+9,17/10/2023,Flamengo,Bahia,Maracanã,RJ,BA
+9,15/10/2023,Corinthians,Fortaleza,Neo Química Arena,SP,CE
+9,16/10/2023,Cuiabá,São Paulo,Arena Pantanal,MT,SP
+9,17/10/2023,Coritiba,Santos,Couto Pereira,PR,SP
+9,15/10/2023,Grêmio,Athletico-PR,Arena do Grêmio,RS,PR
+9,16/10/2023,Vasco,Internacional,São Januário,RJ,RS
+9,17/10/2023,Fluminense,Atlético-MG,Maracanã,RJ,MG
+9,15/10/2023,Cruzeiro,Botafogo,Mineirão,MG,RJ
+10,22/10/2023,Palmeiras,América-MG,Allianz Parque,SP,MG
+10,23/10/2023,Goiás,Bahia,Hailé Pinheiro,GO,BA
+10,24/10/2023,RB Bragantino,Fortaleza,Nabi Abi Chedid,SP,CE
+10,22/10/2023,Cuiabá,Flamengo,Arena Pantanal,MT,RJ
+10,23/10/2023,Corinthians,Coritiba,Neo Química Arena,SP,PR
+10,24/10/2023,São Paulo,Athletico-PR,Morumbi,SP,PR
+10,22/10/2023,Santos,Vasco,Vila Belmiro,SP,RJ
+10,23/10/2023,Grêmio,Fluminense,Arena do Grêmio,RS,RJ
+10,24/10/2023,Botafogo,Internacional,Nilton Santos (Engenhão),RJ,RS
+10,22/10/2023,Cruzeiro,Atlético-MG,Mineirão,MG,MG
+11,29/10/2023,São Paulo,Palmeiras,Morumbi,SP,SP
+11,30/10/2023,Santos,Corinthians,Vila Belmiro,SP,SP
+11,31/10/2023,Flamengo,Grêmio,Maracanã,RJ,RS
+11,29/10/2023,Internacional,RB Bragantino,Beira-Rio,RS,SP
+11,30/10/2023,Atlético-MG,Goiás,Arena MRV,MG,GO
+11,31/10/2023,América-MG,Cruzeiro,Independência,MG,MG
+11,29/10/2023,Bahia,Botafogo,Arena Fonte Nova,BA,RJ
+11,30/10/2023,Fortaleza,Fluminense,Castelão,CE,RJ
+11,31/10/2023,Vasco,Cuiabá,São Januário,RJ,MT
+11,29/10/2023,Athletico-PR,Coritiba,Ligga Arena,PR,PR
+12,05/11/2023,Palmeiras,Cruzeiro,Allianz Parque,SP,MG
+12,06/11/2023,Botafogo,Atlético-MG,Nilton Santos (Engenhão),RJ,MG
+12,07/11/2023,Fluminense,Internacional,Maracanã,RJ,RS
+12,05/11/2023,Vasco,Grêmio,São Januário,RJ,RS
+12,06/11/2023,Athletico-PR,Santos,Ligga Arena,PR,SP
+12,07/11/2023,Coritiba,São Paulo,Couto Pereira,PR,SP
+12,05/11/2023,Cuiabá,Corinthians,Arena Pantanal,MT,SP
+12,06/11/2023,Fortaleza,Flamengo,Castelão,CE,RJ
+12,07/11/2023,RB Bragantino,Bahia,Nabi Abi Chedid,SP,BA
+12,05/11/2023,América-MG,Goiás,Independência,MG,GO
+13,12/11/2023,Palmeiras,Vasco,Allianz Parque,SP,RJ
+13,13/11/2023,Fluminense,Athletico-PR,Maracanã,RJ,PR
+13,14/11/2023,Coritiba,Botafogo,Couto Pereira,PR,RJ
+13,12/11/2023,Cruzeiro,Cuiabá,Mineirão,MG,MT
+13,13/11/2023,Atlético-MG,Fortaleza,Arena MRV,MG,CE
+13,14/11/2023,Bahia,Internacional,Arena Fonte Nova,BA,RS
+13,12/11/2023,Grêmio,América-MG,Arena do Grêmio,RS,MG
+13,13/11/2023,Goiás,Santos,Hailé Pinheiro,GO,SP
+13,14/11/2023,RB Bragantino,São Paulo,Nabi Abi Chedid,SP,SP
+13,12/11/2023,Corinthians,Flamengo,Neo Química Arena,SP,RJ
+14,19/11/2023,Flamengo,Palmeiras,Maracanã,RJ,SP
+14,20/11/2023,Corinthians,RB Bragantino,Neo Química Arena,SP,SP
+14,21/11/2023,São Paulo,Goiás,Morumbi,SP,GO
+14,19/11/2023,Santos,América-MG,Vila Belmiro,SP,MG
+14,20/11/2023,Bahia,Grêmio,Arena Fonte Nova,BA,RS
+14,21/11/2023,Internacional,Fortaleza,Beira-Rio,RS,CE
+14,19/11/2023,Cuiabá,Atlético-MG,Arena Pantanal,MT,MG
+14,20/11/2023,Cruzeiro,Coritiba,Mineirão,MG,PR
+14,21/11/2023,Athletico-PR,Botafogo,Ligga Arena,PR,RJ
+14,19/11/2023,Vasco,Fluminense,São Januário,RJ,RJ
+15,26/11/2023,Palmeiras,Cuiabá,Allianz Parque,SP,MT
+15,27/11/2023,Fortaleza,Coritiba,Castelão,CE,PR
+15,28/11/2023,Athletico-PR,Bahia,Ligga Arena,PR,BA
+15,26/11/2023,América-MG,Vasco,Independência,MG,RJ
+15,27/11/2023,Goiás,Fluminense,Hailé Pinheiro,GO,RJ
+15,28/11/2023,Botafogo,RB Bragantino,Nilton Santos (Engenhão),RJ,SP
+15,26/11/2023,Flamengo,Cruzeiro,Maracanã,RJ,MG
+15,27/11/2023,Atlético-MG,Corinthians,Arena MRV,MG,SP
+15,28/11/2023,Internacional,São Paulo,Beira-Rio,RS,SP
+15,26/11/2023,Grêmio,Santos,Arena do Grêmio,RS,SP
+16,03/12/2023,Palmeiras,Santos,Allianz Parque,SP,SP
+16,04/12/2023,Grêmio,São Paulo,Arena do Grêmio,RS,SP
+16,05/12/2023,Corinthians,Internacional,Neo Química Arena,SP,RS
+16,03/12/2023,Atlético-MG,Flamengo,Arena MRV,MG,RJ
+16,04/12/2023,RB Bragantino,Cruzeiro,Nabi Abi Chedid,SP,MG
+16,05/12/2023,Goiás,Botafogo,Hailé Pinheiro,GO,RJ
+16,03/12/2023,Fluminense,América-MG,Maracanã,RJ,MG
+16,04/12/2023,Bahia,Vasco,Arena Fonte Nova,BA,RJ
+16,05/12/2023,Fortaleza,Athletico-PR,Castelão,CE,PR
+16,03/12/2023,Coritiba,Cuiabá,Couto Pereira,PR,MT
+17,10/12/2023,Grêmio,Palmeiras,Arena do Grêmio,RS,SP
+17,11/12/2023,Santos,Internacional,Vila Belmiro,SP,RS
+17,12/12/2023,São Paulo,Atlético-MG,Morumbi,SP,MG
+17,10/12/2023,Cruzeiro,Corinthians,Mineirão,MG,SP
+17,11/12/2023,Flamengo,Botafogo,Maracanã,RJ,RJ
+17,12/12/2023,Fluminense,RB Bragantino,Maracanã,RJ,SP
+17,10/12/2023,Vasco,Goiás,São Januário,RJ,GO
+17,11/12/2023,Athletico-PR,América-MG,Ligga Arena,PR,MG
+17,12/12/2023,Bahia,Coritiba,Arena Fonte Nova,BA,PR
+17,10/12/2023,Cuiabá,Fortaleza,Arena Pantanal,MT,CE
+18,17/12/2023,Internacional,Palmeiras,Beira-Rio,RS,SP
+18,18/12/2023,Atlético-MG,Grêmio,Arena MRV,MG,RS
+18,19/12/2023,Cruzeiro,Santos,Mineirão,MG,SP
+18,17/12/2023,Botafogo,São Paulo,Nilton Santos (Engenhão),RJ,SP
+18,18/12/2023,Corinthians,Fluminense,Neo Química Arena,SP,RJ
+18,19/12/2023,Flamengo,Vasco,Maracanã,RJ,RJ
+18,17/12/2023,RB Bragantino,Athletico-PR,Nabi Abi Chedid,SP,PR
+18,18/12/2023,Coritiba,Goiás,Couto Pereira,PR,GO
+18,19/12/2023,América-MG,Cuiabá,Independência,MG,MT
+18,17/12/2023,Fortaleza,Bahia,Castelão,CE,BA
+19,24/12/2023,Palmeiras,Botafogo,Allianz Parque,SP,RJ
+19,25/12/2023,Fluminense,Cruzeiro,Maracanã,RJ,MG
+19,26/12/2023,Vasco,Atlético-MG,São Januário,RJ,MG
+19,24/12/2023,Internacional,Athletico-PR,Beira-Rio,RS,PR
+19,25/12/2023,Grêmio,Coritiba,Arena do Grêmio,RS,PR
+19,26/12/2023,Santos,Cuiabá,Vila Belmiro,SP,MT
+19,24/12/2023,São Paulo,Fortaleza,Morumbi,SP,CE
+19,25/12/2023,Bahia,Corinthians,Arena Fonte Nova,BA,SP
+19,26/12/2023,América-MG,Flamengo,Independência,MG,RJ
+19,24/12/2023,Goiás,RB Bragantino,Hailé Pinheiro,GO,SP
+20,31/12/2023,Palmeiras,Bahia,Allianz Parque,SP,BA
+20,01/01/2024,Fortaleza,América-MG,Castelão,CE,MG
+20,02/01/2024,Cuiabá,Goiás,Arena Pantanal,MT,GO
+20,31/12/2023,Coritiba,RB Bragantino,Couto Pereira,PR,SP
+20,01/01/2024,Flamengo,Athletico-PR,Maracanã,RJ,PR
+20,02/01/2024,Corinthians,Vasco,Neo Química Arena,SP,RJ
+20,31/12/2023,São Paulo,Fluminense,Morumbi,SP,RJ
+20,01/01/2024,Botafogo,Santos,Nilton Santos (Engenhão),RJ,SP
+20,02/01/2024,Cruzeiro,Grêmio,Mineirão,MG,RS
+20,31/12/2023,Atlético-MG,Internacional,Arena MRV,MG,RS
+21,07/01/2024,RB Bragantino,Palmeiras,Nabi Abi Chedid,SP,SP
+21,08/01/2024,Goiás,Flamengo,Hailé Pinheiro,GO,RJ
+21,09/01/2024,América-MG,Corinthians,Independência,MG,SP
+21,07/01/2024,Bahia,São Paulo,Arena Fonte Nova,BA,SP
+21,08/01/2024,Santos,Fortaleza,Vila Belmiro,SP,CE
+21,09/01/2024,Grêmio,Cuiabá,Arena do Grêmio,RS,MT
+21,07/01/2024,Internacional,Coritiba,Beira-Rio,RS,PR
+21,08/01/2024,Athletico-PR,Atlético-MG,Ligga Arena,PR,MG
+21,09/01/2024,Vasco,Cruzeiro,São Januário,RJ,MG
+21,07/01/2024,Fluminense,Botafogo,Maracanã,RJ,RJ
+22,14/01/2024,Palmeiras,Fluminense,Allianz Parque,SP,RJ
+22,15/01/2024,Botafogo,Vasco,Nilton Santos (Engenhão),RJ,RJ
+22,16/01/2024,Athletico-PR,Cruzeiro,Ligga Arena,PR,MG
+22,14/01/2024,Coritiba,Atlético-MG,Couto Pereira,PR,MG
+22,15/01/2024,Internacional,Cuiabá,Beira-Rio,RS,MT
+22,16/01/2024,Fortaleza,Grêmio,Castelão,CE,RS
+22,14/01/2024,Bahia,Santos,Arena Fonte Nova,BA,SP
+22,15/01/2024,São Paulo,América-MG,Morumbi,SP,MG
+22,16/01/2024,Goiás,Corinthians,Hailé Pinheiro,GO,SP
+22,14/01/2024,RB Bragantino,Flamengo,Nabi Abi Chedid,SP,RJ
+23,21/01/2024,Palmeiras,Coritiba,Allianz Parque,SP,PR
+23,22/01/2024,Cuiabá,Athletico-PR,Arena Pantanal,MT,PR
+23,23/01/2024,Vasco,Fortaleza,São Januário,RJ,CE
+23,21/01/2024,Fluminense,Bahia,Maracanã,RJ,BA
+23,22/01/2024,América-MG,Botafogo,Independência,MG,RJ
+23,23/01/2024,Cruzeiro,Goiás,Mineirão,MG,GO
+23,21/01/2024,Atlético-MG,RB Bragantino,Arena MRV,MG,SP
+23,22/01/2024,Flamengo,Internacional,Maracanã,RJ,RS
+23,23/01/2024,Corinthians,Grêmio,Neo Química Arena,SP,RS
+23,21/01/2024,São Paulo,Santos,Morumbi,SP,SP
+24,28/01/2024,Athletico-PR,Palmeiras,Ligga Arena,PR,SP
+24,29/01/2024,Vasco,Coritiba,São Januário,RJ,PR
+24,30/01/2024,Cuiabá,Fluminense,Arena Pantanal,MT,RJ
+24,28/01/2024,Fortaleza,Botafogo,Castelão,CE,RJ
+24,29/01/2024,Bahia,Cruzeiro,Arena Fonte Nova,BA,MG
+24,30/01/2024,Atlético-MG,América-MG,Arena MRV,MG,MG
+24,28/01/2024,Goiás,Internacional,Hailé Pinheiro,GO,RS
+24,29/01/2024,Grêmio,RB Bragantino,Arena do Grêmio,RS,SP
+24,30/01/2024,Santos,Flamengo,Vila Belmiro,SP,RJ
+24,28/01/2024,Corinthians,São Paulo,Neo Química Arena,SP,SP
+25,04/02/2024,Fortaleza,Palmeiras,Castelão,CE,SP
+25,05/02/2024,Bahia,Cuiabá,Arena Fonte Nova,BA,MT
+25,06/02/2024,Coritiba,América-MG,Couto Pereira,PR,MG
+25,04/02/2024,Athletico-PR,Goiás,Ligga Arena,PR,GO
+25,05/02/2024,RB Bragantino,Vasco,Nabi Abi Chedid,SP,RJ
+25,06/02/2024,Flamengo,Fluminense,Maracanã,RJ,RJ
+25,04/02/2024,Botafogo,Corinthians,Nilton Santos (Engenhão),RJ,SP
+25,05/02/2024,São Paulo,Cruzeiro,Morumbi,SP,MG
+25,06/02/2024,Santos,Atlético-MG,Vila Belmiro,SP,MG
+25,04/02/2024,Internacional,Grêmio,Beira-Rio,RS,RS
+26,11/02/2024,Palmeiras,Corinthians,Allianz Parque,SP,SP
+26,12/02/2024,Flamengo,São Paulo,Maracanã,RJ,SP
+26,13/02/2024,RB Bragantino,Santos,Nabi Abi Chedid,SP,SP
+26,11/02/2024,Grêmio,Goiás,Arena do Grêmio,RS,GO
+26,12/02/2024,América-MG,Internacional,Independência,MG,RS
+26,13/02/2024,Atlético-MG,Bahia,Arena MRV,MG,BA
+26,11/02/2024,Cruzeiro,Fortaleza,Mineirão,MG,CE
+26,12/02/2024,Botafogo,Cuiabá,Nilton Santos (Engenhão),RJ,MT
+26,13/02/2024,Fluminense,Coritiba,Maracanã,RJ,PR
+26,11/02/2024,Vasco,Athletico-PR,São Januário,RJ,PR
+27,18/02/2024,Palmeiras,Atlético-MG,Allianz Parque,SP,MG
+27,19/02/2024,Cruzeiro,Internacional,Mineirão,MG,RS
+27,20/02/2024,Grêmio,Botafogo,Arena do Grêmio,RS,RJ
+27,18/02/2024,Santos,Fluminense,Vila Belmiro,SP,RJ
+27,19/02/2024,São Paulo,Vasco,Morumbi,SP,RJ
+27,20/02/2024,Corinthians,Athletico-PR,Neo Química Arena,SP,PR
+27,18/02/2024,Coritiba,Flamengo,Couto Pereira,PR,RJ
+27,19/02/2024,Cuiabá,RB Bragantino,Arena Pantanal,MT,SP
+27,20/02/2024,Goiás,Fortaleza,Hailé Pinheiro,GO,CE
+27,18/02/2024,América-MG,Bahia,Independência,MG,BA
+28,25/02/2024,Goiás,Palmeiras,Hailé Pinheiro,GO,SP
+28,26/02/2024,RB Bragantino,América-MG,Nabi Abi Chedid,SP,MG
+28,27/02/2024,Bahia,Flamengo,Arena Fonte Nova,BA,RJ
+28,25/02/2024,Fortaleza,Corinthians,Castelão,CE,SP
+28,26/02/2024,São Paulo,Cuiabá,Morumbi,SP,MT
+28,27/02/2024,Santos,Coritiba,Vila Belmiro,SP,PR
+28,25/02/2024,Athletico-PR,Grêmio,Ligga Arena,PR,RS
+28,26/02/2024,Internacional,Vasco,Beira-Rio,RS,RJ
+28,27/02/2024,Atlético-MG,Fluminense,Arena MRV,MG,RJ
+28,25/02/2024,Botafogo,Cruzeiro,Nilton Santos (Engenhão),RJ,MG
+29,03/03/2024,América-MG,Palmeiras,Independência,MG,SP
+29,04/03/2024,Bahia,Goiás,Arena Fonte Nova,BA,GO
+29,05/03/2024,Fortaleza,RB Bragantino,Castelão,CE,SP
+29,03/03/2024,Flamengo,Cuiabá,Maracanã,RJ,MT
+29,04/03/2024,Coritiba,Corinthians,Couto Pereira,PR,SP
+29,05/03/2024,Athletico-PR,São Paulo,Ligga Arena,PR,SP
+29,03/03/2024,Vasco,Santos,São Januário,RJ,SP
+29,04/03/2024,Fluminense,Grêmio,Maracanã,RJ,RS
+29,05/03/2024,Internacional,Botafogo,Beira-Rio,RS,RJ
+29,03/03/2024,Atlético-MG,Cruzeiro,Arena MRV,MG,MG
+30,10/03/2024,Palmeiras,São Paulo,Allianz Parque,SP,SP
+30,11/03/2024,Corinthians,Santos,Neo Química Arena,SP,SP
+30,12/03/2024,Grêmio,Flamengo,Arena do Grêmio,RS,RJ
+30,10/03/2024,RB Bragantino,Internacional,Nabi Abi Chedid,SP,RS
+30,11/03/2024,Goiás,Atlético-MG,Hailé Pinheiro,GO,MG
+30,12/03/2024,Cruzeiro,América-MG,Mineirão,MG,MG
+30,10/03/2024,Botafogo,Bahia,Nilton Santos (Engenhão),RJ,BA
+30,11/03/2024,Fluminense,Fortaleza,Maracanã,RJ,CE
+30,12/03/2024,Cuiabá,Vasco,Arena Pantanal,MT,RJ
+30,10/03/2024,Coritiba,Athletico-PR,Couto Pereira,PR,PR
+31,17/03/2024,Cruzeiro,Palmeiras,Mineirão,MG,SP
+31,18/03/2024,Atlético-MG,Botafogo,Arena MRV,MG,RJ
+31,19/03/2024,Internacional,Fluminense,Beira-Rio,RS,RJ
+31,17/03/2024,Grêmio,Vasco,Arena do Grêmio,RS,RJ
+31,18/03/2024,Santos,Athletico-PR,Vila Belmiro,SP,PR
+31,19/03/2024,São Paulo,Coritiba,Morumbi,SP,PR
+31,17/03/2024,Corinthians,Cuiabá,Neo Química Arena,SP,MT
+31,18/03/2024,Flamengo,Fortaleza,Maracanã,RJ,CE
+31,19/03/2024,Bahia,RB Bragantino,Arena Fonte Nova,BA,SP
+31,17/03/2024,Goiás,América-MG,Hailé Pinheiro,GO,MG
+32,24/03/2024,Vasco,Palmeiras,São Januário,RJ,SP
+32,25/03/2024,Athletico-PR,Fluminense,Ligga Arena,PR,RJ
+32,26/03/2024,Botafogo,Coritiba,Nilton Santos (Engenhão),RJ,PR
+32,24/03/2024,Cuiabá,Cruzeiro,Arena Pantanal,MT,MG
+32,25/03/2024,Fortaleza,Atlético-MG,Castelão,CE,MG
+32,26/03/2024,Internacional,Bahia,Beira-Rio,RS,BA
+32,24/03/2024,América-MG,Grêmio,Independência,MG,RS
+32,25/03/2024,Santos,Goiás,Vila Belmiro,SP,GO
+32,26/03/2024,São Paulo,RB Bragantino,Morumbi,SP,SP
+32,24/03/2024,Flamengo,Corinthians,Maracanã,RJ,SP
+33,31/03/2024,Palmeiras,Flamengo,Allianz Parque,SP,RJ
+33,01/04/2024,RB Bragantino,Corinthians,Nabi Abi Chedid,SP,SP
+33,02/04/2024,Goiás,São Paulo,Hailé Pinheiro,GO,SP
+33,31/03/2024,América-MG,Santos,Independência,MG,SP
+33,01/04/2024,Grêmio,Bahia,Arena do Grêmio,RS,BA
+33,02/04/2024,Fortaleza,Internacional,Castelão,CE,RS
+33,31/03/2024,Atlético-MG,Cuiabá,Arena MRV,MG,MT
+33,01/04/2024,Coritiba,Cruzeiro,Couto Pereira,PR,MG
+33,02/04/2024,Botafogo,Athletico-PR,Nilton Santos (Engenhão),RJ,PR
+33,31/03/2024,Fluminense,Vasco,Maracanã,RJ,RJ
+34,07/04/2024,Cuiabá,Palmeiras,Arena Pantanal,MT,SP
+34,08/04/2024,Coritiba,Fortaleza,Couto Pereira,PR,CE
+34,09/04/2024,Bahia,Athletico-PR,Arena Fonte Nova,BA,PR
+34,07/04/2024,Vasco,América-MG,São Januário,RJ,MG
+34,08/04/2024,Fluminense,Goiás,Maracanã,RJ,GO
+34,09/04/2024,RB Bragantino,Botafogo,Nabi Abi Chedid,SP,RJ
+34,07/04/2024,Cruzeiro,Flamengo,Mineirão,MG,RJ
+34,08/04/2024,Corinthians,Atlético-MG,Neo Química Arena,SP,MG
+34,09/04/2024,São Paulo,Internacional,Morumbi,SP,RS
+34,07/04/2024,Santos,Grêmio,Vila Belmiro,SP,RS
+35,14/04/2024,Santos,Palmeiras,Vila Belmiro,SP,SP
+35,15/04/2024,São Paulo,Grêmio,Morumbi,SP,RS
+35,16/04/2024,Internacional,Corinthians,Beira-Rio,RS,SP
+35,14/04/2024,Flamengo,Atlético-MG,Maracanã,RJ,MG
+35,15/04/2024,Cruzeiro,RB Bragantino,Mineirão,MG,SP
+35,16/04/2024,Botafogo,Goiás,Nilton Santos (Engenhão),RJ,GO
+35,14/04/2024,América-MG,Fluminense,Independência,MG,RJ
+35,15/04/2024,Vasco,Bahia,São Januário,RJ,BA
+35,16/04/2024,Athletico-PR,Fortaleza,Ligga Arena,PR,CE
+35,14/04/2024,Cuiabá,Coritiba,Arena Pantanal,MT,PR
+36,21/04/2024,Palmeiras,Grêmio,Allianz Parque,SP,RS
+36,22/04/2024,Internacional,Santos,Beira-Rio,RS,SP
+36,23/04/2024,Atlético-MG,São Paulo,Arena MRV,MG,SP
+36,21/04/2024,Corinthians,Cruzeiro,Neo Química Arena,SP,MG
+36,22/04/2024,Botafogo,Flamengo,Nilton Santos (Engenhão),RJ,RJ
+36,23/04/2024,RB Bragantino,Fluminense,Nabi Abi Chedid,SP,RJ
+36,21/04/2024,Goiás,Vasco,Hailé Pinheiro,GO,RJ
+36,22/04/2024,América-MG,Athletico-PR,Independência,MG,PR
+36,23/04/2024,Coritiba,Bahia,Couto Pereira,PR,BA
+36,21/04/2024,Fortaleza,Cuiabá,Castelão,CE,MT
+37,28/04/2024,Palmeiras,Internacional,Allianz Parque,SP,RS
+37,29/04/2024,Grêmio,Atlético-MG,Arena do Grêmio,RS,MG
+37,30/04/2024,Santos,Cruzeiro,Vila Belmiro,SP,MG
+37,28/04/2024,São Paulo,Botafogo,Morumbi,SP,RJ
+37,29/04/2024,Fluminense,Corinthians,Maracanã,RJ,SP
+37,30/04/2024,Vasco,Flamengo,São Januário,RJ,RJ
+37,28/04/2024,Athletico-PR,RB Bragantino,Ligga Arena,PR,SP
+37,29/04/2024,Goiás,Coritiba,Hailé Pinheiro,GO,PR
+37,30/04/2024,Cuiabá,América-MG,Arena Pantanal,MT,MG
+37,28/04/2024,Bahia,Fortaleza,Arena Fonte Nova,BA,CE
+38,05/05/2024,Botafogo,Palmeiras,Nilton Santos (Engenhão),RJ,SP
+38,06/05/2024,Cruzeiro,Fluminense,Mineirão,MG,RJ
+38,07/05/2024,Atlético-MG,Vasco,Arena MRV,MG,RJ
+38,05/05/2024,Athletico-PR,Internacional,Ligga Arena,PR,RS
+38,06/05/2024,Coritiba,Grêmio,Couto Pereira,PR,RS
+38,07/05/2024,Cuiabá,Santos,Arena Pantanal,MT,SP
+38,05/05/2024,Fortaleza,São Paulo,Castelão,CE,SP
+38,06/05/2024,Corinthians,Bahia,Neo Química Arena,SP,BA
+38,07/05/2024,Flamengo,América-MG,Maracanã,RJ,MG
+38,05/05/2024,RB Bragantino,Goiás,Nabi Abi Chedid,SP,GO
