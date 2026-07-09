@@ -20,7 +20,7 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
-HARD_CONSTRAINTS: set[str] = {"a", "b"}
+HARD_CONSTRAINTS: set[str] = {"a", "b", "i", "j"}
 
 # h tem peso 0 por design: o custo de PRV já é contabilizado pelo termo
 # w["prv"] * total_prv. A entrada "h" em violations_by_type permanece como
@@ -35,6 +35,8 @@ DEFAULT_WEIGHTS: dict[str, float] = {
     "f": 100.0,
     "g": 100.0,
     "h": 0.0,
+    "i": 100.0,
+    "j": 100.0,
 }
 
 _DATE_FMT = "%d/%m/%Y"

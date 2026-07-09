@@ -1,13 +1,20 @@
 from __future__ import annotations
 
 from collections import defaultdict
+from datetime import datetime
 from typing import Callable, Dict, List, Tuple
 
-from .domain import ConstraintViolation, Schedule, ScheduledMatch
+from .domain import ConstraintViolation, Schedule, ScheduledMatch, TeamMap
 
 TURNO_FIRST = 1
 TURNO_LAST = 19
 RETURNO_LAST = 38
+
+_DATE_FMT = "%d/%m/%Y"
+
+
+def _parse_day(day: str) -> datetime:
+    return datetime.strptime(day, _DATE_FMT)
 
 
 def _inverse_side(side: str) -> str:
@@ -230,6 +237,70 @@ def check_h_prv(schedule: Schedule, prv_days: int = 5) -> List[ConstraintViolati
     return violations
 
 
+def check_i_span_rodada(schedule: Schedule) -> List[ConstraintViolation]:
+    """(i) Span da rodada: a diferença em dias entre a MAIOR e a MENOR data de
+    cada rodada deve ser <= 2 ("3 dias de calendário": D, D+1, D+2). Uma
+    violação por rodada cujo span excede 2 dias."""
+    days_by_round: Dict[int, List[datetime]] = defaultdict(list)
+    for m in schedule:
+        days_by_round[m.round].append(_parse_day(m.day))
+
+    violations: List[ConstraintViolation] = []
+    for r, days in days_by_round.items():
+        span = (max(days) - min(days)).days
+        if span > 2:
+            violations.append(
+                ConstraintViolation(
+                    constraint_id="i",
+                    description=f"Rodada {r}: span de {span} dias (máximo permitido: 2)",
+                    round=r,
+                )
+            )
+    return violations
+
+
+def check_j_sem_encavalamento(schedule: Schedule) -> List[ConstraintViolation]:
+    """(j) Sem encavalamento: para todo par de rodadas consecutivas (r, r+1),
+    toda data de r deve ser ESTRITAMENTE anterior a toda data de r+1. Viola se
+    (maior data de r) >= (menor data de r+1) — mesmo dia na fronteira viola.
+    Uma violação por par (r, r+1) que encavala."""
+    days_by_round: Dict[int, List[datetime]] = defaultdict(list)
+    for m in schedule:
+        days_by_round[m.round].append(_parse_day(m.day))
+
+    violations: List[ConstraintViolation] = []
+    for r in sorted(days_by_round):
+        if (r + 1) not in days_by_round:
+            continue
+        last_of_r = max(days_by_round[r])
+        first_of_next = min(days_by_round[r + 1])
+        if last_of_r >= first_of_next:
+            violations.append(
+                ConstraintViolation(
+                    constraint_id="j",
+                    description=(
+                        f"Rodadas {r} e {r + 1} encavalam: última de {r} "
+                        f"({last_of_r.strftime(_DATE_FMT)}) não é anterior à primeira "
+                        f"de {r + 1} ({first_of_next.strftime(_DATE_FMT)})"
+                    ),
+                    round=r,
+                )
+            )
+    return violations
+
+
+def check_span_rodada(schedule: Schedule, teams_map: TeamMap | None = None) -> int:
+    """Nº de rodadas que violam o span (<= 2 dias). Wrapper de contagem sobre
+    ``check_i_span_rodada`` (``teams_map`` não é usado; presente por uniformidade)."""
+    return len(check_i_span_rodada(schedule))
+
+
+def check_sem_encavalamento(schedule: Schedule, teams_map: TeamMap | None = None) -> int:
+    """Nº de pares (r, r+1) que encavalam. Wrapper de contagem sobre
+    ``check_j_sem_encavalamento`` (``teams_map`` não é usado; uniformidade)."""
+    return len(check_j_sem_encavalamento(schedule))
+
+
 CONSTRAINT_CHECKS: List[Tuple[str, Callable[[Schedule], List[ConstraintViolation]]]] = [
     ("a", check_a_max_one_game_per_round),
     ("b", check_b_double_round_robin),
@@ -239,6 +310,8 @@ CONSTRAINT_CHECKS: List[Tuple[str, Callable[[Schedule], List[ConstraintViolation
     ("f", check_f_home_away_balance_per_turno),
     ("g", check_g_max_consecutive_home_or_away),
     ("h", check_h_prv),
+    ("i", check_i_span_rodada),
+    ("j", check_j_sem_encavalamento),
 ]
 
 
