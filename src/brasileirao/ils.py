@@ -1,6 +1,6 @@
 """Iterated Local Search (ILS) para o calendário do Brasileirão.
 
-Arquitetura (Opção B): o ILS é uma **pós-otimização** — roda UMA vez sobre a
+Arquitetura: o ILS é uma **pós-otimização** — roda UMA vez sobre a
 melhor solução do GRASP. Ele USA o VND (:mod:`brasileirao.local_search`) como
 caixa-preta (chama ``local_search``) e NÃO reimplementa busca local.
 

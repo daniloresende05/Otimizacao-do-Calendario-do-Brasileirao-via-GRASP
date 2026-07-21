@@ -265,6 +265,6 @@ def test_check_all_clean():
     assert check_all(schedule) == []
 
 
-def test_registry_has_all_eight_checks():
+def test_registry_has_all_checks():
     ids = [cid for cid, _ in CONSTRAINT_CHECKS]
-    assert ids == ["a", "b", "c", "d", "e", "f", "g", "h"]
+    assert ids == ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]

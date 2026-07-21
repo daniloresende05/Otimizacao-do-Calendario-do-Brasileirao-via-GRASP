@@ -117,9 +117,10 @@ def test_evaluate_violates_a():
 
 def test_evaluate_total_cost():
     # 2 PRVs + 1 violação de (a); demais limpas para 4 partidas no mesmo estádio.
+    # Rodada 1 tem span de 2 dias (01/06->03/06), respeitando (i).
     schedule = [
         _m(1, "01/06/2024", "A", "B", "S"),
-        _m(1, "04/06/2024", "A", "C", "S"),
+        _m(1, "03/06/2024", "A", "C", "S"),
         _m(2, "07/06/2024", "B", "A", "S"),
         _m(3, "14/06/2024", "C", "A", "S"),
     ]
@@ -227,8 +228,10 @@ def test_evaluate_clean_schedule():
     assert result.hard_constraint_violations == []
     assert result.soft_constraint_violations == []
     assert result.total_cost == 0
-    # Registry deve ter rodado todas as 8 verificações.
-    assert set(result.violations_by_type.keys()) == {"a", "b", "c", "d", "e", "f", "g", "h"}
+    # Registry deve ter rodado todas as 10 verificações.
+    assert set(result.violations_by_type.keys()) == {
+        "a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+    }
     assert all(c == 0 for c in result.violations_by_type.values())
 
 
@@ -238,7 +241,7 @@ def test_default_weights_h_is_zero():
 
 
 def test_hard_constraints_set():
-    assert HARD_CONSTRAINTS == {"a", "b"}
+    assert HARD_CONSTRAINTS == {"a", "b", "i", "j"}
 
 
 def test_summary_contains_key_lines():
