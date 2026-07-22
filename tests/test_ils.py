@@ -89,12 +89,12 @@ def _fixture_anchors_and_improvable():
         _sm(tm, 2, "05/08/2023", "F", "E"),
         _sm(tm, 20, "20/03/2024", "G", "H"),
         _sm(tm, 21, "24/03/2024", "H", "G"),
-        _sm(tm, 4, "11/09/2023", "D", "C"),
+        _sm(tm, 4, "13/09/2023", "D", "C"),
         _sm(tm, 4, "14/09/2023", "B", "A"),
         _sm(tm, 5, "18/09/2023", "B", "D"),
         _sm(tm, 5, "19/09/2023", "A", "C"),
         _sm(tm, 6, "24/09/2023", "D", "A"),
-        _sm(tm, 6, "28/09/2023", "C", "B"),
+        _sm(tm, 6, "25/09/2023", "C", "B"),
         _sm(tm, 23, "23/01/2024", "A", "B"),
         _sm(tm, 23, "25/01/2024", "C", "D"),
         _sm(tm, 24, "01/02/2024", "B", "C"),
@@ -107,21 +107,21 @@ def _fixture_anchors_and_improvable():
 
 # --- Fixture B: ILS escapa (o cenário-chave do CA9) -------------------------
 # Viável, soft=0, min_rest>=3, PRV=3. O VND (com reinício) TRAVA em (0,0,3);
-# perturbação + VND alcança algo estritamente melhor (verificado empiricamente
-# para todas as seeds 0..9; ver scratchpad/explore_ils.py).
+# perturbação + VND alcança algo estritamente melhor (reverificado por busca
+# aleatória computacional para as seeds 0..7 após (i)/(j) virarem HARD).
 
 def _fixture_ils_escapes():
     tm = _teams({"T0": "SW", "T1": "SW", "T2": "SX", "T3": "SZ",
                  "T4": "SW", "T5": "SW", "T6": "SZ", "T7": "SW"})
     sched = [
-        _sm(tm, 22, "17/01/2024", "T0", "T1"),
-        _sm(tm, 24, "14/01/2024", "T1", "T0"),
-        _sm(tm, 25, "03/01/2024", "T2", "T3"),
-        _sm(tm, 24, "14/01/2024", "T3", "T2"),
-        _sm(tm, 23, "09/02/2024", "T4", "T5"),
-        _sm(tm, 22, "10/01/2024", "T5", "T4"),
-        _sm(tm, 25, "07/01/2024", "T6", "T7"),
-        _sm(tm, 23, "13/01/2024", "T7", "T6"),
+        _sm(tm, 22, "03/01/2024", "T3", "T2"),
+        _sm(tm, 22, "03/01/2024", "T5", "T4"),
+        _sm(tm, 23, "06/01/2024", "T7", "T6"),
+        _sm(tm, 23, "06/01/2024", "T0", "T1"),
+        _sm(tm, 24, "16/01/2024", "T1", "T0"),
+        _sm(tm, 24, "17/01/2024", "T4", "T5"),
+        _sm(tm, 25, "25/01/2024", "T6", "T7"),
+        _sm(tm, 25, "25/01/2024", "T2", "T3"),
     ]
     return sched, tm
 

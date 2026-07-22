@@ -133,12 +133,12 @@ def _fixture_anchors_and_improvable():
         _sm(tm, 20, "20/03/2024", "G", "H"),
         _sm(tm, 21, "24/03/2024", "H", "G"),
         # núcleo móvel (viável, PRV=1)
-        _sm(tm, 4, "11/09/2023", "D", "C"),
+        _sm(tm, 4, "13/09/2023", "D", "C"),
         _sm(tm, 4, "14/09/2023", "B", "A"),
         _sm(tm, 5, "18/09/2023", "B", "D"),
         _sm(tm, 5, "19/09/2023", "A", "C"),
         _sm(tm, 6, "24/09/2023", "D", "A"),
-        _sm(tm, 6, "28/09/2023", "C", "B"),
+        _sm(tm, 6, "25/09/2023", "C", "B"),
         _sm(tm, 23, "23/01/2024", "A", "B"),
         _sm(tm, 23, "25/01/2024", "C", "D"),
         _sm(tm, 24, "01/02/2024", "B", "C"),
@@ -162,17 +162,18 @@ def _fixture_shared_stadium():
         _sm(tm, 22, "01/01/2024", "D", "B"),
         _sm(tm, 23, "10/01/2024", "B", "D"),
         _sm(tm, 23, "10/01/2024", "C", "A"),
-        _sm(tm, 24, "25/01/2024", "E", "F"),   # E@SX 25/01
+        _sm(tm, 24, "24/01/2024", "E", "F"),   # E@SX 24/01
         _sm(tm, 24, "22/01/2024", "H", "G"),
         _sm(tm, 25, "28/01/2024", "F", "E"),
-        _sm(tm, 25, "28/01/2024", "G", "H"),   # G@SX 28/01  -> PRV SX (25 vs 28)
+        _sm(tm, 25, "28/01/2024", "G", "H"),   # G@SX 28/01  -> PRV SX (24 vs 28)
     ]
     return sched, tm
 
 
 # --- Fixture C: VND-reinício (o cenário-chave do CA10) ----------------------
 # Viável, soft_estruturais=0, PRV=2, descanso >= 3 em S0. Propriedades (todas
-# verificadas empiricamente; ver scratchpad/explore_ca10.py):
+# reverificadas por busca aleatória computacional após (i)/(j) virarem HARD;
+# ver scratchpad de verificação em tests/ — não versionado):
 #   * swap_homes (1ª vizinhança) NÃO melhora S0 (fica preso);
 #   * um swap_days (2ª vizinhança) remove 1 PRV -> S1 com chave (0,0,1);
 #   * em S1, swap_homes AGORA melhora (remove o 2º PRV) -> (0,0,0).
@@ -185,14 +186,14 @@ def _fixture_vnd_restart():
         "T4": "SW", "T5": "SW", "T6": "SX", "T7": "SW",
     })
     sched = [
-        _sm(tm, 25, "09/02/2024", "T0", "T1"),
-        _sm(tm, 24, "02/02/2024", "T1", "T0"),
-        _sm(tm, 22, "17/01/2024", "T2", "T3"),
-        _sm(tm, 23, "25/01/2024", "T3", "T2"),
-        _sm(tm, 23, "06/02/2024", "T4", "T5"),
-        _sm(tm, 24, "21/01/2024", "T5", "T4"),
-        _sm(tm, 22, "29/01/2024", "T6", "T7"),
-        _sm(tm, 25, "09/01/2024", "T7", "T6"),
+        _sm(tm, 22, "06/01/2024", "T4", "T5"),
+        _sm(tm, 22, "08/01/2024", "T3", "T2"),
+        _sm(tm, 23, "14/01/2024", "T6", "T7"),
+        _sm(tm, 23, "16/01/2024", "T2", "T3"),
+        _sm(tm, 24, "20/01/2024", "T7", "T6"),
+        _sm(tm, 24, "22/01/2024", "T1", "T0"),
+        _sm(tm, 25, "26/01/2024", "T0", "T1"),
+        _sm(tm, 25, "27/01/2024", "T5", "T4"),
     ]
     return sched, tm
 
