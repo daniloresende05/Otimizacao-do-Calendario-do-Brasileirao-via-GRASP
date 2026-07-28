@@ -25,6 +25,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Callable
 
+from .dates import parse_day as _parse_day
 from .domain import EvaluationResult, Schedule, ScheduledMatch, TeamMap
 from .objective import evaluate
 
@@ -38,9 +39,6 @@ FROZEN_ROUNDS: frozenset[int] = frozenset({1, 2, 18, 19, 20, 21, 37, 38})
 #: Ordem default das vizinhanças exploradas pelo VND.
 DEFAULT_NEIGHBORHOODS: list[str] = ["swap_homes", "swap_days"]
 
-#: Formato de data usado em ``ScheduledMatch.day`` (idêntico a ``objective._DATE_FMT``).
-_DATE_FMT = "%d/%m/%Y"
-
 #: Assinatura de um gerador de vizinhança: (schedule, teams_map, *) -> vizinhos.
 NeighborhoodFn = Callable[..., list[Schedule]]
 
@@ -48,11 +46,6 @@ NeighborhoodFn = Callable[..., list[Schedule]]
 # ---------------------------------------------------------------------------
 # Helpers puros sobre jogos/agenda (sem I/O, sem mutação; ScheduledMatch é frozen)
 # ---------------------------------------------------------------------------
-
-def _parse_day(day: str) -> datetime:
-    """Converte o campo ``day`` (``dd/mm/YYYY``) em ``datetime``."""
-    return datetime.strptime(day, _DATE_FMT)
-
 
 def _pair_key(m: ScheduledMatch) -> tuple[str, str]:
     """Confronto de ``m`` como par não-ordenado canônico (times em ordem)."""

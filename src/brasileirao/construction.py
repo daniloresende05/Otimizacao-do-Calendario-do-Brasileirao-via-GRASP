@@ -15,6 +15,14 @@ CONSTRUCTION_WEIGHTS = {
     "g": 300.0,
 }
 
+# Pesos da etapa C (_pick_r18_r19): (d) e (g) contam 1:1, espelhando o
+# objetivo global, cuja chave lexicográfica soma todas as violações
+# estruturais com peso igual.
+ETAPA_C_WEIGHTS = {
+    "d": 1.0,
+    "g": 1.0,
+}
+
 
 class ConstructionFailedError(Exception):
     """Levantada se a construção esgota matchings sem completar 19 rodadas."""
@@ -179,6 +187,68 @@ def _chain_g_violations(
     return g
 
 
+def _pick_quartet_r1_r2_r18_r19(
+    remaining: list[list[tuple[str, str]]],
+    teams: list[str],
+    teams_map: TeamMap,
+    rng: random.Random,
+) -> tuple[
+    list[tuple[str, str]],
+    list[tuple[str, str]],
+    list[list[tuple[str, str]]],
+]:
+    """Fase 1 conjunta (Silva et al., 2006): escolhe (R1, R2) e reserva
+    {R18, R19} de uma vez, minimizando as violações estruturais de (d).
+
+    Para cada par ordenado (R1, R2), a 2-coloração de R1 ∪ R2 fixa o lado de
+    cada time; um confronto de R18/R19 que junta times de MESMA cor é 1
+    violação de (d) inevitável (nenhuma orientação resolve). Critério
+    lexicográfico: (nº de confrontos incompatíveis em R18+R19, nº de
+    clássicos do candidato a R19) — o segundo termo preserva (e). Empates
+    são sorteados para dar diversidade ao multi-start do GRASP.
+
+    Retorna (r1_pairs, r2_pairs, reserved_r18_r19) e REMOVE os 4 matchings
+    de `remaining`.
+    """
+    n_m = len(remaining)
+    # a PARTIÇÃO da 2-coloração independe do rng (só os rótulos H/A mudam),
+    # então um rng fixo basta para contar incompatíveis sem gastar o rng real
+    color_rng = random.Random(0)
+    cls = [count_classicos(m, teams_map) for m in remaining]
+
+    best_key: tuple[int, int] | None = None
+    best_cands: list[tuple[int, int, int, int]] = []
+    for i in range(n_m):
+        for j in range(n_m):
+            if i == j:
+                continue
+            sides = _two_color_pair_union(
+                remaining[i], remaining[j], teams, color_rng
+            )
+            others = [k for k in range(n_m) if k != i and k != j]
+            incompat = {
+                k: sum(1 for a, b in remaining[k] if sides[a] == sides[b])
+                for k in others
+            }
+            for ki in range(len(others)):
+                for li in range(ki + 1, len(others)):
+                    k, l = others[ki], others[li]
+                    key = (incompat[k] + incompat[l], min(cls[k], cls[l]))
+                    if best_key is None or key < best_key:
+                        best_key = key
+                        best_cands = [(i, j, k, l)]
+                    elif key == best_key:
+                        best_cands.append((i, j, k, l))
+
+    i, j, k, l = rng.choice(best_cands)
+    r1_pairs = remaining[i]
+    r2_pairs = remaining[j]
+    reserved = [remaining[k], remaining[l]]
+    for m in (r1_pairs, r2_pairs, reserved[0], reserved[1]):
+        remaining.remove(m)
+    return r1_pairs, r2_pairs, reserved
+
+
 def _pick_r18_r19(
     remaining: list[list[tuple[str, str]]],
     sides_r1: dict[str, str],
@@ -197,9 +267,10 @@ def _pick_r18_r19(
       1. (e) determina quais ordens são permitidas (R19 deve ser limpo
          quando possível; senão escolhe o de menor # clássicos).
       2. Para cada ordem permitida, enumera 2^10 orientações para R18 e
-         escolhe a que minimiza (d_resid_R18 + 1000·g_R17→R18). Em seguida
-         enumera 2^10 orientações para R19 e escolhe a que minimiza
-         (d_resid_R19 + 1000·g_R18→R19) — dado o estado pós-R18.
+         escolhe a que minimiza o custo ponderado por ETAPA_C_WEIGHTS
+         (d_resid_R18 e g_R17→R18). Em seguida enumera 2^10 orientações
+         para R19 e escolhe a de menor custo (d_resid_R19 e g_R18→R19)
+         — dado o estado pós-R18.
       3. Compara as ordens pelo custo total e escolhe a melhor.
     """
     teams = list(teams_map.keys())
@@ -270,7 +341,10 @@ def _pick_r18_r19(
                 else:
                     tmp_last[away_i] = 2
                     tmp_streak[away_i] = 1
-            cost = 10 * d_resid + 1000 * g_v
+            cost = (
+                ETAPA_C_WEIGHTS["d"] * d_resid
+                + ETAPA_C_WEIGHTS["g"] * g_v
+            )
             if best_cost is None or cost < best_cost:
                 best_cost = cost
                 best_mask = mask
@@ -394,7 +468,8 @@ def build_matches_with_homes(
       (b) cada par se enfrenta 2x com mandos invertidos (turno + returno espelhado)
       (c) alternância C/F entre R1 e R2 (best-effort: pode ter resíduo se
           o matching de R2 não for "bipartite cut" perfeito de R1)
-      (d) espelho R18↔R1 e R19↔R2 (best-effort, mesma observação de (c))
+      (d) espelho R18↔R1 e R19↔R2 (resíduo mínimo estrutural: o quarteto
+          R1/R2/R18/R19 é escolhido em conjunto na etapa A')
       (e) R38 (espelho de R19 no turno) sem clássico estadual quando possível
 
     Otimiza via RCL gulosa-aleatória:
@@ -417,17 +492,17 @@ def build_matches_with_homes(
 
     remaining: list[list[tuple[str, str]]] = [list(m) for m in matchings]
 
-    # -- Etapa A: âncoras R1 e R2 ------------------------------------------
-    # Pega dois matchings distintos e usa 2-coloring do grafo R1 ∪ R2
-    # (sempre bipartido). A 2-coloração resultante garante (c) estrita.
-    # R18/R19 são decididos DEPOIS da RCL para que ela tenha liberdade
-    # de manobra em (f)/(g) — atribuir matchings a essas rodadas com
-    # antecedência limita drasticamente o pool de orientações disponíveis
-    # nas últimas rodadas da RCL e empurra o solver para violações.
-    r1_idx = rng.randrange(len(remaining))
-    r1_pairs = remaining.pop(r1_idx)
-    r2_idx = rng.randrange(len(remaining))
-    r2_pairs = remaining.pop(r2_idx)
+    # -- Etapa A': quarteto (R1, R2, R18, R19) escolhido em conjunto -------
+    # Fase 1 de Silva et al. (2006): as duas primeiras E as duas últimas
+    # rodadas do turno são alocadas antes das intermediárias. A 2-coloração
+    # de R1 ∪ R2 (sempre bipartido) garante (c) estrita, e {R18, R19} são
+    # os matchings com menos confrontos de mesma cor — o resíduo de (d)
+    # fica no mínimo estrutural. Trade-off: a RCL passa a ter 15 matchings
+    # para 15 rodadas (zero escolha de matching em R17, só orientação), o
+    # que pode pressionar (f)/(g).
+    r1_pairs, r2_pairs, reserved_r18_r19 = _pick_quartet_r1_r2_r18_r19(
+        remaining, teams, teams_map, rng
+    )
 
     sides_r1 = _two_color_pair_union(r1_pairs, r2_pairs, teams, rng)
     r1_oriented = [
@@ -470,21 +545,6 @@ def build_matches_with_homes(
         1: [Match(h, a) for h, a in r1_oriented],
         2: [Match(h, a) for h, a in r2_oriented],
     }
-
-    # Reserva um matching limpo (sem clássico estadual) entre os
-    # remanescentes para garantir que R19 possa atender (e). Se houver
-    # múltiplos limpos, escolhe o de maior compat com a inversão de R2.
-    clean_in_remaining = [
-        m for m in remaining if no_classico_estadual(m, teams_map)
-    ]
-    r19_reserved: list[tuple[str, str]] | None = None
-    if clean_in_remaining:
-        def _r19_compat(m: list[tuple[str, str]]) -> int:
-            return sum(1 for a, b in m if sides_r2[a] != sides_r2[b])
-        best_compat = max(_r19_compat(m) for m in clean_in_remaining)
-        best_clean = [m for m in clean_in_remaining if _r19_compat(m) == best_compat]
-        r19_reserved = rng.choice(best_clean)
-        remaining.remove(r19_reserved)
 
     remaining_idx = [
         [(team_to_idx[a], team_to_idx[b]) for a, b in m] for m in remaining
@@ -573,13 +633,12 @@ def build_matches_with_homes(
         _apply_oriented(chosen_oriented_str)
         matches_by_round[r] = [Match(h, a) for h, a in chosen_oriented_str]
 
-    # -- Etapa C: R18 e R19 a partir dos 2 matchings remanescentes ---------
-    if r19_reserved is not None:
-        remaining.append(r19_reserved)
-    if len(remaining) != 2:
+    # -- Etapa C: R18 e R19 a partir dos 2 matchings reservados na A' ------
+    if remaining:
         raise ConstructionFailedError(
-            f"Esperado 2 matchings após R3..R17; sobrou {len(remaining)}."
+            f"Esperado 0 matchings após R3..R17; sobrou {len(remaining)}."
         )
+    remaining = reserved_r18_r19
 
     r18_oriented, r19_oriented = _pick_r18_r19(
         remaining,

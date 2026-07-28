@@ -2,10 +2,10 @@ from __future__ import annotations
 
 import logging
 import warnings
-from datetime import datetime
 from typing import TYPE_CHECKING
 
 from .constraints import CONSTRAINT_CHECKS
+from .dates import parse_day as _parse_day
 from .domain import (
     ConstraintViolation,
     EvaluationResult,
@@ -38,13 +38,6 @@ DEFAULT_WEIGHTS: dict[str, float] = {
     "i": 100.0,
     "j": 100.0,
 }
-
-_DATE_FMT = "%d/%m/%Y"
-
-
-def _parse_day(day: str) -> datetime:
-    return datetime.strptime(day, _DATE_FMT)
-
 
 def compute_prv(schedule: Schedule, prv_days: int = 5) -> PRVResult:
     """Conta PRVs: pares consecutivos no mesmo estádio com intervalo < prv_days dias."""
