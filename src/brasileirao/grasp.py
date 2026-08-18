@@ -7,7 +7,7 @@ from datetime import date
 
 from .construction import construct_schedule
 from .domain import EvaluationResult, Schedule, TeamMap
-from .objective import evaluate
+from .objective import evaluate, hard_violation_summary
 
 logger = logging.getLogger(__name__)
 
@@ -55,6 +55,7 @@ def grasp(
     prv_days: int = 5,
     min_team_rest_days: int = 3,
     max_consecutive: int = 2,
+    simultaneous_rounds: frozenset[int] = frozenset({38}),
     weights: dict[str, float] | None = None,
 ) -> GRASPResult:
     """Loop multi-start do GRASP (Algoritmo 1, sem busca local)."""
@@ -84,6 +85,7 @@ def grasp(
             prv_days=prv_days,
             min_team_rest_days=min_team_rest_days,
             max_consecutive=max_consecutive,
+            simultaneous_rounds=simultaneous_rounds,
         )
         avaliacao = evaluate(schedule, weights=weights, prv_days=prv_days)
 
@@ -124,6 +126,14 @@ def grasp(
             break
 
     assert best_schedule is not None and best_eval is not None
+    if not best_eval.is_feasible:
+        logger.warning(
+            "Nenhuma solucao viavel encontrada com as restricoes hard atuais "
+            "apos %d iteracoes; retornando a melhor encontrada (menor hard). "
+            "Restricoes hard com violacao > 0: %s",
+            len(history),
+            hard_violation_summary(best_eval.violations_by_type),
+        )
     return GRASPResult(
         best_schedule=best_schedule,
         best_evaluation=best_eval,

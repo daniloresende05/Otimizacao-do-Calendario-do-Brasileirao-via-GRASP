@@ -20,7 +20,78 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
-HARD_CONSTRAINTS: set[str] = {"a", "b", "i", "j"}
+# ---------------------------------------------------------------------------
+# CONTROLE DE DUREZA DAS RESTRIÇÕES — edite AQUI (um único ponto).
+#
+# True  = hard: conta no componente 'hard' da chave lexicográfica e bloqueia
+#         is_feasible.
+# False = soft: penaliza via pesos e entra em 'soft_estruturais' (exceto (h),
+#         cujo custo já é o próprio PRV, 3º componente da chave).
+#
+# Default (comportamento histórico do projeto): apenas a, b, i, j hard.
+#
+# Para experimentar "TUDO HARD", coloque todas em True — ou use a flag
+# --all-hard da CLI, que faz isso apenas para aquela execução:
+#     CONSTRAINT_HARDNESS: dict[str, bool] = {
+#         "a": True, "b": True, "c": True, "d": True, "e": True,
+#         "f": True, "g": True, "h": True, "i": True, "j": True,
+#     }
+#
+# ATENÇÃO: neste dataset, (d) tem piso estrutural provado de 4 violações
+# (paridade da bipartição 10x10 nos matchings do círculo) e o PRV (h) tem
+# piso > 0 (co-mandantes no Maracanã na mesma rodada). Marcar (d) ou (h)
+# como hard torna o problema INVIÁVEL: o GRASP roda até max_iter, devolve a
+# melhor solução encontrada (menor hard) e emite um aviso listando quais
+# restrições hard impedem a viabilidade. Isso é esperado, não é travamento.
+# ---------------------------------------------------------------------------
+CONSTRAINT_HARDNESS: dict[str, bool] = {
+    "a": True, "b": True, "c": False, "d": False, "e": False,
+    "f": False, "g": False, "h": False, "i": True, "j": True,
+}
+
+# Cópia do default para permitir restauração (reset_constraint_hardness).
+_DEFAULT_HARDNESS: dict[str, bool] = dict(CONSTRAINT_HARDNESS)
+
+
+def hard_constraint_ids() -> set[str]:
+    """Conjunto de restrições hard derivado, em tempo de chamada, de
+    CONSTRAINT_HARDNESS. Fonte de verdade usada por evaluate()."""
+    return {cid for cid, is_hard in CONSTRAINT_HARDNESS.items() if is_hard}
+
+
+# Retrocompat: snapshot derivado no import (default == {"a", "b", "i", "j"}).
+# Mantido em sincronia por set_all_hard()/reset_constraint_hardness(); código
+# novo deve preferir hard_constraint_ids().
+HARD_CONSTRAINTS: set[str] = hard_constraint_ids()
+
+
+def set_all_hard() -> None:
+    """Marca TODAS as restrições como hard (atalho da flag --all-hard da CLI).
+
+    O controle permanente é editar CONSTRAINT_HARDNESS acima; esta função é
+    a conveniência experimental por execução."""
+    for cid in CONSTRAINT_HARDNESS:
+        CONSTRAINT_HARDNESS[cid] = True
+    HARD_CONSTRAINTS.clear()
+    HARD_CONSTRAINTS.update(hard_constraint_ids())
+
+
+def reset_constraint_hardness() -> None:
+    """Restaura o default (a, b, i, j hard). Usado em testes."""
+    CONSTRAINT_HARDNESS.clear()
+    CONSTRAINT_HARDNESS.update(_DEFAULT_HARDNESS)
+    HARD_CONSTRAINTS.clear()
+    HARD_CONSTRAINTS.update(hard_constraint_ids())
+
+
+def hard_violation_summary(violations_by_type: dict[str, int]) -> str:
+    """Formata as restrições hard com violação > 0, ex.: 'd=4, h=6'."""
+    hard_ids = hard_constraint_ids()
+    return ", ".join(
+        f"{cid}={count}"
+        for cid, count in sorted(violations_by_type.items())
+        if cid in hard_ids and count > 0
+    )
 
 # h tem peso 0 por design: o custo de PRV já é contabilizado pelo termo
 # w["prv"] * total_prv. A entrada "h" em violations_by_type permanece como
@@ -80,13 +151,15 @@ def evaluate(
     Avalia f(x) = w[prv] * total_prv + Σ_c w[c] * |violations_c|
     iterando o registry CONSTRAINT_CHECKS.
 
-    HARD_CONSTRAINTS = {"a", "b"} populam hard_constraint_violations;
-    demais populam soft_constraint_violations.
+    As restrições marcadas True em CONSTRAINT_HARDNESS (derivadas via
+    hard_constraint_ids()) populam hard_constraint_violations; as demais
+    populam soft_constraint_violations. Default: a, b, i, j hard.
 
     weights faltantes herdam de DEFAULT_WEIGHTS. (h) tem peso default 0
     para evitar dupla contagem com w["prv"] * total_prv.
     """
     w = {**DEFAULT_WEIGHTS, **(weights or {})}
+    hard_ids = hard_constraint_ids()
 
     prv_result = compute_prv(schedule, prv_days=prv_days)
 
@@ -101,7 +174,7 @@ def evaluate(
             violations = check_fn(schedule)
 
         violations_by_type[constraint_id] = len(violations)
-        target = hard if constraint_id in HARD_CONSTRAINTS else soft
+        target = hard if constraint_id in hard_ids else soft
         target.extend(violations)
 
     total_cost = w["prv"] * prv_result.total_prv + sum(

@@ -797,6 +797,48 @@ def _optimize_local_prv(
     return atribuicao
 
 
+def _assign_single_date_round(
+    matches: list[Match],
+    window: list[date],
+    last_play: dict[str, date],
+    min_rest: int,
+    prev_stadium_dates: dict[str, list[date]],
+    teams_map: TeamMap,
+    prv_days: int,
+    round_number: int | None = None,
+) -> list[tuple[Match, date]]:
+    """Rodada SIMULTÂNEA: todos os jogos na MESMA data.
+
+    Uma data da janela é viável se TODOS os jogos respeitam ``min_rest`` nela
+    (i.e., todos os times a >= min_rest do seu jogo anterior). Entre as
+    viáveis, escolhe a que MINIMIZA o PRV da rodada (mesma lógica de
+    ``_round_prv_count`` contra ``prev_stadium_dates``); empate resolve pela
+    data mais antiga (determinismo).
+
+    NÃO passa por ``_optimize_local_prv``: ele troca datas ENTRE jogos, o que
+    reintroduziria múltiplas datas na rodada.
+    """
+    best: tuple[int, date] | None = None
+    for d in window:
+        if not all(_check_rest(m, d, last_play, min_rest) for m in matches):
+            continue
+        atribuicao = [(m, d) for m in matches]
+        prv = _round_prv_count(
+            atribuicao, prev_stadium_dates, teams_map, prv_days
+        )
+        if best is None or prv < best[0] or (prv == best[0] and d < best[1]):
+            best = (prv, d)
+    if best is None:
+        rotulo = f"rodada {round_number}" if round_number else "rodada"
+        raise DateAssignmentFailedError(
+            f"Rodada simultânea sem data viável: nenhuma data da janela "
+            f"{[d.isoformat() for d in window]} da {rotulo} respeita o "
+            f"descanso mínimo de {min_rest} dia(s) para todos os times."
+        )
+    chosen = best[1]
+    return [(m, chosen) for m in matches]
+
+
 def assign_dates_to_matches(
     matches_by_round: MatchesByRound,
     dates: list[date],
@@ -806,9 +848,14 @@ def assign_dates_to_matches(
     round_span: int = 3,
     prv_days: int = 5,
     min_team_rest_days: int = 3,
+    simultaneous_rounds: frozenset[int] = frozenset({38}),
 ) -> Schedule:
     """Atribui uma data a cada jogo de cada rodada, respeitando descanso mínimo
-    de time e minimizando PRVs."""
+    de time e minimizando PRVs.
+
+    Rodadas em ``simultaneous_rounds`` recebem TODOS os jogos na MESMA data
+    (via ``_assign_single_date_round``); as demais espalham na janela
+    (balanced -> flexible -> otimização local de PRV)."""
     schedule: Schedule = []
     last_play: dict[str, date] = {}
     prev_stadium_dates: dict[str, list[date]] = {}
@@ -819,25 +866,32 @@ def assign_dates_to_matches(
 
         matches = matches_by_round[r]
 
-        atribuicao = _try_balanced_distribution(
-            matches, window, last_play, min_team_rest_days
-        )
-
-        if atribuicao is None:
-            atribuicao = _try_flexible_distribution(
+        if r in simultaneous_rounds:
+            atribuicao = _assign_single_date_round(
+                matches, window, last_play, min_team_rest_days,
+                prev_stadium_dates, teams_map, prv_days,
+                round_number=r,
+            )
+        else:
+            atribuicao = _try_balanced_distribution(
                 matches, window, last_play, min_team_rest_days
             )
 
-        if atribuicao is None:
-            raise DateAssignmentFailedError(
-                f"Não foi possível atribuir datas na rodada {r} "
-                "respeitando descanso."
-            )
+            if atribuicao is None:
+                atribuicao = _try_flexible_distribution(
+                    matches, window, last_play, min_team_rest_days
+                )
 
-        atribuicao = _optimize_local_prv(
-            atribuicao, prev_stadium_dates, teams_map, prv_days,
-            last_play, min_team_rest_days,
-        )
+            if atribuicao is None:
+                raise DateAssignmentFailedError(
+                    f"Não foi possível atribuir datas na rodada {r} "
+                    "respeitando descanso."
+                )
+
+            atribuicao = _optimize_local_prv(
+                atribuicao, prev_stadium_dates, teams_map, prv_days,
+                last_play, min_team_rest_days,
+            )
 
         for match, d in atribuicao:
             sm = ScheduledMatch(
@@ -870,6 +924,7 @@ def construct_schedule(
     prv_days: int = 5,
     min_team_rest_days: int = 3,
     max_consecutive: int = 2,
+    simultaneous_rounds: frozenset[int] = frozenset({38}),
 ) -> Schedule:
     """Pipeline completo: build_matches_with_homes → assign_dates_to_matches."""
     matches_by_round = build_matches_with_homes(
@@ -883,4 +938,5 @@ def construct_schedule(
         round_span=round_span,
         prv_days=prv_days,
         min_team_rest_days=min_team_rest_days,
+        simultaneous_rounds=simultaneous_rounds,
     )

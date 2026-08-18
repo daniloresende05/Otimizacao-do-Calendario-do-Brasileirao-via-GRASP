@@ -11,7 +11,24 @@ from .dates import parse_day
 from .grasp import DEFAULT_ALPHA_POOL, grasp
 from .ils import iterated_local_search
 from .io import load_dates, load_teams, save_schedule_csv
-from .objective import evaluate
+from .objective import (
+    evaluate,
+    hard_constraint_ids,
+    hard_violation_summary,
+    set_all_hard,
+)
+
+
+def _warn_if_infeasible(evaluation, stage: str) -> None:
+    """Aviso claro quando as restrições hard atuais não podem ser satisfeitas."""
+    if evaluation.is_feasible:
+        return
+    print(f"\nAVISO [{stage}]: Nenhuma solução viável encontrada com as "
+          f"restrições hard atuais.")
+    print(f"  Restrições hard com violação > 0: "
+          f"{hard_violation_summary(evaluation.violations_by_type)}")
+    print("  Retornando a melhor solução encontrada (menor número de "
+          "violações hard).")
 
 
 def main():
@@ -54,7 +71,23 @@ def main():
                              help="Descanso mínimo (dias) entre jogos de um time")
     model_group.add_argument("--max-consecutive", type=int, default=2,
                              help="Máximo de jogos consecutivos em casa/fora")
+    model_group.add_argument("--simultaneous-rounds", type=int, nargs="*",
+                             default=[38], metavar="RODADA",
+                             help="Rodadas com todos os jogos na MESMA data "
+                                  "(default: 38; passe sem valores para "
+                                  "desligar)")
+    model_group.add_argument("--all-hard", action="store_true",
+                             help="Marca TODAS as restrições (a-j) como hard "
+                                  "nesta execução (atalho experimental; o "
+                                  "controle permanente é CONSTRAINT_HARDNESS "
+                                  "em objective.py). Com (d) e (h) hard este "
+                                  "dataset é inviável: a CLI avisa e devolve "
+                                  "a melhor solução encontrada.")
     args = parser.parse_args()
+    simultaneous_rounds = frozenset(args.simultaneous_rounds)
+
+    if args.all_hard:
+        set_all_hard()
 
     teams_map = load_teams(args.teams)
     dates_raw = load_dates(args.dates, col=args.date_col)
@@ -62,6 +95,12 @@ def main():
 
     print(f"Times: {len(teams_map)} | Datas disponíveis: {len(dates)} "
           f"({dates[0]:%d/%m/%Y} a {dates[-1]:%d/%m/%Y}) | Seed: {args.seed}")
+    sim_txt = (", ".join(f"R{r}" for r in sorted(simultaneous_rounds))
+               if simultaneous_rounds else "nenhuma")
+    print(f"Rodadas simultâneas (todos os jogos na mesma data): {sim_txt}")
+    print(f"Restrições hard ativas: "
+          f"{', '.join(sorted(hard_constraint_ids()))}"
+          f"{' (--all-hard)' if args.all_hard else ''}")
 
     print(f"\n[1/2] GRASP: multi-start de construção "
           f"(max_iter={args.grasp_max_iter}, alpha_pool={args.alpha_pool})...")
@@ -77,6 +116,7 @@ def main():
         prv_days=args.prv_days,
         min_team_rest_days=args.min_team_rest_days,
         max_consecutive=args.max_consecutive,
+        simultaneous_rounds=simultaneous_rounds,
     )
     grasp_eval = grasp_result.best_evaluation
     print(f"GRASP: {grasp_result.total_iterations} iterações "
@@ -85,6 +125,7 @@ def main():
           f"alpha={grasp_result.best_alpha})")
     print(f"PRV após GRASP (antes do ILS): {grasp_eval.total_prv} "
           f"| lex_key={grasp_eval.lexicographic_key()}")
+    _warn_if_infeasible(grasp_eval, "GRASP")
 
     print(f"\n[2/2] ILS: VND + perturbações sobre a melhor solução do GRASP "
           f"(max_iter={args.ils_max_iter}, "
@@ -104,11 +145,19 @@ def main():
     final_eval = evaluate(final_schedule, prv_days=args.prv_days)
     print(f"PRV após ILS (final): {final_eval.total_prv} "
           f"| lex_key={final_eval.lexicographic_key()}")
+    _warn_if_infeasible(final_eval, "final")
 
     delta = grasp_eval.total_prv - final_eval.total_prv
     print(f"Melhora do ILS sobre o GRASP: -{delta} PRV")
 
     print("\n" + final_eval.summary())
+
+    for r in sorted(simultaneous_rounds):
+        r_days = sorted(
+            {m.day for m in final_schedule if m.round == r},
+            key=parse_day,
+        )
+        print(f"Datas da R{r} (simultânea): {', '.join(r_days)}")
 
     prv_by_stadium = final_eval.prv_result.prv_by_stadium
     if prv_by_stadium:
