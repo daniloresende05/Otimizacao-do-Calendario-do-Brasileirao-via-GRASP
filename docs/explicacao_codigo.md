@@ -130,12 +130,24 @@ datas [20/08, 21/08, 22/08]. A rodada 2 usa [27/08, 28/08, 29/08]. O gap
 entre o ultimo dia possivel de uma rodada (22/08) e o primeiro da seguinte
 (27/08) e de 5 dias, o que garante os 3 dias minimos de descanso.
 
+**E as datas FIFA?** A CLI remove as datas do CSV de datas FIFA
+(`--fifa-dates`, 43 dias em 2023/24) da lista de datas disponiveis ANTES do
+GRASP; `--no-fifa` desliga. Como a lista passa a ter buracos, a janela de
+cada rodada e calculada por CALENDARIO (`round_windows`), nao por posicao
+na lista: a rodada r comeca na primeira data disponivel a partir de
+`inicio(r-1) + 7`, e a janela sao as datas disponiveis nos 3 dias seguintes.
+Se o inicio previsto cai numa data FIFA, a rodada desliza para depois da
+janela FIFA e as seguintes acompanham — o campeonato "pausa", como no
+calendario real. Com dias consecutivos o resultado e identico ao antigo
+fatiamento `dates[(r-1)*7 : +3]`.
+
 ### 2.7 Como a Parte 2 (atribuicao de datas) funciona?
 
-Codigo em `src/brasileirao/construction.py:741-799`. Para cada rodada r:
+Codigo em `src/brasileirao/construction.py` (`round_windows` +
+`assign_dates_to_matches`). Para cada rodada r:
 
-1. Calcula a janela de datas: 3 dias consecutivos comecando em
-   `dates[(r-1)*7]`.
+1. Calcula a janela de datas: as datas DISPONIVEIS nos 3 dias de calendario
+   a partir do inicio da rodada (ver 2.6).
 2. Distribui os 10 jogos de forma balanceada (~4, 3, 3 jogos por dia),
    verificando que cada time tem pelo menos 3 dias desde seu ultimo jogo.
 3. Aplica 2-opt local: tenta trocar datas entre pares de jogos na rodada;

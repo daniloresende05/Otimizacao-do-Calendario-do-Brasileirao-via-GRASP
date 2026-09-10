@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import random
-from datetime import date
+from bisect import bisect_left
+from datetime import date, timedelta
 from math import ceil
 from typing import Iterator
 
@@ -839,6 +840,58 @@ def _assign_single_date_round(
     return [(m, chosen) for m in matches]
 
 
+def round_windows(
+    dates: list[date],
+    *,
+    round_gap: int = 7,
+    round_span: int = 3,
+    n_rounds: int = 38,
+) -> list[list[date]]:
+    """Janela de datas de cada rodada, em termos de CALENDÁRIO.
+
+    ``dates`` é o conjunto de datas DISPONÍVEIS (pode ter buracos: datas
+    FIFA removidas, feriados etc.). Regra:
+
+      * a rodada 1 começa na primeira data disponível;
+      * a rodada r começa na primeira data disponível >= início(r-1) +
+        ``round_gap`` dias — se esse dia está bloqueado, a rodada desliza
+        para o próximo disponível e as seguintes seguem a partir dele;
+      * a janela da rodada são as datas disponíveis nos ``round_span`` dias
+        de calendário a partir do início (pode ter menos de ``round_span``
+        datas se alguma estiver bloqueada).
+
+    Com uma lista de dias consecutivos isso equivale exatamente ao
+    fatiamento posicional ``dates[(r-1)*round_gap : +round_span]``. Com
+    buracos, mantém as garantias de (i) span <= round_span-1 dias e (j) sem
+    encavalamento, que o fatiamento posicional violaria.
+
+    Levanta ``DateAssignmentFailedError`` se as ``n_rounds`` rodadas não
+    cabem nas datas disponíveis.
+    """
+    available = sorted(set(dates))
+    if not available:
+        raise DateAssignmentFailedError("Lista de datas disponíveis vazia.")
+
+    windows: list[list[date]] = []
+    start = available[0]
+    for r in range(1, n_rounds + 1):
+        if r > 1:
+            start = windows[-1][0] + timedelta(days=round_gap)
+        idx = bisect_left(available, start)
+        if idx == len(available):
+            raise DateAssignmentFailedError(
+                f"Rodada {r}: nenhuma data disponível a partir de "
+                f"{start.isoformat()} (última disponível: "
+                f"{available[-1].isoformat()}). As {n_rounds} rodadas não "
+                f"cabem nas datas disponíveis."
+            )
+        start = available[idx]
+        limit = start + timedelta(days=round_span)
+        window = [d for d in available[idx : idx + round_span] if d < limit]
+        windows.append(window)
+    return windows
+
+
 def assign_dates_to_matches(
     matches_by_round: MatchesByRound,
     dates: list[date],
@@ -853,6 +906,9 @@ def assign_dates_to_matches(
     """Atribui uma data a cada jogo de cada rodada, respeitando descanso mínimo
     de time e minimizando PRVs.
 
+    A janela de cada rodada vem de ``round_windows`` (baseada em calendário,
+    tolerante a datas bloqueadas — ex.: datas FIFA removidas da lista).
+
     Rodadas em ``simultaneous_rounds`` recebem TODOS os jogos na MESMA data
     (via ``_assign_single_date_round``); as demais espalham na janela
     (balanced -> flexible -> otimização local de PRV)."""
@@ -860,9 +916,12 @@ def assign_dates_to_matches(
     last_play: dict[str, date] = {}
     prev_stadium_dates: dict[str, list[date]] = {}
 
+    windows = round_windows(
+        dates, round_gap=round_gap, round_span=round_span, n_rounds=38
+    )
+
     for r in range(1, 39):
-        base_idx = (r - 1) * round_gap
-        window = dates[base_idx : base_idx + round_span]
+        window = windows[r - 1]
 
         matches = matches_by_round[r]
 

@@ -1,3 +1,6 @@
+from datetime import date
+from typing import Iterable
+
 import pandas as pd
 from .dates import parse_day
 from .domain import Schedule, Team, TeamMap
@@ -9,6 +12,13 @@ def load_dates(path: str, col: str = "Data") -> list[str]:
         raise ValueError(f"Coluna '{col}' não encontrada em {path}. Colunas: {list(df.columns)}")
     # mantém como string pra não ter dor com parsing agora
     return df[col].astype(str).tolist()
+
+
+def remove_blocked_dates(dates: list[date], blocked: Iterable[date]) -> list[date]:
+    """Remove de ``dates`` toda data presente em ``blocked`` (ex.: datas FIFA),
+    preservando a ordem. Datas bloqueadas ausentes de ``dates`` são ignoradas."""
+    blocked_set = set(blocked)
+    return [d for d in dates if d not in blocked_set]
 
 def load_teams(path: str) -> TeamMap:
     df = pd.read_csv(path)

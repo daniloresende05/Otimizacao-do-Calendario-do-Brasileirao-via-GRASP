@@ -10,7 +10,7 @@ import os
 from .dates import parse_day
 from .grasp import DEFAULT_ALPHA_POOL, grasp
 from .ils import iterated_local_search
-from .io import load_dates, load_teams, save_schedule_csv
+from .io import load_dates, load_teams, remove_blocked_dates, save_schedule_csv
 from .objective import (
     evaluate,
     hard_constraint_ids,
@@ -41,6 +41,16 @@ def main():
                         help="CSV de datas disponíveis (coluna Data em dd/mm/aaaa)")
     parser.add_argument("--date-col", default="Data",
                         help="Nome da coluna de data no CSV")
+    parser.add_argument("--fifa-dates",
+                        default="data/raw/datas_fifas_20-08-2023_a_09-06-2024.csv",
+                        help="CSV de datas FIFA (janelas de seleção). Essas "
+                             "datas são REMOVIDAS da lista de datas "
+                             "disponíveis antes do GRASP.")
+    parser.add_argument("--fifa-date-col", default="DATA",
+                        help="Nome da coluna de data no CSV de datas FIFA")
+    parser.add_argument("--no-fifa", action="store_true",
+                        help="Não remove as datas FIFA (usa todas as datas "
+                             "do CSV de datas disponíveis)")
     parser.add_argument("--out", default="results/schedule.csv",
                         help="CSV final (Rodada,Data,Mandante,Visitante,Estádio,PRV)")
     parser.add_argument("--seed", type=int, default=42,
@@ -92,9 +102,26 @@ def main():
     teams_map = load_teams(args.teams)
     dates_raw = load_dates(args.dates, col=args.date_col)
     dates = sorted(parse_day(s.strip()).date() for s in dates_raw)
+    n_dates_total = len(dates)
+
+    # Datas FIFA: removidas da lista ANTES do GRASP. Todo o restante da
+    # pipeline (construção, busca local, avaliação) enxerga só a lista filtrada.
+    fifa_removed = 0
+    if not args.no_fifa:
+        fifa_raw = load_dates(args.fifa_dates, col=args.fifa_date_col)
+        fifa_dates = sorted(parse_day(s.strip()).date() for s in fifa_raw)
+        dates = remove_blocked_dates(dates, fifa_dates)
+        fifa_removed = n_dates_total - len(dates)
+        if not dates:
+            raise SystemExit("Nenhuma data disponível após remover as datas FIFA.")
 
     print(f"Times: {len(teams_map)} | Datas disponíveis: {len(dates)} "
           f"({dates[0]:%d/%m/%Y} a {dates[-1]:%d/%m/%Y}) | Seed: {args.seed}")
+    if args.no_fifa:
+        print("Datas FIFA: não removidas (--no-fifa)")
+    else:
+        print(f"Datas FIFA removidas: {fifa_removed} de {n_dates_total} "
+              f"({args.fifa_dates})")
     sim_txt = (", ".join(f"R{r}" for r in sorted(simultaneous_rounds))
                if simultaneous_rounds else "nenhuma")
     print(f"Rodadas simultâneas (todos os jogos na mesma data): {sim_txt}")
