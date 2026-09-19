@@ -82,25 +82,25 @@ Rodada 2:  T1-T19  T20-T18  T2-T17  ...  T9-T11
 Para garantir duas restricoes por construcao:
 
 - **(c)** Todo time que jogou em casa em R1 joga fora em R2 e vice-versa.
-  Conseguimos isso fazendo uma 2-coloracao do grafo R1 ∪ R2
-  (`src/brasileirao/construction.py:432`).
-- **(d)** R18 deve ter mandos opostos a R1 (e R19 opostos a R2). Decidimos
-  R18/R19 depois da RCL para R3-R17 com enumeracao de 2^10 orientacoes
-  (`src/brasileirao/construction.py:584`).
+- **(d)** R18 tem mandos opostos a R1, e R19 opostos a R2.
+
+As duas saem de graca porque as quatro ancoras vem de rodadas "cruzadas" da
+biparticao (A, B): todo jogo delas liga um time de A a um de B, entao o mando
+e determinado pelo lado. Manda A na R1 e na R19; manda B na R2 e na R18.
 
 ### 2.3 Como a construcao decide o mando em R1?
 
-Usa 2-coloracao (`src/brasileirao/construction.py:432-434`). Os matchings de
-R1 e R2 formam um grafo bipartido (cada time tem grau 2). A 2-coloracao
-atribui "H" ou "A" a cada time. A escolha de qual cor e H e qual e A e
-aleatoria por componente conexa, o que da diversidade entre seeds.
+Pelo lado da biparticao: manda quem esta em A. Nao ha 2-coloracao a calcular,
+porque a biparticao e sorteada ANTES dos confrontos e a 1-fatoracao e gerada
+alinhada a ela (`bipartite_factorization`). A diversidade entre seeds vem do
+sorteio da propria biparticao, de quais cruzadas viram ancora e dos flips de
+ciclo alternante no miolo.
 
 ### 2.4 Como R2 e construida a partir de R1?
 
-Cada time que jogou em casa em R1 joga fora em R2 (e vice-versa). Como a
-2-coloracao garante que cada par de R2 tem um time H e um time A na coloracao
-de R1, a orientacao de R2 esta determinada: o time que era H em R1 vira A em
-R2 (`src/brasileirao/construction.py:438-439`).
+Cada time que jogou em casa em R1 joga fora em R2. Como R2 tambem e uma rodada
+cruzada, cada jogo dela tem exatamente um time de A e um de B — entao basta
+mandar quem e de B. A orientacao esta determinada, sem residuo.
 
 ### 2.5 Por que enumeramos as 1024 orientacoes?
 
@@ -324,10 +324,11 @@ violacoes cada vizinhanca deve resolver.
 
 A auditoria mostrou (nas 50 iteracoes, com o dataset real):
 
-- **(d)** min=4, max=22, media=13 violacoes. E best-effort: a construcao
-  enumera 2^10 orientacoes para R18/R19, mas os matchings remanescentes
-  raramente sao "cortes bipartidos perfeitos". Nao e bug — e limitacao
-  estrutural. A vizinhanca swap_teams vai atacar isso.
+- **(d)** zero, por construcao. Ate a troca do gerador de confrontos essa
+  restricao tinha um piso estrutural de 4 violacoes: no metodo do circulo,
+  fixados R1 e R2, nenhum dos 17 fatores restantes e corte perfeito da
+  2-coloracao de R1 ∪ R2 (o perfil de arestas monocromaticas e sempre
+  `[2,2,2,2,4,4,4,4,6,6,6,6,8,8,8,8,10]`). Ver `construction_phase1.md` §2.
 - **(f)** min=3, max=10. A RCL penaliza desequilibrio mas nao bloqueia.
 - **(g)** min=1, max=19. Mesmo raciocinio.
 

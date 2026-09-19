@@ -9,6 +9,8 @@ from __future__ import annotations
 
 from collections import Counter
 
+import pytest
+
 from brasileirao.construction import build_matches_with_homes
 from brasileirao.domain import Match, Team, TeamMap
 
@@ -129,9 +131,10 @@ def test_constraint_b_satisfied():
 # 7. (c) alternância R1 ↔ R2
 # ---------------------------------------------------------------------------
 
-def test_constraint_c_satisfied():
+@pytest.mark.parametrize("seed", [42, 43, 44, 7, 2024])
+def test_constraint_c_satisfied(seed):
     teams = _make_teams()
-    m = build_matches_with_homes(teams, seed=42)
+    m = build_matches_with_homes(teams, seed=seed)
     s1 = _sides_in_round(m[1])
     s2 = _sides_in_round(m[2])
     assert set(s1.keys()) == set(s2.keys()) == set(teams.keys())
@@ -140,31 +143,37 @@ def test_constraint_c_satisfied():
 
 
 # ---------------------------------------------------------------------------
-# 8. (d) espelho R18↔R1, R19↔R2 (com bound empírico)
+# 8. (d) espelho R18↔R1, R19↔R2 — estrito
 # ---------------------------------------------------------------------------
 
-def test_constraint_d_within_empirical_bound():
-    """(d) é best-effort: residuais são esperados quando os matchings
-    remanescentes não são "perfectly bipartite cuts" de sides_r1/sides_r2.
-    Spec aceita até 20 violações combinadas."""
+@pytest.mark.parametrize("seed", [42, 43, 44, 7, 2024])
+def test_constraint_d_satisfied(seed):
+    """(d) sai ZERADA por construção desde que as quatro âncoras venham de
+    rodadas cruzadas da bipartição: todo jogo delas liga um time de A a um de
+    B, então o lado de cada time fica determinado e o espelho é exato.
+
+    Antes deste gerador, (d) tinha um piso estrutural de 4 violações — o
+    método do círculo não contém dois matchings que sejam corte perfeito da
+    2-coloração de R1 ∪ R2. Ver test_bipartite_factorization.py."""
     teams = _make_teams()
-    m = build_matches_with_homes(teams, seed=42)
+    m = build_matches_with_homes(teams, seed=seed)
     s1 = _sides_in_round(m[1])
     s2 = _sides_in_round(m[2])
     s18 = _sides_in_round(m[18])
     s19 = _sides_in_round(m[19])
-    viol = sum(1 for t in teams if s18[t] == s1[t])
-    viol += sum(1 for t in teams if s19[t] == s2[t])
-    assert viol <= 20, f"(d) violou {viol} vezes (bound=20)"
+    viol = [t for t in teams if s18[t] == s1[t]]
+    viol += [t for t in teams if s19[t] == s2[t]]
+    assert not viol, f"(d) violada para {viol}"
 
 
 # ---------------------------------------------------------------------------
 # 9. (e) R38 sem clássico estadual
 # ---------------------------------------------------------------------------
 
-def test_constraint_e_satisfied():
+@pytest.mark.parametrize("seed", [42, 43, 44, 7, 2024])
+def test_constraint_e_satisfied(seed):
     teams = _make_teams()
-    m = build_matches_with_homes(teams, seed=42)
+    m = build_matches_with_homes(teams, seed=seed)
     classicos = sum(
         1 for mm in m[38]
         if teams[mm.home].state == teams[mm.away].state
