@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 import warnings
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Iterable
 
 from .constraints import CONSTRAINT_CHECKS
 from .dates import parse_day as _parse_day
@@ -37,9 +37,8 @@ logger = logging.getLogger(__name__)
 #         "f": True, "g": True, "h": True, "i": True, "j": True,
 #     }
 #
-# ATENÇÃO: neste dataset, (d) tem piso estrutural provado de 4 violações
-# (paridade da bipartição 10x10 nos matchings do círculo) e o PRV (h) tem
-# piso > 0 (co-mandantes no Maracanã na mesma rodada). Marcar (d) ou (h)
+# ATENÇÃO: o PRV (h) tem piso > 0 neste dataset (Flamengo e Fluminense
+# mandando no Maracanã na mesma rodada). Marcar (h)
 # como hard torna o problema INVIÁVEL: o GRASP roda até max_iter, devolve a
 # melhor solução encontrada (menor hard) e emite um aviso listando quais
 # restrições hard impedem a viabilidade. Isso é esperado, não é travamento.
@@ -72,6 +71,22 @@ def set_all_hard() -> None:
     a conveniência experimental por execução."""
     for cid in CONSTRAINT_HARDNESS:
         CONSTRAINT_HARDNESS[cid] = True
+    HARD_CONSTRAINTS.clear()
+    HARD_CONSTRAINTS.update(hard_constraint_ids())
+
+
+def set_soft_constraints(ids: Iterable[str]) -> None:
+    """Marca as restrições de `ids` como SOFT nesta execução.
+
+    Serve para janelas de datas em que uma restrição estrutural é
+    inalcançável — por exemplo (i)/(j) num período curto demais para 38
+    rodadas sem encavalamento. Soft mantém a contagem da violação na chave
+    lexicográfica, mas para de bloquear `is_feasible`."""
+    desconhecidas = sorted(set(ids) - set(CONSTRAINT_HARDNESS))
+    if desconhecidas:
+        raise ValueError(f"Restrições desconhecidas: {desconhecidas}")
+    for cid in ids:
+        CONSTRAINT_HARDNESS[cid] = False
     HARD_CONSTRAINTS.clear()
     HARD_CONSTRAINTS.update(hard_constraint_ids())
 

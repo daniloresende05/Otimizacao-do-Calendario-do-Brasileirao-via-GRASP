@@ -7,6 +7,7 @@ Fluxo: load (io) -> grasp (multi-start de construção) -> iterated_local_search
 import argparse
 import os
 
+from .construction import fit_round_gap
 from .dates import parse_day
 from .grasp import DEFAULT_ALPHA_POOL, grasp
 from .ils import iterated_local_search
@@ -16,6 +17,7 @@ from .objective import (
     hard_constraint_ids,
     hard_violation_summary,
     set_all_hard,
+    set_soft_constraints,
 )
 
 
@@ -37,7 +39,7 @@ def main():
     )
     parser.add_argument("--teams", default="data/raw/teams.csv",
                         help="teams.csv (name,stadium,state)")
-    parser.add_argument("--dates", default="data/raw/datas_20-08-2023_a_09-06-2024.csv",
+    parser.add_argument("--dates", default="data/raw/datas_11-08-2023_a_26-05-2024.csv",
                         help="CSV de datas disponíveis (coluna Data em dd/mm/aaaa)")
     parser.add_argument("--date-col", default="Data",
                         help="Nome da coluna de data no CSV")
@@ -86,6 +88,16 @@ def main():
                              help="Rodadas com todos os jogos na MESMA data "
                                   "(default: 38; passe sem valores para "
                                   "desligar)")
+    model_group.add_argument("--strict-round-gap", action="store_true",
+                             help="Não reduz a cadência automaticamente: se as "
+                                  "38 rodadas não couberem com --round-gap, "
+                                  "falha em vez de comprimir.")
+    model_group.add_argument("--soft-constraints", nargs="*", default=[],
+                             metavar="ID",
+                             help="Marca estas restrições como soft nesta "
+                                  "execução (ex.: --soft-constraints i j). "
+                                  "Elas continuam contadas, mas deixam de "
+                                  "bloquear is_feasible.")
     model_group.add_argument("--all-hard", action="store_true",
                              help="Marca TODAS as restrições (a-j) como hard "
                                   "nesta execução (atalho experimental; o "
@@ -98,6 +110,8 @@ def main():
 
     if args.all_hard:
         set_all_hard()
+    if args.soft_constraints:
+        set_soft_constraints(args.soft_constraints)
 
     teams_map = load_teams(args.teams)
     dates_raw = load_dates(args.dates, col=args.date_col)
@@ -125,6 +139,20 @@ def main():
     sim_txt = (", ".join(f"R{r}" for r in sorted(simultaneous_rounds))
                if simultaneous_rounds else "nenhuma")
     print(f"Rodadas simultâneas (todos os jogos na mesma data): {sim_txt}")
+    # A cadência é um parâmetro, não uma restrição: (i) e (j) continuam
+    # valendo para qualquer gap maior que o span. Janelas curtas apenas
+    # exigem rodadas mais próximas, então reduzimos até caber.
+    round_gap = args.round_gap
+    if not args.strict_round_gap:
+        round_gap = fit_round_gap(
+            dates, preferred_gap=args.round_gap, round_span=args.round_span
+        )
+    if round_gap != args.round_gap:
+        print(f"Cadência entre rodadas: {round_gap} dias "
+              f"(as 38 rodadas não cabem com {args.round_gap}; "
+              f"use --strict-round-gap para falhar em vez de comprimir)")
+    else:
+        print(f"Cadência entre rodadas: {round_gap} dias")
     print(f"Restrições hard ativas: "
           f"{', '.join(sorted(hard_constraint_ids()))}"
           f"{' (--all-hard)' if args.all_hard else ''}")
@@ -138,7 +166,7 @@ def main():
         max_iter_no_improve=args.grasp_max_iter_no_improve,
         alpha_pool=args.alpha_pool,
         seed=args.seed,
-        round_gap=args.round_gap,
+        round_gap=round_gap,
         round_span=args.round_span,
         prv_days=args.prv_days,
         min_team_rest_days=args.min_team_rest_days,

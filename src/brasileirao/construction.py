@@ -654,6 +654,39 @@ def round_windows(
     return windows
 
 
+def fit_round_gap(
+    dates: list[date],
+    *,
+    preferred_gap: int = 7,
+    min_gap: int = 2,
+    round_span: int = 3,
+    n_rounds: int = 38,
+) -> int:
+    """Maior cadência <= `preferred_gap` em que as `n_rounds` rodadas cabem.
+
+    A cadência é um PARÂMETRO do calendário, não uma restrição: (i) span da
+    rodada e (j) sem encavalamento continuam valendo para qualquer gap maior
+    que `round_span - 1`. Janelas curtas simplesmente exigem rodadas mais
+    próximas umas das outras — é o que competições reais fazem com rodadas
+    de meio de semana, só que de forma irregular.
+
+    Levanta `DateAssignmentFailedError` se nem `min_gap` couber.
+    """
+    for gap in range(preferred_gap, min_gap - 1, -1):
+        try:
+            round_windows(
+                dates, round_gap=gap, round_span=round_span, n_rounds=n_rounds
+            )
+            return gap
+        except DateAssignmentFailedError:
+            continue
+    raise DateAssignmentFailedError(
+        f"Nem com cadência de {min_gap} dias as {n_rounds} rodadas cabem nas "
+        f"{len(dates)} datas disponíveis "
+        f"({min(dates).isoformat()} a {max(dates).isoformat()})."
+    )
+
+
 def assign_dates_to_matches(
     matches_by_round: MatchesByRound,
     dates: list[date],
