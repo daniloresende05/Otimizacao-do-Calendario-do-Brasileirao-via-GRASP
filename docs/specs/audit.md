@@ -26,11 +26,11 @@ O script `scripts/audit_violations.py` roda as 50 iteracoes do GRASP e:
 
 ## Conclusao
 
-(d) eh best-effort na construcao: a orientacao de R18/R19 minimiza
-`d_residual + g_violations` por enumeracao de 2^10 orientacoes, mas nao
-garante zero. Violacoes residuais sao esperadas quando os matchings
-remanescentes nao sao "perfectly bipartite cuts" de `sides_r1`/`sides_r2`.
-Nao eh bug — eh limitacao estrutural. Correcao via local search futura.
+(d) eh estrita na construcao desde a troca do gerador de confrontos: as
+quatro ancoras vem de rodadas cruzadas da biparticao, entao o mando de cada
+time e determinado pelo lado e o espelho e exato. Esta auditoria descreve o
+comportamento ANTERIOR, em que (d) era best-effort com piso estrutural de 4
+violacoes. Ver `construction_phase1.md` §2.
 
 (f) e (g) tambem sao best-effort. A RCL filtra candidatos sem (g) quando
 possiveis, e penaliza (f) no custo, mas nao bloqueia. Poucas violacoes sao

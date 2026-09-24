@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import random
-from datetime import date
+from bisect import bisect_left
+from datetime import date, timedelta
 from math import ceil
 from typing import Iterator
 
 from .domain import Match, Schedule, ScheduledMatch, TeamMap
-from .round_robin import circle_method
+from .round_robin import bipartite_factorization, shuffle_factors
 
 MatchesByRound = dict[int, list[Match]]
 
@@ -15,6 +16,9 @@ CONSTRUCTION_WEIGHTS = {
     "g": 300.0,
 }
 
+#: Sorteios de bipartição tentados até achar um com rodada cruzada sem
+#: clássico estadual (candidata a R19, que espelha na R38 — restrição (e)).
+MAX_TENTATIVAS_BIPARTICAO = 20
 
 class ConstructionFailedError(Exception):
     """Levantada se a construção esgota matchings sem completar 19 rodadas."""
@@ -116,44 +120,6 @@ def _orient_inverting_sides(
     return out
 
 
-def _two_color_pair_union(
-    r1_pairs: list[tuple[str, str]],
-    r2_pairs: list[tuple[str, str]],
-    teams: list[str],
-    rng: random.Random,
-) -> dict[str, str]:
-    """2-colore o grafo formado pela união das arestas de R1 e R2.
-
-    Esse grafo é sempre bipartido: cada vértice tem grau 2 (uma aresta de
-    cada matching) e os ciclos formados alternam arestas de R1/R2, então têm
-    tamanho par. A 2-coloração define `sides_r1`, e como cada aresta de R2
-    liga vértices de cores opostas, R2 fica automaticamente "perfectly cut"
-    em relação a `sides_r1` — i.e., (c) sai estrita."""
-    adj: dict[str, list[str]] = {t: [] for t in teams}
-    for a, b in r1_pairs:
-        adj[a].append(b)
-        adj[b].append(a)
-    for a, b in r2_pairs:
-        adj[a].append(b)
-        adj[b].append(a)
-
-    sides: dict[str, str] = {}
-    for start in teams:
-        if start in sides:
-            continue
-        sides[start] = "H" if rng.random() < 0.5 else "A"
-        stack = [start]
-        while stack:
-            cur = stack.pop()
-            cur_side = sides[cur]
-            other = "A" if cur_side == "H" else "H"
-            for neigh in adj[cur]:
-                if neigh not in sides:
-                    sides[neigh] = other
-                    stack.append(neigh)
-    return sides
-
-
 def _chain_g_violations(
     team_idx_list: list[int],
     sides_sequence: list[list[int]],  # cada item: list[int] (1=H,2=A) por time
@@ -177,136 +143,6 @@ def _chain_g_violations(
                 last[t] = s
                 streak[t] = 1
     return g
-
-
-def _pick_r18_r19(
-    remaining: list[list[tuple[str, str]]],
-    sides_r1: dict[str, str],
-    sides_r2: dict[str, str],
-    teams_map: TeamMap,
-    last_side: list[int],
-    streak: list[int],
-    max_cons: int,
-    rng: random.Random,
-) -> tuple[list[tuple[str, str]], list[tuple[str, str]]]:
-    """Atribui os 2 matchings remanescentes a R18 e R19. Considera (e)
-    (R19 limpo se possível), (d) (inverter R1/R2 maximizando residual mínimo)
-    e o impacto em (g) da cadeia R17→R18→R19.
-
-    Estratégia:
-      1. (e) determina quais ordens são permitidas (R19 deve ser limpo
-         quando possível; senão escolhe o de menor # clássicos).
-      2. Para cada ordem permitida, enumera 2^10 orientações para R18 e
-         escolhe a que minimiza (d_resid_R18 + 1000·g_R17→R18). Em seguida
-         enumera 2^10 orientações para R19 e escolhe a que minimiza
-         (d_resid_R19 + 1000·g_R18→R19) — dado o estado pós-R18.
-      3. Compara as ordens pelo custo total e escolhe a melhor.
-    """
-    teams = list(teams_map.keys())
-    team_to_idx = {t: i for i, t in enumerate(teams)}
-    n = len(teams)
-
-    target_r18_int = [1 if sides_r1[t] == "A" else 2 for t in teams]
-    target_r19_int = [1 if sides_r2[t] == "A" else 2 for t in teams]
-
-    m_a, m_b = remaining
-    clean_a = no_classico_estadual(m_a, teams_map)
-    clean_b = no_classico_estadual(m_b, teams_map)
-
-    if clean_a and not clean_b:
-        orderings = [(m_b, m_a)]
-    elif clean_b and not clean_a:
-        orderings = [(m_a, m_b)]
-    else:
-        if not clean_a and not clean_b:
-            cls_a = count_classicos(m_a, teams_map)
-            cls_b = count_classicos(m_b, teams_map)
-            if cls_a < cls_b:
-                orderings = [(m_b, m_a)]
-            elif cls_b < cls_a:
-                orderings = [(m_a, m_b)]
-            else:
-                orderings = [(m_a, m_b), (m_b, m_a)]
-        else:
-            orderings = [(m_a, m_b), (m_b, m_a)]
-
-    def _best_orientation_for_round(
-        pairs: list[tuple[str, str]],
-        target_sides: list[int],
-        in_last: list[int],
-        in_streak: list[int],
-    ) -> tuple[list[tuple[str, str]], list[int], list[int], list[int], int]:
-        """Retorna (oriented, sides_int, new_last, new_streak, cost)."""
-        npairs = len(pairs)
-        pairs_idx = [(team_to_idx[a], team_to_idx[b]) for a, b in pairs]
-        best_cost = None
-        best_mask = 0
-        for mask in range(1 << npairs):
-            d_resid = 0
-            g_v = 0
-            tmp_last = list(in_last)
-            tmp_streak = list(in_streak)
-            for k in range(npairs):
-                ai, bi = pairs_idx[k]
-                if (mask >> k) & 1:
-                    home_i, away_i = ai, bi
-                else:
-                    home_i, away_i = bi, ai
-                if target_sides[home_i] != 1:
-                    d_resid += 1
-                if target_sides[away_i] != 2:
-                    d_resid += 1
-                if tmp_last[home_i] == 1:
-                    tmp_streak[home_i] += 1
-                    if tmp_streak[home_i] > max_cons:
-                        g_v += 1
-                else:
-                    tmp_last[home_i] = 1
-                    tmp_streak[home_i] = 1
-                if tmp_last[away_i] == 2:
-                    tmp_streak[away_i] += 1
-                    if tmp_streak[away_i] > max_cons:
-                        g_v += 1
-                else:
-                    tmp_last[away_i] = 2
-                    tmp_streak[away_i] = 1
-            cost = 10 * d_resid + 1000 * g_v
-            if best_cost is None or cost < best_cost:
-                best_cost = cost
-                best_mask = mask
-                best_last = tmp_last
-                best_streak = tmp_streak
-
-        oriented = []
-        sides_int = [0] * n
-        for k in range(npairs):
-            a, b = pairs[k]
-            if (best_mask >> k) & 1:
-                oriented.append((a, b))
-                sides_int[team_to_idx[a]] = 1
-                sides_int[team_to_idx[b]] = 2
-            else:
-                oriented.append((b, a))
-                sides_int[team_to_idx[b]] = 1
-                sides_int[team_to_idx[a]] = 2
-        return oriented, sides_int, best_last, best_streak, best_cost  # type: ignore[return-value]
-
-    candidates = []
-    for r18_pairs, r19_pairs in orderings:
-        r18_oriented, _, after_r18_last, after_r18_streak, c18 = (
-            _best_orientation_for_round(
-                r18_pairs, target_r18_int, last_side, streak,
-            )
-        )
-        r19_oriented, _, _, _, c19 = _best_orientation_for_round(
-            r19_pairs, target_r19_int, after_r18_last, after_r18_streak,
-        )
-        candidates.append((c18 + c19, r18_oriented, r19_oriented))
-
-    best_cost = min(c[0] for c in candidates)
-    best = [c for c in candidates if c[0] == best_cost]
-    chosen = rng.choice(best)
-    return chosen[1], chosen[2]
 
 
 def _lookahead_g(
@@ -347,39 +183,6 @@ def _lookahead_g(
     return g
 
 
-def _pick_best_compat(
-    remaining: list[list[tuple[str, str]]],
-    sides_ref: dict[str, str],
-    rng: random.Random,
-    *,
-    teams_map: TeamMap | None = None,
-    prefer_clean: bool = False,
-) -> list[tuple[str, str]]:
-    """Pop e retorna o matching com mais pares "bipartite cut" em `sides_ref`.
-
-    Se `prefer_clean=True`, restringe primeiro aos matchings sem clássicos
-    estaduais; se nenhum existir, ignora o filtro.
-    """
-    pool = remaining
-    if prefer_clean and teams_map is not None:
-        clean = [m for m in pool if no_classico_estadual(m, teams_map)]
-        if clean:
-            pool = clean
-
-    def compat(m: list[tuple[str, str]]) -> int:
-        return sum(1 for a, b in m if sides_ref[a] != sides_ref[b])
-
-    best_score = max(compat(m) for m in pool)
-    best = [m for m in pool if compat(m) == best_score]
-    chosen = rng.choice(best)
-    remaining.remove(chosen)
-    return chosen
-
-
-# ---------------------------------------------------------------------------
-# API principal
-# ---------------------------------------------------------------------------
-
 def build_matches_with_homes(
     teams_map: TeamMap,
     *,
@@ -394,7 +197,8 @@ def build_matches_with_homes(
       (b) cada par se enfrenta 2x com mandos invertidos (turno + returno espelhado)
       (c) alternância C/F entre R1 e R2 (best-effort: pode ter resíduo se
           o matching de R2 não for "bipartite cut" perfeito de R1)
-      (d) espelho R18↔R1 e R19↔R2 (best-effort, mesma observação de (c))
+      (d) espelho R18↔R1 e R19↔R2 (resíduo mínimo estrutural: o quarteto
+          R1/R2/R18/R19 é escolhido em conjunto na etapa A')
       (e) R38 (espelho de R19 no turno) sem clássico estadual quando possível
 
     Otimiza via RCL gulosa-aleatória:
@@ -409,27 +213,41 @@ def build_matches_with_homes(
             f"Esperado 20 times; recebido {n}."
         )
 
-    matchings = circle_method(teams)
-    if len(matchings) != 19:
-        raise ConstructionFailedError(
-            f"circle_method retornou {len(matchings)} matchings; esperado 19."
-        )
+    # -- Etapa A': bipartição e âncoras (R1, R2, R18, R19) ------------------
+    # A 1-fatoração é gerada JÁ alinhada a uma bipartição (A, B) de 10 times.
+    # As 10 rodadas "cruzadas" só têm jogos ligando um time de A a um de B,
+    # então quatro delas servem de âncora com o mando determinado pelo lado:
+    # A manda na R1 e na R19, B manda na R2 e na R18. Isso faz (c) e (d)
+    # saírem ZERADAS por construção — antes elas dependiam de achar, dentro
+    # do método do círculo, dois matchings que fossem corte perfeito da
+    # 2-coloração de R1 ∪ R2, o que é estruturalmente impossível: sobrava
+    # sempre um piso de 4 violações de (d).
+    # Quase toda bipartição deixa alguma rodada cruzada sem clássico estadual
+    # (~99% dos sorteios, 2.9 em média). Poucas tentativas bastam para nunca
+    # entregar (e) violada por falta de candidata limpa.
+    for _ in range(MAX_TENTATIVAS_BIPARTICAO):
+        cruzadas, internas, part_a, _ = bipartite_factorization(teams, rng)
+        if any(no_classico_estadual(c, teams_map) for c in cruzadas):
+            break
+    lado_a = set(part_a)
 
-    remaining: list[list[tuple[str, str]]] = [list(m) for m in matchings]
+    # A âncora que virar R19 espelha na R38, então as duas RESERVADAS para
+    # R18/R19 são as cruzadas com menos clássicos — é o que preserva (e).
+    # R1 e R2 não têm essa restrição e ficam com as duas seguintes.
+    ordem = list(range(len(cruzadas)))
+    rng.shuffle(ordem)
+    ordem.sort(key=lambda k: count_classicos(cruzadas[k], teams_map))
+    reserved_r18_r19 = [cruzadas[ordem[0]], cruzadas[ordem[1]]]
+    r1_pairs, r2_pairs = cruzadas[ordem[2]], cruzadas[ordem[3]]
 
-    # -- Etapa A: âncoras R1 e R2 ------------------------------------------
-    # Pega dois matchings distintos e usa 2-coloring do grafo R1 ∪ R2
-    # (sempre bipartido). A 2-coloração resultante garante (c) estrita.
-    # R18/R19 são decididos DEPOIS da RCL para que ela tenha liberdade
-    # de manobra em (f)/(g) — atribuir matchings a essas rodadas com
-    # antecedência limita drasticamente o pool de orientações disponíveis
-    # nas últimas rodadas da RCL e empurra o solver para violações.
-    r1_idx = rng.randrange(len(remaining))
-    r1_pairs = remaining.pop(r1_idx)
-    r2_idx = rng.randrange(len(remaining))
-    r2_pairs = remaining.pop(r2_idx)
+    # As 15 rodadas do miolo são as 6 cruzadas restantes mais as 9 internas.
+    # Sem os flips cada uma seria "pura" (só interna ou só cruzada); os flips
+    # de ciclo alternante misturam os dois tipos sem quebrar a fatoração e
+    # sem tocar nas âncoras, dando diversidade ao multi-start do GRASP.
+    miolo = [cruzadas[k] for k in ordem[4:]] + internas
+    remaining: list[list[tuple[str, str]]] = shuffle_factors(miolo, rng)
 
-    sides_r1 = _two_color_pair_union(r1_pairs, r2_pairs, teams, rng)
+    sides_r1 = {t: ("H" if t in lado_a else "A") for t in teams}
     r1_oriented = [
         (a, b) if sides_r1[a] == "H" else (b, a) for a, b in r1_pairs
     ]
@@ -438,7 +256,6 @@ def build_matches_with_homes(
     r2_oriented = [
         (a, b) if sides_r1[a] == "A" else (b, a) for a, b in r2_pairs
     ]
-    sides_r2 = _sides_from_oriented(r2_oriented)
 
     # -- Estado e índices ---------------------------------------------------
     team_to_idx = {t: i for i, t in enumerate(teams)}
@@ -470,21 +287,6 @@ def build_matches_with_homes(
         1: [Match(h, a) for h, a in r1_oriented],
         2: [Match(h, a) for h, a in r2_oriented],
     }
-
-    # Reserva um matching limpo (sem clássico estadual) entre os
-    # remanescentes para garantir que R19 possa atender (e). Se houver
-    # múltiplos limpos, escolhe o de maior compat com a inversão de R2.
-    clean_in_remaining = [
-        m for m in remaining if no_classico_estadual(m, teams_map)
-    ]
-    r19_reserved: list[tuple[str, str]] | None = None
-    if clean_in_remaining:
-        def _r19_compat(m: list[tuple[str, str]]) -> int:
-            return sum(1 for a, b in m if sides_r2[a] != sides_r2[b])
-        best_compat = max(_r19_compat(m) for m in clean_in_remaining)
-        best_clean = [m for m in clean_in_remaining if _r19_compat(m) == best_compat]
-        r19_reserved = rng.choice(best_clean)
-        remaining.remove(r19_reserved)
 
     remaining_idx = [
         [(team_to_idx[a], team_to_idx[b]) for a, b in m] for m in remaining
@@ -573,24 +375,44 @@ def build_matches_with_homes(
         _apply_oriented(chosen_oriented_str)
         matches_by_round[r] = [Match(h, a) for h, a in chosen_oriented_str]
 
-    # -- Etapa C: R18 e R19 a partir dos 2 matchings remanescentes ---------
-    if r19_reserved is not None:
-        remaining.append(r19_reserved)
-    if len(remaining) != 2:
+    # -- Etapa C: R18 e R19 a partir dos 2 matchings reservados na A' ------
+    if remaining:
         raise ConstructionFailedError(
-            f"Esperado 2 matchings após R3..R17; sobrou {len(remaining)}."
+            f"Esperado 0 matchings após R3..R17; sobrou {len(remaining)}."
         )
+    # R18 espelha o mando da R1 e R19 o da R2, então o lado de cada time já
+    # está decidido pela bipartição: manda quem é de B na R18 e quem é de A
+    # na R19. Só resta escolher QUAL das duas âncoras reservadas vai para
+    # cada rodada — critério: (e) primeiro (R19 espelha na R38), depois o
+    # encadeamento de (g) em R17 → R18 → R19.
+    def _orient_r18(pairs: list[tuple[str, str]]) -> list[tuple[str, str]]:
+        return [(a, b) if sides_r1[a] == "A" else (b, a) for a, b in pairs]
 
-    r18_oriented, r19_oriented = _pick_r18_r19(
-        remaining,
-        sides_r1,
-        sides_r2,
-        teams_map,
-        last_side,
-        streak,
-        max_consecutive,
-        rng,
-    )
+    def _orient_r19(pairs: list[tuple[str, str]]) -> list[tuple[str, str]]:
+        return [(a, b) if sides_r1[a] == "H" else (b, a) for a, b in pairs]
+
+    first, second = reserved_r18_r19
+    ordens = [(first, second), (second, first)]
+    team_idx_list = list(range(n))
+
+    def _custo_ordem(par: tuple[list, list]) -> tuple[int, int]:
+        cand_r18, cand_r19 = par
+        sides_seq = []
+        for oriented in (_orient_r18(cand_r18), _orient_r19(cand_r19)):
+            por_time = [0] * n
+            for h, a in oriented:
+                por_time[team_to_idx[h]] = 1
+                por_time[team_to_idx[a]] = 2
+            sides_seq.append(por_time)
+        g_v = _chain_g_violations(
+            team_idx_list, sides_seq, last_side, streak, max_consecutive
+        )
+        return (count_classicos(cand_r19, teams_map), g_v)
+
+    rng.shuffle(ordens)
+    melhor = min(ordens, key=_custo_ordem)
+    r18_oriented = _orient_r18(melhor[0])
+    r19_oriented = _orient_r19(melhor[1])
     _apply_oriented(r18_oriented)
     _apply_oriented(r19_oriented)
     matches_by_round[18] = [Match(h, a) for h, a in r18_oriented]
@@ -738,6 +560,133 @@ def _optimize_local_prv(
     return atribuicao
 
 
+def _assign_single_date_round(
+    matches: list[Match],
+    window: list[date],
+    last_play: dict[str, date],
+    min_rest: int,
+    prev_stadium_dates: dict[str, list[date]],
+    teams_map: TeamMap,
+    prv_days: int,
+    round_number: int | None = None,
+) -> list[tuple[Match, date]]:
+    """Rodada SIMULTÂNEA: todos os jogos na MESMA data.
+
+    Uma data da janela é viável se TODOS os jogos respeitam ``min_rest`` nela
+    (i.e., todos os times a >= min_rest do seu jogo anterior). Entre as
+    viáveis, escolhe a que MINIMIZA o PRV da rodada (mesma lógica de
+    ``_round_prv_count`` contra ``prev_stadium_dates``); empate resolve pela
+    data mais antiga (determinismo).
+
+    NÃO passa por ``_optimize_local_prv``: ele troca datas ENTRE jogos, o que
+    reintroduziria múltiplas datas na rodada.
+    """
+    best: tuple[int, date] | None = None
+    for d in window:
+        if not all(_check_rest(m, d, last_play, min_rest) for m in matches):
+            continue
+        atribuicao = [(m, d) for m in matches]
+        prv = _round_prv_count(
+            atribuicao, prev_stadium_dates, teams_map, prv_days
+        )
+        if best is None or prv < best[0] or (prv == best[0] and d < best[1]):
+            best = (prv, d)
+    if best is None:
+        rotulo = f"rodada {round_number}" if round_number else "rodada"
+        raise DateAssignmentFailedError(
+            f"Rodada simultânea sem data viável: nenhuma data da janela "
+            f"{[d.isoformat() for d in window]} da {rotulo} respeita o "
+            f"descanso mínimo de {min_rest} dia(s) para todos os times."
+        )
+    chosen = best[1]
+    return [(m, chosen) for m in matches]
+
+
+def round_windows(
+    dates: list[date],
+    *,
+    round_gap: int = 7,
+    round_span: int = 3,
+    n_rounds: int = 38,
+) -> list[list[date]]:
+    """Janela de datas de cada rodada, em termos de CALENDÁRIO.
+
+    ``dates`` é o conjunto de datas DISPONÍVEIS (pode ter buracos: datas
+    FIFA removidas, feriados etc.). Regra:
+
+      * a rodada 1 começa na primeira data disponível;
+      * a rodada r começa na primeira data disponível >= início(r-1) +
+        ``round_gap`` dias — se esse dia está bloqueado, a rodada desliza
+        para o próximo disponível e as seguintes seguem a partir dele;
+      * a janela da rodada são as datas disponíveis nos ``round_span`` dias
+        de calendário a partir do início (pode ter menos de ``round_span``
+        datas se alguma estiver bloqueada).
+
+    Com uma lista de dias consecutivos isso equivale exatamente ao
+    fatiamento posicional ``dates[(r-1)*round_gap : +round_span]``. Com
+    buracos, mantém as garantias de (i) span <= round_span-1 dias e (j) sem
+    encavalamento, que o fatiamento posicional violaria.
+
+    Levanta ``DateAssignmentFailedError`` se as ``n_rounds`` rodadas não
+    cabem nas datas disponíveis.
+    """
+    available = sorted(set(dates))
+    if not available:
+        raise DateAssignmentFailedError("Lista de datas disponíveis vazia.")
+
+    windows: list[list[date]] = []
+    start = available[0]
+    for r in range(1, n_rounds + 1):
+        if r > 1:
+            start = windows[-1][0] + timedelta(days=round_gap)
+        idx = bisect_left(available, start)
+        if idx == len(available):
+            raise DateAssignmentFailedError(
+                f"Rodada {r}: nenhuma data disponível a partir de "
+                f"{start.isoformat()} (última disponível: "
+                f"{available[-1].isoformat()}). As {n_rounds} rodadas não "
+                f"cabem nas datas disponíveis."
+            )
+        start = available[idx]
+        limit = start + timedelta(days=round_span)
+        window = [d for d in available[idx : idx + round_span] if d < limit]
+        windows.append(window)
+    return windows
+
+
+def fit_round_gap(
+    dates: list[date],
+    *,
+    preferred_gap: int = 7,
+    min_gap: int = 2,
+    round_span: int = 3,
+    n_rounds: int = 38,
+) -> int:
+    """Maior cadência <= `preferred_gap` em que as `n_rounds` rodadas cabem.
+
+    A cadência é um PARÂMETRO do calendário, não uma restrição: (i) span da
+    rodada e (j) sem encavalamento continuam valendo para qualquer gap maior
+    que `round_span - 1`. Janelas curtas simplesmente exigem rodadas mais
+    próximas umas das outras — é o que competições reais fazem com rodadas
+    de meio de semana, só que de forma irregular.
+
+    Levanta `DateAssignmentFailedError` se nem `min_gap` couber.
+    """
+    for gap in range(preferred_gap, min_gap - 1, -1):
+        try:
+            round_windows(
+                dates, round_gap=gap, round_span=round_span, n_rounds=n_rounds
+            )
+            return gap
+        except DateAssignmentFailedError:
+            continue
+    raise DateAssignmentFailedError(
+        f"Nem com cadência de {min_gap} dias as {n_rounds} rodadas cabem nas "
+        f"{len(dates)} datas disponíveis "
+        f"({min(dates).isoformat()} a {max(dates).isoformat()})."
+    )
+
+
 def assign_dates_to_matches(
     matches_by_round: MatchesByRound,
     dates: list[date],
@@ -747,38 +696,56 @@ def assign_dates_to_matches(
     round_span: int = 3,
     prv_days: int = 5,
     min_team_rest_days: int = 3,
+    simultaneous_rounds: frozenset[int] = frozenset({38}),
 ) -> Schedule:
     """Atribui uma data a cada jogo de cada rodada, respeitando descanso mínimo
-    de time e minimizando PRVs."""
+    de time e minimizando PRVs.
+
+    A janela de cada rodada vem de ``round_windows`` (baseada em calendário,
+    tolerante a datas bloqueadas — ex.: datas FIFA removidas da lista).
+
+    Rodadas em ``simultaneous_rounds`` recebem TODOS os jogos na MESMA data
+    (via ``_assign_single_date_round``); as demais espalham na janela
+    (balanced -> flexible -> otimização local de PRV)."""
     schedule: Schedule = []
     last_play: dict[str, date] = {}
     prev_stadium_dates: dict[str, list[date]] = {}
 
+    windows = round_windows(
+        dates, round_gap=round_gap, round_span=round_span, n_rounds=38
+    )
+
     for r in range(1, 39):
-        base_idx = (r - 1) * round_gap
-        window = dates[base_idx : base_idx + round_span]
+        window = windows[r - 1]
 
         matches = matches_by_round[r]
 
-        atribuicao = _try_balanced_distribution(
-            matches, window, last_play, min_team_rest_days
-        )
-
-        if atribuicao is None:
-            atribuicao = _try_flexible_distribution(
+        if r in simultaneous_rounds:
+            atribuicao = _assign_single_date_round(
+                matches, window, last_play, min_team_rest_days,
+                prev_stadium_dates, teams_map, prv_days,
+                round_number=r,
+            )
+        else:
+            atribuicao = _try_balanced_distribution(
                 matches, window, last_play, min_team_rest_days
             )
 
-        if atribuicao is None:
-            raise DateAssignmentFailedError(
-                f"Não foi possível atribuir datas na rodada {r} "
-                "respeitando descanso."
-            )
+            if atribuicao is None:
+                atribuicao = _try_flexible_distribution(
+                    matches, window, last_play, min_team_rest_days
+                )
 
-        atribuicao = _optimize_local_prv(
-            atribuicao, prev_stadium_dates, teams_map, prv_days,
-            last_play, min_team_rest_days,
-        )
+            if atribuicao is None:
+                raise DateAssignmentFailedError(
+                    f"Não foi possível atribuir datas na rodada {r} "
+                    "respeitando descanso."
+                )
+
+            atribuicao = _optimize_local_prv(
+                atribuicao, prev_stadium_dates, teams_map, prv_days,
+                last_play, min_team_rest_days,
+            )
 
         for match, d in atribuicao:
             sm = ScheduledMatch(
@@ -811,6 +778,7 @@ def construct_schedule(
     prv_days: int = 5,
     min_team_rest_days: int = 3,
     max_consecutive: int = 2,
+    simultaneous_rounds: frozenset[int] = frozenset({38}),
 ) -> Schedule:
     """Pipeline completo: build_matches_with_homes → assign_dates_to_matches."""
     matches_by_round = build_matches_with_homes(
@@ -824,4 +792,5 @@ def construct_schedule(
         round_span=round_span,
         prv_days=prv_days,
         min_team_rest_days=min_team_rest_days,
+        simultaneous_rounds=simultaneous_rounds,
     )

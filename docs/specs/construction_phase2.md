@@ -24,15 +24,32 @@ Nenhuma outra restrição é tratada nesta fase.
 
 ### 3.1. Janela por rodada
 
-Para rodada `r` (1–38), a janela de datas é:
+A janela é definida em termos de **calendário**, não de posição na lista
+(`round_windows` em `construction.py`), porque a lista de datas
+disponíveis pode ter buracos — as datas FIFA são removidas dela pela CLI
+antes do GRASP (`--fifa-dates`, `--no-fifa` desliga).
 
 ```
-base_idx = (r - 1) * round_gap
-janela = dates[base_idx : base_idx + round_span]
+início(1) = primeira data disponível
+início(r) = primeira data disponível >= início(r-1) + round_gap
+janela(r) = datas disponíveis em [início(r), início(r) + round_span)
 ```
 
-Default: `round_gap=7`, `round_span=3` → janela de 3 dias consecutivos,
-com 7 dias entre inícios de rodada.
+Default: `round_gap=7`, `round_span=3` → janela de até 3 dias de
+calendário, com pelo menos 7 dias entre inícios de rodada.
+
+Consequências:
+
+- Com uma lista de dias consecutivos, isso equivale exatamente ao antigo
+  fatiamento posicional `dates[(r-1)*round_gap : +round_span]`.
+- Se o início previsto cai numa data bloqueada, a rodada **desliza** para a
+  próxima data disponível e as rodadas seguintes seguem a partir dela — o
+  campeonato "pausa" na janela FIFA, como no calendário real.
+- A janela pode ter menos de `round_span` datas se alguma delas estiver
+  bloqueada; nunca junta dias não consecutivos, então (i) span ≤ 2 dias e
+  (j) sem encavalamento continuam garantidas por construção.
+- Se as 38 rodadas não couberem nas datas disponíveis, levanta
+  `DateAssignmentFailedError` indicando a rodada e a última data.
 
 ### 3.2. Distribuição balanceada
 

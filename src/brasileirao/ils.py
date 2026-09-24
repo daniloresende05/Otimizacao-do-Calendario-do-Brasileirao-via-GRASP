@@ -132,9 +132,9 @@ def iterated_local_search(
     perturbation_min: int = 1,
     perturbation_step: int = 1,
     perturbation_max: int = 5,
-    max_iter_no_improve: int = 20,
+    max_iter_no_improve: int = 100,
     max_iter: int = 200,
-    seed: int = 42,
+    seed: int = 21,
 ) -> Schedule:
     """Iterated Local Search sobre ``schedule`` (pós-otimização do GRASP).
 

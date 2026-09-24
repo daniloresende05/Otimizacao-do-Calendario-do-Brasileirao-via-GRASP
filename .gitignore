@@ -15,3 +15,9 @@ dist/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Saídas regeneráveis da CLI (results/schedule.csv etc.)
+results/
+
+# Locks temporarios do MS Office (arquivo aberto no Excel/PowerPoint)
+~$*

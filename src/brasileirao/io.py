@@ -1,5 +1,10 @@
+from datetime import date
+from typing import Iterable
+
 import pandas as pd
-from .domain import Team, TeamMap
+from .dates import parse_day
+from .domain import Schedule, Team, TeamMap
+from .objective import compute_prv
 
 def load_dates(path: str, col: str = "Data") -> list[str]:
     df = pd.read_csv(path)
@@ -7,6 +12,13 @@ def load_dates(path: str, col: str = "Data") -> list[str]:
         raise ValueError(f"Coluna '{col}' não encontrada em {path}. Colunas: {list(df.columns)}")
     # mantém como string pra não ter dor com parsing agora
     return df[col].astype(str).tolist()
+
+
+def remove_blocked_dates(dates: list[date], blocked: Iterable[date]) -> list[date]:
+    """Remove de ``dates`` toda data presente em ``blocked`` (ex.: datas FIFA),
+    preservando a ordem. Datas bloqueadas ausentes de ``dates`` são ignoradas."""
+    blocked_set = set(blocked)
+    return [d for d in dates if d not in blocked_set]
 
 def load_teams(path: str) -> TeamMap:
     df = pd.read_csv(path)
@@ -48,3 +60,33 @@ def select_round_dates(dates_str: list[str], n_rounds: int = 38, gap_days: int =
         selected.append(nxt)
 
     return [d.strftime("%d/%m/%Y") for d in selected]
+
+
+def save_schedule_csv(schedule: Schedule, path: str, prv_days: int = 5) -> None:
+    """Grava o schedule em CSV (Rodada,Data,Mandante,Visitante,Estádio,PRV).
+
+    A coluna PRV marca com 1 o jogo POSTERIOR de cada ocorrência de PRV
+    (mesmo estádio com intervalo < prv_days), via compute_prv — substitui a
+    deprecated add_prv_column. Linhas ordenadas por (Rodada, data cronológica).
+    """
+    prv_result = compute_prv(schedule, prv_days=prv_days)
+    flagged = {
+        (occ.match_b.round, occ.match_b.home, occ.match_b.away, occ.match_b.day)
+        for occ in prv_result.occurrences
+    }
+
+    rows = sorted(
+        (
+            {
+                "Rodada": m.round,
+                "Data": m.day,
+                "Mandante": m.home,
+                "Visitante": m.away,
+                "Estádio": m.stadium,
+                "PRV": 1 if (m.round, m.home, m.away, m.day) in flagged else 0,
+            }
+            for m in schedule
+        ),
+        key=lambda r: (r["Rodada"], parse_day(r["Data"])),
+    )
+    pd.DataFrame(rows).to_csv(path, index=False)

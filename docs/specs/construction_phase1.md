@@ -6,49 +6,92 @@ Decidir, para o turno (R1–R19), **quem joga contra quem em cada rodada
 e quem é mandante**. O returno (R20–R38) é o turno espelhado com mando
 invertido. Não há atribuição de datas nesta fase.
 
-Restrições resolvidas por construção: **(a), (b), (c)**.
-Restrições atendidas best-effort por seleção de matching: **(d), (e)**.
+Restrições resolvidas por construção: **(a), (b), (c), (d)**.
+Restrições atendidas best-effort por seleção de matching: **(e)**.
 Restrições otimizadas via RCL: **(f), (g)**.
 PRV / (h) não entra — datas vêm na Parte 2.
 
-## 2. Decisão chave — interpretação de (d)
+## 2. Decisão chave — (d) estrita via 1-fatoração alinhada à bipartição
 
-A spec original do orientando descrevia uma "implementação prática"
-reusando o matching de R1 em R18 (e de R2 em R19) com mando trocado.
-Essa simplificação foi **descartada** porque quebra (b): se R18 reusa
-os pares de R1, o par `(A, B)` joga em R1, R18, R20 (=inverso de R1)
-e R37 (=inverso de R18), 4 vezes no campeonato.
+### O problema que existia
 
-**Interpretação adotada:**
+A versão anterior sorteava R1 e R2 entre os 19 matchings do `circle_method`,
+2-coloria o grafo `R1 ∪ R2` e procurava, entre os 17 restantes, dois matchings
+que fossem "corte perfeito" dessa coloração para servirem de R18 e R19.
 
-- R1 e R2 usam matchings distintos do `circle_method`.
-- R18 e R19 também usam matchings distintos, escolhidos **depois** da
-  RCL ter ocorrido para R3..R17.
-- (d) é aplicada **por time**:
-  - `side_R18(T) ≈ inverso de side_R1(T)`
-  - `side_R19(T) ≈ inverso de side_R2(T)`
-- A orientação de R18/R19 é decidida por enumeração das 2¹⁰ opções,
-  minimizando um custo agregado de **(d) residual + impacto em (g)**
-  da cadeia R17→R18→R19. Em geral, (d) tem violações residuais porque
-  os matchings remanescentes raramente são "perfectly bipartite cuts"
-  de `sides_r1`/`sides_r2`.
+Esses dois matchings **não existem**. Encadeando (c) e (d):
 
-Com essa interpretação, (b) sai por construção (19 matchings distintos
-no turno + returno invertido).
+- (c) diz `lado_R2(T) = ¬lado_R1(T)`;
+- (d) diz `lado_R18(T) = ¬lado_R1(T)` e `lado_R19(T) = ¬lado_R2(T)`.
 
-## 3. Decisão chave — (c) estrita via 2-coloring
+Chamando de **A** o conjunto dos times que mandam na R1 e de **B** o resto,
+todo time de A precisa visitar na R18, logo o mandante de cada jogo da R18 tem
+de sair de B. Ou seja: **as quatro rodadas-âncora precisam ser matchings que
+atravessam a bipartição (A, B)** — nenhuma aresta dentro de A ou dentro de B.
+É uma condição sobre os CONFRONTOS, não sobre o mando: nenhuma orientação e
+nenhum movimento de busca local conserta uma aresta monocromática.
 
-R1 e R2 são tratados juntos: pegamos dois matchings distintos `M_{r1}`
-e `M_{r2}`, formamos o grafo `M_{r1} ∪ M_{r2}` (cada vértice com grau 2,
-ciclos alternantes de comprimento par → sempre bipartido) e fazemos uma
-2-coloração. Cada componente conexa permite duas 2-colorações; sorteamos
-uma delas com `rng.random()`.
+E o método do círculo não oferece essas rodadas. Duas propriedades, ambas
+verificadas por enumeração exaustiva em `tests/test_bipartite_factorization.py`:
 
-A 2-coloração determina `sides_r1`; R1 é orientado de acordo, e R2 é
-orientado pela inversão (sempre estrita por construção: cada par de R2
-tem um time H e um A em R1).
+1. Para 20 times, `R_a ∪ R_b` é **sempre um único ciclo hamiltoniano**. Logo a
+   2-coloração é única a menos de troca global de rótulos — não havia
+   liberdade de coloração a explorar.
+2. Fixados R1 e R2, o perfil de arestas monocromáticas dos 17 fatores restantes
+   é invariante: `[2,2,2,2,4,4,4,4,6,6,6,6,8,8,8,8,10]`. Nenhum chega a zero.
 
-Com isso, **(c) sai estrita** (sem violações residuais).
+Daí o piso de **4 violações** de (d) (2 + 2), atingido por 2.052 dos 46.512
+quartetos possíveis. Embaralhar a ordem dos times não altera nada: renomear
+vértices não muda a estrutura da 1-fatoração.
+
+### A solução adotada
+
+A bipartição deixa de ser consequência do sorteio de R1/R2 e passa a ser a
+**variável de projeto**. `bipartite_factorization` gera a 1-fatoração de K20 já
+alinhada a ela:
+
+- sorteia A e B com 10 times cada;
+- **10 rodadas cruzadas** `C_k = {(a_i, b_{i+k mod 10})}`, cobrindo as 100
+  arestas entre A e B;
+- **9 rodadas internas** `N_r`, unindo uma 1-fatoração de K10 em A com uma em B,
+  cobrindo as 45 + 45 arestas internas.
+
+Total: 19 rodadas, 190 confrontos, cada par exatamente uma vez.
+
+Quatro rodadas cruzadas viram as âncoras, e o mando sai direto do lado:
+
+| rodada | manda |
+|---|---|
+| R1  | quem é de A |
+| R2  | quem é de B |
+| R18 | quem é de B |
+| R19 | quem é de A |
+
+Como toda aresta de uma rodada cruzada tem uma ponta em A e outra em B, o
+mandante é único e bem definido. **(c) e (d) saem zeradas por construção**, sem
+busca, sem custo e sem desempate — do mesmo jeito que (a) e (b) já saíam.
+
+O `circle_method` continua em uso: agora ele fatora os dois K10 internos.
+
+## 3. Decisão chave — (e) e a diversidade do miolo
+
+**(e)** — R38 espelha R19, então a âncora que vira R19 precisa ser uma rodada
+cruzada sem clássico estadual. Cerca de 99% dos sorteios de bipartição oferecem
+ao menos uma (2,9 em média); `MAX_TENTATIVAS_BIPARTICAO = 20` cobre o resto. As
+duas cruzadas com menos clássicos são reservadas para R18/R19, e R1/R2 ficam com
+as duas seguintes — R1 e R2 não têm restrição de clássico.
+
+**Diversidade** — a fatoração sai "pura": cada rodada do miolo seria ou toda
+interna ou toda cruzada. `shuffle_factors` aplica trocas de ciclo alternante
+entre as 15 rodadas não-âncora. A união de dois matchings perfeitos é uma
+coleção de ciclos de tamanho par alternando os dois; trocar as arestas ao longo
+de um ciclo devolve dois matchings perfeitos cobrindo as mesmas arestas. A
+1-fatoração continua válida, as âncoras não são tocadas, e as rodadas do miolo
+passam a misturar confrontos internos e cruzados.
+
+Isso substitui, com vantagem, o antigo item de trabalho futuro "embaralhar a
+ordem dos times antes do método do círculo", que pelo argumento da seção 2 não
+produziria diversidade nenhuma em (d).
 
 ## 4. Decisão chave — quase-hard (g) na RCL
 
@@ -56,32 +99,25 @@ Na RCL para R3..R17, filtramos candidatos que **não introduzem** violação
 de (g). Só se nenhum candidato sem (g) existir é que aceitamos candidatos
 com (g) > 0. Peso de (g) na função de custo: **300** (vs. 100 de (f)).
 
-## 5. Decisão chave — reserva de matching limpo para R19
-
-Antes da RCL, **um matching limpo** (sem clássicos estaduais, prioritário
-para maior compat com `sides_r2`) é retirado do pool e reservado. Depois
-da RCL para R3..R17, ele volta junto com o último matching restante e
-ambos são submetidos à seleção R18/R19. Isso garante que R19 quase sempre
-seja limpo (ou seja, **(e) atendida** quando há matching limpo disponível
-no `circle_method`).
-
 ## 6. Algoritmo
 
 ```
 rng = Random(seed)
-matchings = circle_method(teams)           # 19 matchings de 10 pares
+cruzadas, internas, part_a, _ = bipartite_factorization(teams, rng)
 ```
 
-### Âncoras (R1, R2)
+### Âncoras (R1, R2, R18, R19)
 
-1. Sorteia `r1_idx`, `r2_idx` distintos. Remove ambos do pool.
-2. 2-colore o grafo `R1 ∪ R2` → `sides_r1`. Orienta R1 e R2 por essa
-   atribuição.
-
-### Reserva para R19
-
-3. Se há matching limpo entre os 17 restantes, escolhe um (max compat
-   com `sides_r2`) e move para `r19_reserved`.
+1. Repete `bipartite_factorization` até alguma das 10 cruzadas não ter
+   clássico estadual (máx. `MAX_TENTATIVAS_BIPARTICAO`).
+2. Ordena as cruzadas por nº de clássicos. As duas primeiras ficam
+   reservadas para R18/R19; a terceira e a quarta viram R1 e R2.
+3. `sides_r1[T] = "H" se T ∈ A senão "A"`. Orienta R1 por `sides_r1` e R2
+   pela inversão — ambas estritas, porque toda aresta de uma cruzada liga
+   A a B.
+4. Miolo = as 6 cruzadas restantes + as 9 internas, passadas por
+   `shuffle_factors` (trocas de ciclo alternante). São os 15 matchings que
+   a RCL vai consumir em R3..R17.
 
 ### RCL para R3..R17 (15 rodadas)
 
@@ -116,17 +152,14 @@ Otimizações implementadas no inner loop:
 
 ### Atribuição de R18 e R19
 
-Reinserimos `r19_reserved` em `remaining`. Os 2 matchings finais são
-designados a R18 e R19 por:
+A orientação não é mais uma busca: o lado de cada time já está fixado pela
+bipartição — manda quem é de B na R18 e quem é de A na R19. Resta só decidir
+qual das duas âncoras reservadas vai para cada rodada, por critério
+lexicográfico `(nº de clássicos do candidato a R19, violações de (g) na cadeia
+R17 → R18 → R19)`. Empates resolvidos por `rng`.
 
-1. Determinação da ordem permitida (R19 prefere limpo; se ambos limpos,
-   ambas ordens; se um único limpo, esse vira R19; se nenhum limpo, o
-   de menor # clássicos vira R19).
-2. Para cada ordem permitida, enumeração das 2¹⁰ orientações de R18 e
-   escolha da que minimiza `10·d_resid + 1000·g_violations_chain` (a
-   cadeia inclui a transição R17→R18). Aplica-se a orientação e
-   repete-se para R19 (cadeia R18→R19).
-3. A ordem com menor custo total vence; empates resolvidos por `rng`.
+A enumeração das 2¹⁰ orientações e o termo `d_resid` desapareceram: não há
+resíduo de (d) a minimizar.
 
 ### Returno
 
@@ -174,9 +207,8 @@ def build_matches_with_homes(
 ) -> MatchesByRound
 ```
 
-Levanta `ConstructionFailedError` se `circle_method` não devolver 19
-matchings (ex.: número de times != 20) ou se o pool de matchings esgotar
-antes de completar 19 rodadas.
+Levanta `ConstructionFailedError` se o número de times não for 20 ou se o
+pool de matchings esgotar antes de completar 19 rodadas.
 
 ## 9. Não-feito nesta fase
 
@@ -186,12 +218,11 @@ antes de completar 19 rodadas.
 
 ## 10. Bounds empíricos para os testes
 
-Como (d) e (g) são best-effort, os testes correspondentes assertam contra
+Como (f) e (g) são best-effort, os testes correspondentes assertam contra
 limites empíricos:
 
-- (a), (b), (c), (e): **zero violações** (estritas).
-- (d): até 20 violações (residuais por estrutura dos matchings do
-  `circle_method` — perfectly bipartite cuts em R18/R19 são raros).
+- (a), (b), (c), (d), (e): **zero violações** (estritas), verificadas em
+  várias seeds.
 - (f): até 10 violações no turno.
 - (g): até 25 violações no campeonato (meta é zero; tolerância empírica
   para a fase de construção. A local search da Parte 3 do GRASP é quem

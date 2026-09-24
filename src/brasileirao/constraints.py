@@ -4,17 +4,13 @@ from collections import defaultdict
 from datetime import datetime
 from typing import Callable, Dict, List, Tuple
 
+from .dates import DATE_FMT as _DATE_FMT
+from .dates import parse_day as _parse_day
 from .domain import ConstraintViolation, Schedule, ScheduledMatch, TeamMap
 
 TURNO_FIRST = 1
 TURNO_LAST = 19
 RETURNO_LAST = 38
-
-_DATE_FMT = "%d/%m/%Y"
-
-
-def _parse_day(day: str) -> datetime:
-    return datetime.strptime(day, _DATE_FMT)
 
 
 def _inverse_side(side: str) -> str:
